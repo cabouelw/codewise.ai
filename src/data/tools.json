@@ -1,0 +1,168 @@
+{
+	"tools": [
+		{
+			"id": "github-copilot",
+			"name": "GitHub Copilot",
+			"slug": "github-copilot",
+			"category": "AI Assistant",
+			"description": "AI-powered code completion and intelligent coding assistant that helps you write better code faster. Suggests entire lines or blocks of code as you type.",
+			"longDescription": "GitHub Copilot is an AI pair programmer that helps you write code faster and with less work. It draws context from the code you're working on, suggesting whole lines or entire functions. Trained on billions of lines of public code, Copilot turns natural language prompts into coding suggestions across dozens of languages.",
+			"icon": "🤖",
+			"aiBased": true,
+			"url": "https://github.com/features/copilot",
+			"pricing": "Free for students, $10/month for individuals",
+			"features": [
+				"Real-time code suggestions",
+				"Multi-language support",
+				"Context-aware completions",
+				"IDE integration",
+				"Natural language to code"
+			],
+			"tags": ["AI", "Code Completion", "Productivity", "GitHub"],
+			"image": "/images/tools/github-copilot.jpg",
+			"featured": true
+		},
+		{
+			"id": "cursor-ai",
+			"slug": "cursor-ai",
+			"name": "Cursor",
+			"category": "AI Assistant",
+			"description": "The AI-first code editor. Build software faster in an editor designed for pair-programming with AI.",
+			"longDescription": "Cursor is an AI-first code editor built to make you extraordinarily productive. It's designed from the ground up to pair program with AI. Chat with your codebase, ask questions, generate code, and refactor with ease.",
+			"icon": "✨",
+			"aiBased": true,
+			"url": "https://cursor.sh",
+			"pricing": "Free tier available, Pro at $20/month",
+			"features": [
+				"AI-powered code editing",
+				"Chat with codebase",
+				"Multi-file editing",
+				"Privacy mode",
+				"VSCode compatible"
+			],
+			"tags": ["AI", "Editor", "Productivity", "Code Generation"],
+			"image": "/images/tools/cursor.jpg",
+			"featured": true
+		},
+		{
+			"id": "v0-vercel",
+			"name": "v0 by Vercel",
+			"slug": "v0-vercel",
+			"category": "UI Generator",
+			"description": "Generate beautiful UI components from text prompts. Built by Vercel, powered by AI.",
+			"longDescription": "v0 is a generative user interface system by Vercel powered by AI. It generates copy-and-paste friendly React code based on shadcn/ui and Tailwind CSS that people can use in their projects.",
+			"icon": "🎨",
+			"aiBased": true,
+			"url": "https://v0.dev",
+			"pricing": "Free with credits, Premium plans available",
+			"features": [
+				"Text to UI generation",
+				"React & Tailwind CSS",
+				"Shadcn/ui components",
+				"Iterative refinement",
+				"Production-ready code"
+			],
+			"tags": ["AI", "UI", "React", "Tailwind CSS", "Component"],
+			"image": "/images/tools/v0.jpg",
+			"featured": true
+		},
+		{
+			"id": "tabnine",
+			"name": "Tabnine",
+			"slug": "tabnine",
+			"category": "AI Assistant",
+			"description": "AI assistant that accelerates and simplifies software development while keeping your code private and secure.",
+			"longDescription": "Tabnine is an AI code assistant that makes you a better developer. Tabnine will increase your development velocity with real-time code completions in all the most popular coding languages and IDEs.",
+			"icon": "⚡",
+			"aiBased": true,
+			"url": "https://www.tabnine.com",
+			"pricing": "Free tier, Pro at $12/month",
+			"features": [
+				"Whole-line code completion",
+				"Natural language to code",
+				"Private code training",
+				"Team learning",
+				"Enterprise security"
+			],
+			"tags": ["AI", "Code Completion", "Privacy", "Enterprise"],
+			"image": "/images/tools/tabnine.jpg",
+			"featured": false
+		},
+		{
+			"id": "codeium",
+			"name": "Codeium",
+			"slug": "codeium",
+			"category": "AI Assistant",
+			"description": "Free AI-powered code acceleration toolkit. Autocomplete, chat, and search - all in one place.",
+			"longDescription": "Codeium offers best-in-class AI code completion & search — all for free. It supports over 70+ languages and integrates with your favorite IDEs, with lightning fast speeds and state-of-the-art suggestion quality.",
+			"icon": "🚀",
+			"aiBased": true,
+			"url": "https://codeium.com",
+			"pricing": "Free for individuals, Team plans available",
+			"features": [
+				"Unlimited autocomplete",
+				"AI-powered chat",
+				"Codebase search",
+				"70+ language support",
+				"IDE integrations"
+			],
+			"tags": ["AI", "Free", "Code Completion", "Chat"],
+			"image": "/images/tools/codeium.jpg",
+			"featured": true
+		},
+		{
+			"id": "phind",
+			"name": "Phind",
+			"slug": "phind",
+			"category": "AI Search",
+			"description": "The AI search engine for developers. Get instant answers with code examples and explanations.",
+			"longDescription": "Phind is an intelligent answer engine for developers. Focused on helping you solve challenging problems, it uses generative AI to answer technical questions with detailed explanations and relevant code snippets.",
+			"icon": "🔍",
+			"aiBased": true,
+			"url": "https://www.phind.com",
+			"pricing": "Free with unlimited searches",
+			"features": [
+				"AI-powered search",
+				"Code examples",
+				"Step-by-step explanations",
+				"Multiple sources",
+				"Developer focused"
+			],
+			"tags": ["AI", "Search", "Documentation", "Free"],
+			"image": "/images/tools/phind.jpg",
+			"featured": false
+		},
+		{
+			"id": "raycast",
+			"name": "Raycast",
+			"slug": "raycast",
+			"category": "Productivity",
+			"description": "Blazingly fast, extendable launcher for Mac. Control your tools with a few keystrokes.",
+			"longDescription": "Raycast is a blazingly fast, totally extendable launcher. It lets you complete tasks, calculate, share common links, and much more. With AI commands built-in, you can access ChatGPT, translate text, fix spelling, and more.",
+			"icon": "⚡",
+			"aiBased": true,
+			"url": "https://www.raycast.com",
+			"pricing": "Free, Pro at $8/month",
+			"features": ["Quick launcher", "AI commands", "Extensions marketplace", "Clipboard history", "Window management"],
+			"tags": ["Productivity", "Mac", "Launcher", "AI"],
+			"image": "/images/tools/raycast.jpg",
+			"featured": false
+		},
+		{
+			"id": "warp",
+			"name": "Warp",
+			"slug": "warp",
+			"category": "Terminal",
+			"description": "The terminal reimagined with AI and collaborative tools for better productivity.",
+			"longDescription": "Warp is a modern, Rust-based terminal with AI built in so you and your team can build great software faster. It works with your existing shell (like zsh or bash) and adds modern features like input editor, command search, and AI command suggestions.",
+			"icon": "💻",
+			"aiBased": true,
+			"url": "https://www.warp.dev",
+			"pricing": "Free for individuals, Team plans available",
+			"features": ["AI command search", "Input editor", "Command palette", "Workflows", "Team collaboration"],
+			"tags": ["Terminal", "AI", "Productivity", "Command Line"],
+			"image": "/images/tools/warp.jpg",
+			"featured": false
+		}
+	]
+}
