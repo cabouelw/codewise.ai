@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import ScrollToTop from "@/components/ScrollToTop"
+import CookieConsent from "@/components/CookieConsent"
 import { Toaster } from "react-hot-toast"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
@@ -128,12 +129,13 @@ export default function RootLayout({
 					/>
 					<div className="flex min-h-screen flex-col">
 						<Header />
-						<main className="flex-1 pt-16">
+						<main className="flex-1 mt-16">
 							{children}
 							<SpeedInsights />
 						</main>
 						<Footer />
 						<ScrollToTop />
+						<CookieConsent />
 					</div>
 				</ThemeProvider>
 			</body>

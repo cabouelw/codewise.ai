@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 import ToolLayout from '@/components/tools/ToolLayout';
 import ResultDisplay from '@/components/tools/ResultDisplay';
 import LoadingSpinner from '@/components/tools/LoadingSpinner';
+import { consentedStorage, hasConsentFor } from '@/lib/consent';
 
 export default function EmailWriterPage() {
   const [prompt, setPrompt] = useState('');
@@ -51,9 +52,12 @@ export default function EmailWriterPage() {
     setMetadata(null);
 
     try {
-      const usageKey = 'tool-usage-/tools/email-writer';
-      const currentCount = parseInt(localStorage.getItem(usageKey) || '0', 10);
-      localStorage.setItem(usageKey, String(currentCount + 1));
+      // Track usage only if user has consented to analytics
+      if (hasConsentFor('analytics')) {
+        const usageKey = 'tool-usage-/tools/email-writer';
+        const currentCount = parseInt(consentedStorage.getItem(usageKey, 'analytics') || '0', 10);
+        consentedStorage.setItem(usageKey, String(currentCount + 1), 'analytics');
+      }
 
       const response = await fetch('/api/email-writer', {
         method: 'POST',
@@ -129,8 +133,8 @@ export default function EmailWriterPage() {
                       key={t.value}
                       onClick={() => setType(t.value)}
                       className={`px-3 py-2 rounded-lg font-medium transition-all text-sm ${type === t.value
-                          ? 'bg-green-600 text-white shadow-lg'
-                          : 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600'
+                        ? 'bg-green-600 text-white shadow-lg'
+                        : 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600'
                         }`}
                     >
                       {t.icon} {t.label}
@@ -149,8 +153,8 @@ export default function EmailWriterPage() {
                       key={t.value}
                       onClick={() => setTone(t.value)}
                       className={`w-full px-4 py-2 rounded-lg font-medium transition-all text-sm ${tone === t.value
-                          ? 'bg-green-600 text-white shadow-lg'
-                          : 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600'
+                        ? 'bg-green-600 text-white shadow-lg'
+                        : 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600'
                         }`}
                     >
                       {t.label}

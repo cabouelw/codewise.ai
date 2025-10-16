@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { LucideIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { consentedStorage, hasConsentFor } from '@/lib/consent';
 
 interface ToolCardProps {
   title: string;
@@ -25,9 +26,11 @@ export default function ToolCard({
   const [usageCount, setUsageCount] = useState(0);
 
   useEffect(() => {
-    // Get usage count from localStorage
-    const count = localStorage.getItem(`tool-usage-${href}`) || '0';
-    setUsageCount(parseInt(count, 10));
+    // Get usage count from localStorage only if user has consented to analytics
+    if (hasConsentFor('analytics')) {
+      const count = consentedStorage.getItem(`tool-usage-${href}`, 'analytics') || '0';
+      setUsageCount(parseInt(count, 10));
+    }
   }, [href]);
 
   return (

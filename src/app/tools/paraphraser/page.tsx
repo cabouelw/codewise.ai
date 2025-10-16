@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 import ToolLayout from '@/components/tools/ToolLayout';
 import ResultDisplay from '@/components/tools/ResultDisplay';
 import LoadingSpinner from '@/components/tools/LoadingSpinner';
+import { consentedStorage, hasConsentFor } from '@/lib/consent';
 
 export default function ParaphraserPage() {
   const [text, setText] = useState('');
@@ -43,9 +44,12 @@ export default function ParaphraserPage() {
     setMetadata(null);
 
     try {
-      const usageKey = 'tool-usage-/tools/paraphraser';
-      const currentCount = parseInt(localStorage.getItem(usageKey) || '0', 10);
-      localStorage.setItem(usageKey, String(currentCount + 1));
+      // Track usage only if user has consented to analytics
+      if (hasConsentFor('analytics')) {
+        const usageKey = 'tool-usage-/tools/paraphraser';
+        const currentCount = parseInt(consentedStorage.getItem(usageKey, 'analytics') || '0', 10);
+        consentedStorage.setItem(usageKey, String(currentCount + 1), 'analytics');
+      }
 
       const response = await fetch('/api/paraphrase', {
         method: 'POST',
@@ -123,8 +127,8 @@ export default function ParaphraserPage() {
                     key={s.value}
                     onClick={() => setStyle(s.value)}
                     className={`px-4 py-3 rounded-lg font-medium transition-all text-left ${style === s.value
-                        ? 'bg-blue-600 text-white shadow-lg ring-2 ring-blue-400'
-                        : 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600'
+                      ? 'bg-blue-600 text-white shadow-lg ring-2 ring-blue-400'
+                      : 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600'
                       }`}
                   >
                     <div className="font-semibold">{s.label}</div>

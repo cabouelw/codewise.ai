@@ -1,6 +1,7 @@
 'use client'
 
 import { createContext, useContext, useEffect, useState } from 'react'
+import { consentedStorage, hasConsentFor } from '@/lib/consent'
 
 type Theme = 'dark' | 'light' | 'system'
 
@@ -35,9 +36,9 @@ export function ThemeProvider({
   ...props
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(() => {
-    // Initialize from localStorage if available (client-side only)
-    if (typeof window !== 'undefined') {
-      const storedTheme = localStorage?.getItem(storageKey) as Theme
+    // Initialize from localStorage if available (client-side only) and user has consented
+    if (typeof window !== 'undefined' && hasConsentFor('preferences')) {
+      const storedTheme = consentedStorage.getItem(storageKey, 'preferences') as Theme
       if (storedTheme) {
         return storedTheme
       }
@@ -72,7 +73,10 @@ export function ThemeProvider({
   const value = {
     theme,
     setTheme: (theme: Theme) => {
-      localStorage?.setItem(storageKey, theme)
+      // Only save to localStorage if user has consented to preferences
+      if (hasConsentFor('preferences')) {
+        consentedStorage.setItem(storageKey, theme, 'preferences')
+      }
       setTheme(theme)
     },
   }

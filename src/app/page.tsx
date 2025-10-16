@@ -25,7 +25,7 @@ export default async function Home() {
       <HeroSection />
 
       {/* Featured Tools Section */}
-      <section className="py-20 bg-white dark:bg-slate-900">
+      {/* <section className="py-20 bg-white dark:bg-slate-900">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection animation="fade-up" className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
@@ -60,31 +60,68 @@ export default async function Home() {
             </a>
           </AnimatedSection>
         </div>
-      </section>
+      </section> */}
 
-      {/* Categories Section */}
-      <section className="py-20 bg-slate-50 dark:bg-slate-800">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection animation="fade-up" className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
-              Explore Categories
+      {/* Categories Section - Redesigned */}
+      <section className="relative py-24 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 overflow-hidden">
+        {/* Animated background gradients */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute -top-40 -right-40 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-pink-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+        </div>
+
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <AnimatedSection animation="fade-up" className="text-center mb-20">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-sm border border-white/10 text-slate-300 rounded-full text-sm font-medium mb-6">
+              <svg className="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+              </svg>
+              Explore by Category
+            </div>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+              Choose Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-blue-500 to-purple-500">Perfect Tool</span>
             </h2>
-            <p className="text-xl text-slate-700 dark:text-slate-200 max-w-2xl mx-auto">
-              Find tools organized by category to suit your specific development needs
+            <p className="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
+              Browse our carefully curated collection of professional tools, organized by category to help you work smarter and faster.
             </p>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto">
             {categories.map((category, index) => (
               <AnimatedSection
                 key={category.id}
                 animation="scale-in"
-                delay={100 + index * 150}
+                delay={100 + index * 100}
               >
                 <CategoryCard {...category} />
               </AnimatedSection>
             ))}
           </div>
+
+          {/* Stats showcase */}
+          <AnimatedSection animation="fade-up" delay={700}>
+            <div className="mt-20 pt-12 border-t border-white/10">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
+                <div className="text-center">
+                  <div className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-600 mb-2">12+</div>
+                  <div className="text-sm text-slate-400 font-medium">AI Tools</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600 mb-2">6</div>
+                  <div className="text-sm text-slate-400 font-medium">Categories</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-pink-600 mb-2">100%</div>
+                  <div className="text-sm text-slate-400 font-medium">Free to Use</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-sky-600 mb-2">24/7</div>
+                  <div className="text-sm text-slate-400 font-medium">Available</div>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
