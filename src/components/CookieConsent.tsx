@@ -112,12 +112,6 @@ export default function CookieConsent() {
                     Accepter tout
                   </button>
                   <button
-                    onClick={handleRejectAll}
-                    className="flex-1 px-6 py-3 bg-slate-200 hover:bg-slate-300 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-900 dark:text-white font-semibold rounded-xl transition-all"
-                  >
-                    Refuser tout
-                  </button>
-                  <button
                     onClick={() => setShowDetails(true)}
                     className="px-6 py-3 bg-white hover:bg-slate-50 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 font-medium rounded-xl transition-all flex items-center justify-center gap-2"
                   >
