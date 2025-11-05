@@ -1,8 +1,8 @@
-# Codewise.ai - Dynamic Content & SEO Implementation Summary
+# codewise-ai.vercel.app - Dynamic Content & SEO Implementation Summary
 
 ## 🎉 Project Enhancements Complete
 
-All requested features have been successfully implemented. Your Codewise.ai website now has a complete content management system with MDX blogs, JSON-based tool data, comprehensive SEO, and automated sitemap generation.
+All requested features have been successfully implemented. Your codewise-ai.vercel.app website now has a complete content management system with MDX blogs, JSON-based tool data, comprehensive SEO, and automated sitemap generation.
 
 ---
 
@@ -573,7 +573,7 @@ If you need help:
 
 ## ✨ Summary
 
-Your Codewise.ai website now features:
+Your codewise-ai.vercel.app website now features:
 
 - 🎨 Beautiful animations with accessibility support
 - 📝 Full MDX blog system with 3 example posts

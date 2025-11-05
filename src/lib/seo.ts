@@ -1,6 +1,6 @@
 export const siteConfig = {
-	name: "Codewise.ai",
-	title: "Codewise.ai - Smart AI Tools for Developers",
+	name: "codewise-ai.vercel.app",
+	title: "codewise-ai.vercel.app - Smart AI Tools for Developers",
 	description:
 		"Empower your coding with smart AI tools — all in one place. Discover, learn, and enhance your development workflow with our curated collection of AI and developer tools.",
 	url: "https://codewise-ai.vercel.app",
@@ -13,7 +13,7 @@ export const siteConfig = {
 
 export const toolsMetadata = {
 	summarizer: {
-		title: "AI Text Summarizer - Codewise.ai",
+		title: "AI Text Summarizer - codewise-ai.vercel.app",
 		description:
 			"Condense long texts into concise summaries with AI. Perfect for articles, reports, and research papers. Free online text summarizer tool.",
 		keywords: [
@@ -75,7 +75,7 @@ export function generateToolMetadata(toolSlug: string) {
 
 	if (!tool) {
 		return {
-			title: "Tool Not Found - Codewise.ai",
+			title: "Tool Not Found - codewise-ai.vercel.app",
 			description: siteConfig.description,
 		}
 	}

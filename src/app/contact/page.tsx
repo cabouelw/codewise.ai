@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Contact Us',
-  description: 'Get in touch with the Codewise.ai team. We\'d love to hear from you!',
+  description: 'Get in touch with the codewise-ai.vercel.app team. We\'d love to hear from you!',
 }
 
 export default function ContactPage() {
@@ -123,8 +123,8 @@ export default function ContactPage() {
                     <p className="text-slate-600 dark:text-slate-300 text-sm mb-2">
                       Send us an email and we'll respond within 24 hours.
                     </p>
-                    <a href="mailto:hello@codewise.ai" className="text-sky-600 dark:text-sky-400 hover:underline">
-                      hello@codewise.ai
+                    <a href="mailto:hello@codewise-ai.vercel.app" className="text-sky-600 dark:text-sky-400 hover:underline">
+                      hello@codewise-ai.vercel.app
                     </a>
                   </div>
                 </div>
@@ -186,7 +186,7 @@ export default function ContactPage() {
                     </svg>
                   </summary>
                   <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
-                    You can submit a new tool by emailing us at hello@codewise.ai with details about the tool and why it should be featured.
+                    You can submit a new tool by emailing us at hello@codewise-ai.vercel.app with details about the tool and why it should be featured.
                   </p>
                 </details>
 

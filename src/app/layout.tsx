@@ -24,34 +24,34 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
 	title: {
-		default: "Codewise.ai - Smart AI Tools for Developers",
-		template: "%s | Codewise.ai",
+		default: "codewise-ai.vercel.app - Smart AI Tools for Developers",
+		template: "%s | codewise-ai.vercel.app",
 	},
 	description:
 		"Empower your coding with smart AI tools — all in one place. Discover, learn, and enhance your development workflow with our curated collection of AI and developer tools.",
 	keywords: ["AI tools", "developer tools", "coding", "programming", "artificial intelligence", "web development"],
-	authors: [{ name: "Codewise.ai" }],
-	creator: "Codewise.ai",
-	metadataBase: new URL("https://codewise.ai"),
+	authors: [{ name: "codewise-ai.vercel.app" }],
+	creator: "codewise-ai.vercel.app",
+	metadataBase: new URL("https://codewise-ai.vercel.app"),
 	openGraph: {
 		type: "website",
 		locale: "en_US",
-		url: "https://codewise.ai",
-		siteName: "Codewise.ai",
-		title: "Codewise.ai - Smart AI Tools for Developers",
+		url: "https://codewise-ai.vercel.app",
+		siteName: "codewise-ai.vercel.app",
+		title: "codewise-ai.vercel.app - Smart AI Tools for Developers",
 		description: "Empower your coding with smart AI tools — all in one place.",
 		images: [
 			{
 				url: "/og-image.jpg",
 				width: 1200,
 				height: 630,
-				alt: "Codewise.ai - Smart AI Tools for Developers",
+				alt: "codewise-ai.vercel.app - Smart AI Tools for Developers",
 			},
 		],
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "Codewise.ai - Smart AI Tools for Developers",
+		title: "codewise-ai.vercel.app - Smart AI Tools for Developers",
 		description: "Empower your coding with smart AI tools — all in one place.",
 		images: ["/og-image.jpg"],
 		creator: "@codewise_ai",

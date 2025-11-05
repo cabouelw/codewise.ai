@@ -2,7 +2,7 @@
 
 ## ✅ Successfully Implemented
 
-Your Codewise.ai blog now features **stunning markdown styling** with **beautiful code highlighting**!
+Your codewise-ai.vercel.app blog now features **stunning markdown styling** with **beautiful code highlighting**!
 
 ---
 

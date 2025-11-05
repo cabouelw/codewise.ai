@@ -2,7 +2,7 @@
 
 ## Overview
 
-This guide explains how to configure your environment variables for the Codewise.ai AI Tools Platform.
+This guide explains how to configure your environment variables for the codewise-ai.vercel.app AI Tools Platform.
 
 ---
 
@@ -43,17 +43,17 @@ OPENAI_API_KEY=sk-proj-xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 Set your production site URL for proper SEO and sitemap generation.
 
 ```env
-SITE_URL=https://codewise.ai
+SITE_URL=https://codewise-ai.vercel.app
 ```
 
 ---
 
 ## Environment Variables Reference
 
-| Variable         | Required              | Default               | Description                      |
-| ---------------- | --------------------- | --------------------- | -------------------------------- |
-| `OPENAI_API_KEY` | Yes (for AI features) | -                     | Your OpenAI API key for AI tools |
-| `SITE_URL`       | No                    | `https://codewise.ai` | Your production site URL         |
+| Variable         | Required              | Default                          | Description                      |
+| ---------------- | --------------------- | -------------------------------- | -------------------------------- |
+| `OPENAI_API_KEY` | Yes (for AI features) | -                                | Your OpenAI API key for AI tools |
+| `SITE_URL`       | No                    | `https://codewise-ai.vercel.app` | Your production site URL         |
 
 ---
 
@@ -208,7 +208,7 @@ For more help:
 
 - OpenAI API Documentation: https://platform.openai.com/docs
 - Next.js Environment Variables: https://nextjs.org/docs/app/building-your-application/configuring/environment-variables
-- Codewise.ai GitHub Issues: (Add your repository URL)
+- codewise-ai.vercel.app GitHub Issues: (Add your repository URL)
 
 ---
 

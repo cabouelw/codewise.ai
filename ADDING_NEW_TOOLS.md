@@ -2,7 +2,7 @@
 
 ## Overview
 
-This guide explains how to add new AI-powered tools to the Codewise.ai platform. Follow these steps to maintain consistency and best practices.
+This guide explains how to add new AI-powered tools to the codewise-ai.vercel.app platform. Follow these steps to maintain consistency and best practices.
 
 ---
 
@@ -245,7 +245,7 @@ Then update `/src/lib/seo.ts`:
 export const toolsMetadata = {
 	// ... existing tools
 	"your-tool-name": {
-		title: "Your Tool Title - Codewise.ai",
+		title: "Your Tool Title - codewise-ai.vercel.app",
 		description: "Description of your tool for SEO",
 		keywords: ["keyword1", "keyword2", "keyword3"],
 		ogImage: "/og-images/your-tool.jpg",

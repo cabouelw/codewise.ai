@@ -1,4 +1,4 @@
-# 🎉 Codewise.ai AI Tools Platform - Implementation Complete
+# 🎉 codewise-ai.vercel.app AI Tools Platform - Implementation Complete
 
 ## 📋 Project Summary
 

@@ -30,10 +30,10 @@ export async function generateMetadata({ params }: ToolPageProps): Promise<Metad
     }
   }
 
-  const url = `https://codewise.ai/tools/${slug}`
+  const url = `https://codewise-ai.vercel.app/tools/${slug}`
 
   return {
-    title: `${tool.name} - ${tool.category} | Codewise.ai`,
+    title: `${tool.name} - ${tool.category} | codewise-ai.vercel.app`,
     description: tool.description,
     keywords: [...tool.tags, tool.category, tool.name, 'AI tools', 'developer tools'],
     openGraph: {

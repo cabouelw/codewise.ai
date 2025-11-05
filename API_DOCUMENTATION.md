@@ -2,9 +2,9 @@
 
 ## Overview
 
-This document describes the API endpoints for the Codewise.ai AI Tools Platform.
+This document describes the API endpoints for the codewise-ai.vercel.app AI Tools Platform.
 
-**Base URL**: `https://codewise.ai` (Production) or `http://localhost:3000` (Development)
+**Base URL**: `https://codewise-ai.vercel.app` (Production) or `http://localhost:3000` (Development)
 
 All API endpoints are located under `/api/` and use the Edge Runtime for optimal performance.
 

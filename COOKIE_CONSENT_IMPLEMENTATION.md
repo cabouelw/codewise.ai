@@ -2,7 +2,7 @@
 
 ## Overview
 
-Implemented a comprehensive GDPR-compliant cookie consent system for Codewise.ai that respects user privacy and ensures no cookies or localStorage data is set without explicit user consent.
+Implemented a comprehensive GDPR-compliant cookie consent system for codewise-ai.vercel.app that respects user privacy and ensures no cookies or localStorage data is set without explicit user consent.
 
 ## Implementation Date
 

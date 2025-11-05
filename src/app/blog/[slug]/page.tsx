@@ -31,10 +31,10 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     }
   }
 
-  const url = `https://codewise.ai/blog/${slug}`
+  const url = `https://codewise-ai.vercel.app/blog/${slug}`
 
   return {
-    title: `${post.title} | Codewise.ai`,
+    title: `${post.title} | codewise-ai.vercel.app`,
     description: post.description,
     authors: [{ name: post.author }],
     openGraph: {
@@ -82,7 +82,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     day: 'numeric'
   })
 
-  const currentUrl = `https://codewise.ai/blog/${slug}`
+  const currentUrl = `https://codewise-ai.vercel.app/blog/${slug}`
 
   return (
     <div className="py-20 bg-slate-50 dark:bg-slate-900 min-h-screen">

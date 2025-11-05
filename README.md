@@ -1,9 +1,8 @@
-# 🚀 Codewise.ai - Smart AI Tools for Developers
+# 🚀 codewise-ai.vercel.app - Smart AI Tools for Developers
 
 A modern, full-featured AI tools platform built with **Next.js 15**, **Tailwind CSS v4**, and **OpenAI**. Features 4 functional AI tools with beautiful UI, real-time processing, and comprehensive SEO optimization.
 
 ## ✨ Features
-
 
 ### 🤖 AI-Powered Tools
 
@@ -344,9 +343,10 @@ This project is licensed under the MIT License.
 
 ## 📞 Support
 
-For support, email hello@codewise.ai or create an issue in the repository.
+For support, email hello@codewise-ai.vercel.app or create an issue in the repository.
 
 ---
 
 Built with ❤️ using Next.js and Tailwind CSS
-# codewise.ai
+
+# codewise-ai.vercel.app

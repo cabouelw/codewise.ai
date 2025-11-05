@@ -1,6 +1,6 @@
-# Content Management Guide for Codewise.ai
+# Content Management Guide for codewise-ai.vercel.app
 
-This guide explains how to add and manage content on Codewise.ai, including blog posts and tools.
+This guide explains how to add and manage content on codewise-ai.vercel.app, including blog posts and tools.
 
 ## 📝 Adding a New Blog Post
 
@@ -8,7 +8,7 @@ This guide explains how to add and manage content on Codewise.ai, including blog
 
 1. Navigate to `src/content/blog/`
 2. Create a new `.mdx` file (e.g., `my-new-post.mdx`)
-3. The filename will become the URL slug (e.g., `codewise.ai/blog/my-new-post`)
+3. The filename will become the URL slug (e.g., `codewise-ai.vercel.app/blog/my-new-post`)
 
 ### Step 2: Add Frontmatter
 
