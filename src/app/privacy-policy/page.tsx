@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Privacy Policy',
-  description: 'Learn how Codewise.ai collects, uses, and protects your personal information.',
+  description: 'Learn how codewise-ai.vercel.app collects, uses, and protects your personal information.',
 }
 
 export default function PrivacyPolicyPage() {
@@ -17,7 +17,7 @@ export default function PrivacyPolicyPage() {
 
           <h2>Introduction</h2>
           <p>
-            At Codewise.ai, we take your privacy seriously. This Privacy Policy explains how we collect,
+            At codewise-ai.vercel.app, we take your privacy seriously. This Privacy Policy explains how we collect,
             use, disclose, and safeguard your information when you visit our website or use our services.
           </p>
 
@@ -120,7 +120,7 @@ export default function PrivacyPolicyPage() {
             If you have any questions about this Privacy Policy, please contact us at:
           </p>
           <ul>
-            <li>Email: privacy@codewise.ai</li>
+            <li>Email: privacy@codewise-ai.vercel.app</li>
             <li>Address: 123 Tech Street, San Francisco, CA 94105</li>
           </ul>
 

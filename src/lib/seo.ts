@@ -3,8 +3,8 @@ export const siteConfig = {
 	title: "Codewise.ai - Smart AI Tools for Developers",
 	description:
 		"Empower your coding with smart AI tools — all in one place. Discover, learn, and enhance your development workflow with our curated collection of AI and developer tools.",
-	url: "https://codewise.ai",
-	ogImage: "https://codewise.ai/og-image.jpg",
+	url: "https://codewise-ai.vercel.app",
+	ogImage: "https://codewise-ai.vercel.app/og-image.jpg",
 	links: {
 		twitter: "https://twitter.com/codewise_ai",
 		github: "https://github.com/codewise-ai",

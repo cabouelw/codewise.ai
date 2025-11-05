@@ -1,9 +1,8 @@
 import HeroSection from '@/components/HeroSection'
-import ToolCard from '@/components/ToolCard'
 import CategoryCard from '@/components/CategoryCard'
 import BlogCard from '@/components/BlogCard'
 import AnimatedSection from '@/components/AnimatedSection'
-import { featuredTools, categories } from '@/lib/data'
+import { categories } from '@/lib/data'
 import { getAllPosts } from '@/lib/mdx/blog'
 
 export default async function Home() {

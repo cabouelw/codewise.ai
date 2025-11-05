@@ -8,7 +8,7 @@ Disallow: /api/
 Disallow: /_next/
 
 # Host
-Host: https://codewise.ai
+Host: https://codewise-ai.vercel.app
 
 # Sitemaps
-Sitemap: https://codewise.ai/sitemap.xml
+Sitemap: https://codewise-ai.vercel.app/sitemap.xml
