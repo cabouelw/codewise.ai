@@ -2,7 +2,8 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'About Us',
-  description: 'Learn about codewise-ai.vercel.app and our mission to empower developers with the best AI tools and resources.',
+  description: 'Learn about CodeWise AI and our mission to empower developers with the best AI tools and resources for modern software development.',
+  keywords: ['about CodeWise AI', 'AI tools platform', 'developer resources', 'AI for developers', 'coding tools', 'software development'],
 }
 
 export default function AboutPage() {

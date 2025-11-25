@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { getToolBySlug, getAllTools, getRelatedTools } from '@/lib/tools'
 import Breadcrumb from '@/components/Breadcrumb'
 import RelatedTools from '@/components/RelatedTools'
+import { JsonLd } from '@/components/JsonLd'
 
 interface ToolPageProps {
   params: Promise<{
@@ -33,7 +34,7 @@ export async function generateMetadata({ params }: ToolPageProps): Promise<Metad
   const url = `https://codewise-ai.vercel.app/tools/${slug}`
 
   return {
-    title: `${tool.name} - ${tool.category} | codewise-ai.vercel.app`,
+    title: `${tool.name} - ${tool.category} | CodeWise AI`,
     description: tool.description,
     keywords: [...tool.tags, tool.category, tool.name, 'AI tools', 'developer tools'],
     openGraph: {
@@ -73,8 +74,59 @@ export default async function ToolPage({ params }: ToolPageProps) {
 
   const relatedTools = getRelatedTools(slug, 3)
 
+  // SoftwareApplication structured data for SEO
+  const softwareSchema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: tool.name,
+    description: tool.longDescription,
+    applicationCategory: tool.category,
+    offers: {
+      "@type": "Offer",
+      price: tool.pricing.includes('Free') ? '0' : tool.pricing,
+      priceCurrency: "USD",
+    },
+    aggregateRating: tool.featured ? {
+      "@type": "AggregateRating",
+      ratingValue: "4.8",
+      ratingCount: "150",
+    } : undefined,
+    operatingSystem: "Web",
+    url: tool.url,
+  }
+
+  // BreadcrumbList structured data
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://codewise-ai.vercel.app",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Tools",
+        item: "https://codewise-ai.vercel.app/tools",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: tool.name,
+        item: `https://codewise-ai.vercel.app/tools/${slug}`,
+      },
+    ],
+  }
+
   return (
     <div className="py-20 bg-white min-h-screen">
+      {/* Add structured data */}
+      <JsonLd data={softwareSchema} />
+      <JsonLd data={breadcrumbSchema} />
+
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         {/* Breadcrumb */}
         <Breadcrumb

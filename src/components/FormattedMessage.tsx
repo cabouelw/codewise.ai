@@ -17,7 +17,7 @@ interface FormattedMessageProps {
 export default function FormattedMessage({ content, accentColor = 'green' }: FormattedMessageProps) {
   const formatMessage = () => {
     // Split into lines for better processing
-    const lines = content.split('\n');
+    const lines = content?.split('\n') || [content];
     const formattedLines: React.ReactElement[] = [];
 
     // Color classes based on accent color
@@ -44,7 +44,7 @@ export default function FormattedMessage({ content, accentColor = 'green' }: For
 
     lines.forEach((line, index) => {
       // Check if it's a numbered list item
-      const numberedListMatch = line.match(/^(\d+)\.\s+(.+)$/);
+      const numberedListMatch = line?.match(/^(\d+)\.\s+(.+)$/);
       if (numberedListMatch) {
         const number = numberedListMatch[1];
         const text = numberedListMatch[2];
@@ -72,7 +72,7 @@ export default function FormattedMessage({ content, accentColor = 'green' }: For
       }
 
       // Check if it's a bullet point
-      if (line.match(/^[•\-\*]\s+/)) {
+      if (line?.match(/^[•\-\*]\s+/)) {
         const text = line.replace(/^[•\-\*]\s+/, '');
         const parts = text.split(/(\*\*.*?\*\*)/g);
         formattedLines.push(
@@ -96,7 +96,7 @@ export default function FormattedMessage({ content, accentColor = 'green' }: For
       }
 
       // Regular line with possible bold text
-      if (line.trim()) {
+      if (line?.trim()) {
         const parts = line.split(/(\*\*.*?\*\*)/g);
         formattedLines.push(
           <p key={index} className="mb-2">

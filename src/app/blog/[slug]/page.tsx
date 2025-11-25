@@ -6,6 +6,7 @@ import MarkdownRenderer from '@/components/MarkdownRenderer'
 import Breadcrumb from '@/components/Breadcrumb'
 import ShareButtons from '@/components/ShareButtons'
 import RelatedPosts from '@/components/RelatedPosts'
+import { JsonLd } from '@/components/JsonLd'
 
 interface BlogPostPageProps {
   params: Promise<{
@@ -34,7 +35,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   const url = `https://codewise-ai.vercel.app/blog/${slug}`
 
   return {
-    title: `${post.title} | codewise-ai.vercel.app`,
+    title: `${post.title} | CodeWise AI`,
     description: post.description,
     authors: [{ name: post.author }],
     openGraph: {
@@ -84,8 +85,65 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const currentUrl = `https://codewise-ai.vercel.app/blog/${slug}`
 
+  // Article structured data for SEO
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.description,
+    image: post.image,
+    datePublished: post.date,
+    dateModified: post.date,
+    author: {
+      "@type": "Person",
+      name: post.author,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "CodeWise AI",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://codewise-ai.vercel.app/logo.png",
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": currentUrl,
+    },
+  }
+
+  // BreadcrumbList structured data
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://codewise-ai.vercel.app",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: "https://codewise-ai.vercel.app/blog",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: post.title,
+        item: currentUrl,
+      },
+    ],
+  }
+
   return (
     <div className="py-20 bg-slate-50 dark:bg-slate-900 min-h-screen">
+      {/* Add structured data */}
+      <JsonLd data={articleSchema} />
+      <JsonLd data={breadcrumbSchema} />
+
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
         {/* Breadcrumb */}
         <Breadcrumb

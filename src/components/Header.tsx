@@ -79,7 +79,7 @@ const Header = () => {
 						<div className="w-8 h-8 bg-gradient-to-r from-sky-500 to-blue-600 rounded-lg flex items-center justify-center">
 							<span className="text-white font-bold text-sm">C</span>
 						</div>
-						<span className="text-xl font-bold text-slate-900 dark:text-white">codewise-ai.vercel.app</span>
+						<span className="text-xl font-bold text-slate-900 dark:text-white">CodeWise-AI</span>
 					</Link>
 
 					{/* Desktop Navigation */}

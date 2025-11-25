@@ -2,7 +2,8 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Privacy Policy',
-  description: 'Learn how codewise-ai.vercel.app collects, uses, and protects your personal information.',
+  description: 'Learn how CodeWise AI collects, uses, and protects your personal information. Read our comprehensive privacy policy and data protection practices.',
+  keywords: ['privacy policy', 'data protection', 'user privacy', 'GDPR compliance', 'data security', 'personal information'],
 }
 
 export default function PrivacyPolicyPage() {

@@ -146,6 +146,43 @@ export const featuredTools: Tool[] = [
 		href: "/tools/shopping-assistant",
 		tags: ["AI", "Shopping", "Recommendations"],
 	},
+	{
+		id: "13",
+		title: "Code Explainer",
+		description: "AI-powered code analysis that explains what your code does in plain language.",
+		category: "AI Assistant",
+		icon: "💻",
+		href: "/tools/code-explainer",
+		featured: true,
+		tags: ["AI", "Code", "Learning", "Development"],
+	},
+	{
+		id: "14",
+		title: "Email Writer",
+		description: "Generate professional emails with AI for any purpose - business, personal, or formal.",
+		category: "Content Creation",
+		icon: "📧",
+		href: "/tools/email-writer",
+		tags: ["AI", "Email", "Writing", "Communication"],
+	},
+	{
+		id: "15",
+		title: "Text Paraphraser",
+		description: "Rewrite and rephrase text while maintaining meaning with AI-powered paraphrasing.",
+		category: "Content Creation",
+		icon: "🔄",
+		href: "/tools/paraphraser",
+		tags: ["AI", "Writing", "Paraphrase", "Content"],
+	},
+	{
+		id: "16",
+		title: "Text Summarizer",
+		description: "Summarize long articles, documents, and texts into concise, easy-to-read summaries.",
+		category: "Content Creation",
+		icon: "📝",
+		href: "/tools/summarizer",
+		tags: ["AI", "Summary", "Reading", "Content"],
+	},
 ]
 
 export const categories: Category[] = [
