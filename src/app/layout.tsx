@@ -6,6 +6,7 @@ import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import ScrollToTop from "@/components/ScrollToTop"
 import CookieConsent from "@/components/CookieConsent"
+import { JsonLd } from "@/components/JsonLd"
 import { Toaster } from "react-hot-toast"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
@@ -24,35 +25,35 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
 	title: {
-		default: "codewise-ai.vercel.app - Smart AI Tools for Developers",
-		template: "%s | codewise-ai.vercel.app",
+		default: "CodeWise AI - Smart AI Tools for Developers",
+		template: "%s | CodeWise AI",
 	},
 	description:
 		"Empower your coding with smart AI tools — all in one place. Discover, learn, and enhance your development workflow with our curated collection of AI and developer tools.",
-	keywords: ["AI tools", "developer tools", "coding", "programming", "artificial intelligence", "web development"],
-	authors: [{ name: "codewise-ai.vercel.app" }],
-	creator: "codewise-ai.vercel.app",
+	keywords: ["AI tools", "developer tools", "coding", "programming", "artificial intelligence", "web development", "code assistant", "AI coding tools"],
+	authors: [{ name: "CodeWise AI" }],
+	creator: "CodeWise AI",
 	metadataBase: new URL("https://codewise-ai.vercel.app"),
 	openGraph: {
 		type: "website",
 		locale: "en_US",
 		url: "https://codewise-ai.vercel.app",
-		siteName: "codewise-ai.vercel.app",
-		title: "codewise-ai.vercel.app - Smart AI Tools for Developers",
-		description: "Empower your coding with smart AI tools — all in one place.",
+		siteName: "CodeWise AI",
+		title: "CodeWise AI - Smart AI Tools for Developers",
+		description: "Empower your coding with smart AI tools — all in one place. Discover, learn, and enhance your development workflow.",
 		images: [
 			{
 				url: "/og-image.jpg",
 				width: 1200,
 				height: 630,
-				alt: "codewise-ai.vercel.app - Smart AI Tools for Developers",
+				alt: "CodeWise AI - Smart AI Tools for Developers",
 			},
 		],
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "codewise-ai.vercel.app - Smart AI Tools for Developers",
-		description: "Empower your coding with smart AI tools — all in one place.",
+		title: "CodeWise AI - Smart AI Tools for Developers",
+		description: "Empower your coding with smart AI tools — all in one place. Discover, learn, and enhance your development workflow.",
 		images: ["/og-image.jpg"],
 		creator: "@codewise_ai",
 	},
@@ -87,6 +88,41 @@ export default function RootLayout({
 					crossOrigin="anonymous"></script>
 				<link rel="preconnect" href="https://fonts.googleapis.com" />
 				<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+
+				{/* Organization Structured Data */}
+				<JsonLd
+					data={{
+						"@context": "https://schema.org",
+						"@type": "Organization",
+						name: "CodeWise AI",
+						url: "https://codewise-ai.vercel.app",
+						logo: "https://codewise-ai.vercel.app/logo.png",
+						description: "Smart AI Tools for Developers - Empower your coding with AI-powered tools for code explanation, content generation, translation, and more.",
+						sameAs: [
+							"https://twitter.com/codewise_ai",
+						],
+					}}
+				/>
+
+				{/* WebSite with SearchAction Structured Data */}
+				<JsonLd
+					data={{
+						"@context": "https://schema.org",
+						"@type": "WebSite",
+						url: "https://codewise-ai.vercel.app",
+						name: "CodeWise AI",
+						description: "Smart AI Tools for Developers",
+						potentialAction: {
+							"@type": "SearchAction",
+							target: {
+								"@type": "EntryPoint",
+								urlTemplate: "https://codewise-ai.vercel.app/tools?search={search_term_string}",
+							},
+							"query-input": "required name=search_term_string",
+						},
+					}}
+				/>
+
 				<script
 					dangerouslySetInnerHTML={{
 						__html: `

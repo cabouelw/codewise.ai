@@ -2,7 +2,8 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Contact Us',
-  description: 'Get in touch with the codewise-ai.vercel.app team. We\'d love to hear from you!',
+  description: 'Get in touch with the CodeWise AI team. We\'d love to hear your questions, feedback, and suggestions about our AI tools platform.',
+  keywords: ['contact CodeWise AI', 'support', 'feedback', 'customer service', 'AI tools help', 'developer support'],
 }
 
 export default function ContactPage() {

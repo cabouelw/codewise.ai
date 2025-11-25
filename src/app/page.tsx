@@ -1,9 +1,16 @@
+import { Metadata } from 'next'
 import HeroSection from '@/components/HeroSection'
 import CategoryCard from '@/components/CategoryCard'
 import BlogCard from '@/components/BlogCard'
 import AnimatedSection from '@/components/AnimatedSection'
 import { categories } from '@/lib/data'
 import { getAllPosts } from '@/lib/mdx/blog'
+
+export const metadata: Metadata = {
+  title: 'Home',
+  description: 'Discover powerful AI tools for developers. From code explanation to content generation, find the perfect tools to enhance your development workflow and boost productivity.',
+  keywords: ['AI tools', 'developer tools', 'coding assistant', 'AI code tools', 'programming tools', 'software development', 'AI powered tools'],
+}
 
 export default async function Home() {
   // Get blog posts from MDX

@@ -1,19 +1,18 @@
 export const siteConfig = {
-	name: "codewise-ai.vercel.app",
-	title: "codewise-ai.vercel.app - Smart AI Tools for Developers",
+	name: "CodeWise AI",
+	title: "CodeWise AI - Smart AI Tools for Developers",
 	description:
 		"Empower your coding with smart AI tools — all in one place. Discover, learn, and enhance your development workflow with our curated collection of AI and developer tools.",
 	url: "https://codewise-ai.vercel.app",
 	ogImage: "https://codewise-ai.vercel.app/og-image.jpg",
 	links: {
 		twitter: "https://twitter.com/codewise_ai",
-		github: "https://github.com/codewise-ai",
 	},
 }
 
 export const toolsMetadata = {
 	summarizer: {
-		title: "AI Text Summarizer - codewise-ai.vercel.app",
+		title: "AI Text Summarizer - CodeWise AI",
 		description:
 			"Condense long texts into concise summaries with AI. Perfect for articles, reports, and research papers. Free online text summarizer tool.",
 		keywords: [
@@ -68,6 +67,83 @@ export const toolsMetadata = {
 		],
 		ogImage: "/og-images/code-explainer.jpg",
 	},
+	translator: {
+		title: "AI Language Translator - Translate 100+ Languages",
+		description:
+			"Real-time AI translation for 100+ languages with context-aware accuracy. Translate text, documents, and content instantly with our free online translator.",
+		keywords: [
+			"language translator",
+			"ai translate",
+			"multilingual translation",
+			"free translator",
+			"translate online",
+			"language converter",
+		],
+		ogImage: "/og-images/translator.jpg",
+	},
+	"ai-assistant": {
+		title: "AI Personal Assistant - Smart Chatbot & Virtual Helper",
+		description:
+			"Your intelligent AI assistant for reminders, scheduling, Q&A, and personalized recommendations. Free AI chatbot powered by advanced language models.",
+		keywords: ["AI assistant", "chatbot", "virtual assistant", "personal AI", "smart assistant", "task automation"],
+		ogImage: "/og-images/ai-assistant.jpg",
+	},
+	"image-enhancer": {
+		title: "AI Image Enhancer - Upscale & Enhance Photos",
+		description:
+			"Enhance photos, remove backgrounds, upscale images, and apply AI-powered filters. Professional image enhancement tool with background removal and quality improvement.",
+		keywords: [
+			"image enhancer",
+			"photo enhancer",
+			"ai image upscale",
+			"background remover",
+			"photo editor",
+			"image quality",
+		],
+		ogImage: "/og-images/image-enhancer.jpg",
+	},
+	"fitness-coach": {
+		title: "AI Fitness Coach - Personal Trainer & Workout Plans",
+		description:
+			"AI-powered personal trainer with custom workout plans and nutrition guidance. Get personalized fitness coaching, meal plans, and exercise routines.",
+		keywords: [
+			"fitness coach",
+			"AI personal trainer",
+			"workout plans",
+			"nutrition guidance",
+			"exercise routines",
+			"health coach",
+		],
+		ogImage: "/og-images/fitness-coach.jpg",
+	},
+	"content-generator": {
+		title: "AI Content Generator - Create Blog Posts & Articles",
+		description:
+			"Generate blog posts, social media content, and marketing copy with AI assistance. Create high-quality content for any purpose with our AI writing tool.",
+		keywords: [
+			"content generator",
+			"ai writer",
+			"blog post generator",
+			"article writer",
+			"content creation",
+			"marketing copy",
+		],
+		ogImage: "/og-images/content-generator.jpg",
+	},
+	"shopping-assistant": {
+		title: "AI Shopping Assistant - Smart Product Recommendations",
+		description:
+			"Smart shopping companion that finds deals, compares prices, and recommends products. Get personalized shopping advice and price comparisons with AI.",
+		keywords: [
+			"shopping assistant",
+			"ai shopping",
+			"product recommendations",
+			"price comparison",
+			"deal finder",
+			"smart shopping",
+		],
+		ogImage: "/og-images/shopping-assistant.jpg",
+	},
 }
 
 export function generateToolMetadata(toolSlug: string) {
@@ -75,7 +151,7 @@ export function generateToolMetadata(toolSlug: string) {
 
 	if (!tool) {
 		return {
-			title: "Tool Not Found - codewise-ai.vercel.app",
+			title: "Tool Not Found - CodeWise AI",
 			description: siteConfig.description,
 		}
 	}

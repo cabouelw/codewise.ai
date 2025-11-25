@@ -29,7 +29,7 @@ export function hasConsent(): boolean {
 	if (typeof window === "undefined") return false
 
 	try {
-		const consent = sessionStorage.getItem(CONSENT_KEY)
+		const consent = localStorage.getItem(CONSENT_KEY)
 		return consent !== null
 	} catch {
 		return false
@@ -43,7 +43,7 @@ export function getConsent(): ConsentPreferences | null {
 	if (typeof window === "undefined") return null
 
 	try {
-		const stored = sessionStorage.getItem(CONSENT_KEY)
+		const stored = localStorage.getItem(CONSENT_KEY)
 		if (!stored) return null
 
 		const consent = JSON.parse(stored) as ConsentPreferences
@@ -74,7 +74,7 @@ export function saveConsent(preferences: Partial<ConsentPreferences>): void {
 	}
 
 	try {
-		sessionStorage.setItem(CONSENT_KEY, JSON.stringify(consent))
+		localStorage.setItem(CONSENT_KEY, JSON.stringify(consent))
 
 		// If analytics is disabled, clear existing tracking data
 		if (!consent.analytics) {
@@ -117,7 +117,7 @@ export function clearConsent(): void {
 	if (typeof window === "undefined") return
 
 	try {
-		sessionStorage.removeItem(CONSENT_KEY)
+		localStorage.removeItem(CONSENT_KEY)
 	} catch (error) {
 		console.error("Failed to clear consent:", error)
 	}
