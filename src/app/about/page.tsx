@@ -1,9 +1,28 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'About Us',
-  description: 'Learn about CodeWise AI and our mission to empower developers with the best AI tools and resources for modern software development.',
-  keywords: ['about CodeWise AI', 'AI tools platform', 'developer resources', 'AI for developers', 'coding tools', 'software development'],
+  title: 'About CodeWise AI - Empowering Developers with AI Tools',
+  description: 'Learn about CodeWise AI\'s mission to empower 10,000+ developers worldwide with the best free AI tools and resources. Discover our story, values, and commitment to developer success.',
+  keywords: ['about CodeWise AI', 'AI tools platform', 'developer resources platform', 'AI for developers', 'coding tools platform', 'software development community', 'developer tools company', 'AI development platform'],
+  openGraph: {
+    title: 'About CodeWise AI - Empowering Developers with AI Tools',
+    description: 'Empowering 10,000+ developers with free AI tools. Learn about our mission and values.',
+    type: 'website',
+    url: 'https://codewise-ai.vercel.app/about',
+    images: [
+      {
+        url: '/images/blog/AI_vs_Human.png',
+        width: 1200,
+        height: 628,
+        alt: 'About CodeWise AI - Empowering Developers',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'About CodeWise AI',
+    description: 'Empowering developers with AI tools and resources.',
+  },
 }
 
 export default function AboutPage() {

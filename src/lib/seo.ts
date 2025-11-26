@@ -4,7 +4,7 @@ export const siteConfig = {
 	description:
 		"Empower your coding with smart AI tools — all in one place. Discover, learn, and enhance your development workflow with our curated collection of AI and developer tools.",
 	url: "https://codewise-ai.vercel.app",
-	ogImage: "https://codewise-ai.vercel.app/og-image.jpg",
+	ogImage: "https://codewise-ai.vercel.app/images/blog/AI_vs_Human.png",
 	links: {
 		twitter: "https://twitter.com/codewise_ai",
 	},

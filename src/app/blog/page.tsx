@@ -3,8 +3,28 @@ import BlogCard from '@/components/BlogCard'
 import { getAllPosts } from '@/lib/mdx/blog'
 
 export const metadata: Metadata = {
-  title: 'Blog - Latest Insights',
-  description: 'Stay updated with the latest trends, tutorials, and insights in AI and development.',
+  title: 'AI Development Blog - Tutorials, Tips & Best Practices | CodeWise AI',
+  description: 'Expert tutorials, in-depth guides, and latest trends in AI development. Learn how to leverage AI tools, improve your coding workflow, and stay ahead in software development.',
+  keywords: ['AI development blog', 'coding tutorials', 'AI tools tutorials', 'developer guides', 'programming tips', 'AI best practices', 'software development blog', 'coding tips', 'AI trends'],
+  openGraph: {
+    title: 'AI Development Blog - Tutorials & Best Practices | CodeWise AI',
+    description: 'Expert tutorials and guides on AI development, coding best practices, and the latest trends in software development.',
+    type: 'website',
+    url: 'https://codewise-ai.vercel.app/blog',
+    images: [
+      {
+        url: '/images/blog/AI_vs_Human.png',
+        width: 1200,
+        height: 628,
+        alt: 'AI Development Blog - Tutorials & Best Practices',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'AI Development Blog | CodeWise AI',
+    description: 'Expert tutorials and guides on AI development and coding best practices.',
+  },
 }
 
 export default async function BlogPage() {

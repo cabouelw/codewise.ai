@@ -25,37 +25,54 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
 	title: {
-		default: "CodeWise AI - Smart AI Tools for Developers",
+		default: "CodeWise AI - 50+ Free AI Tools for Developers",
 		template: "%s | CodeWise AI",
 	},
 	description:
-		"Empower your coding with smart AI tools — all in one place. Discover, learn, and enhance your development workflow with our curated collection of AI and developer tools.",
-	keywords: ["AI tools", "developer tools", "coding", "programming", "artificial intelligence", "web development", "code assistant", "AI coding tools"],
-	authors: [{ name: "CodeWise AI" }],
+		"Discover 50+ free AI tools for developers. AI code assistants, content generators, translators, and more. Boost your productivity with smart AI-powered development tools.",
+	keywords: [
+		"AI tools for developers",
+		"free AI coding tools",
+		"AI code assistant",
+		"developer productivity tools",
+		"programming tools",
+		"artificial intelligence development",
+		"web development tools",
+		"code explanation AI",
+		"AI content generator",
+		"free developer tools 2025",
+	],
+	authors: [{ name: "CodeWise AI Team" }],
 	creator: "CodeWise AI",
+	publisher: "CodeWise AI",
 	metadataBase: new URL("https://codewise-ai.vercel.app"),
+	alternates: {
+		canonical: "/",
+	},
 	openGraph: {
 		type: "website",
 		locale: "en_US",
 		url: "https://codewise-ai.vercel.app",
 		siteName: "CodeWise AI",
-		title: "CodeWise AI - Smart AI Tools for Developers",
-		description: "Empower your coding with smart AI tools — all in one place. Discover, learn, and enhance your development workflow.",
+		title: "CodeWise AI - 50+ Free AI Tools for Developers",
+		description:
+			"Discover 50+ free AI tools for developers. AI code assistants, content generators, and more to boost your productivity.",
 		images: [
 			{
-				url: "/og-image.jpg",
+				url: "/images/blog/AI_vs_Human.png",
 				width: 1200,
 				height: 630,
-				alt: "CodeWise AI - Smart AI Tools for Developers",
+				alt: "CodeWise AI - Free AI Tools for Developers",
 			},
 		],
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "CodeWise AI - Smart AI Tools for Developers",
-		description: "Empower your coding with smart AI tools — all in one place. Discover, learn, and enhance your development workflow.",
-		images: ["/og-image.jpg"],
+		site: "@codewise_ai",
 		creator: "@codewise_ai",
+		title: "CodeWise AI - 50+ Free AI Tools for Developers",
+		description: "Discover 50+ free AI tools to boost developer productivity.",
+		images: ["/images/blog/AI_vs_Human.png"],
 	},
 	robots: {
 		index: true,
@@ -68,6 +85,8 @@ export const metadata: Metadata = {
 			"max-snippet": -1,
 		},
 	},
+	category: "Technology",
+	classification: "Developer Tools",
 	verification: {
 		google: "your-google-verification-code",
 	},
@@ -88,6 +107,11 @@ export default function RootLayout({
 					crossOrigin="anonymous"></script>
 				<link rel="preconnect" href="https://fonts.googleapis.com" />
 				<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+				<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+				<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+				<link rel="shortcut icon" href="/favicon.ico" />
+				<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+				<link rel="manifest" href="/site.webmanifest" />
 
 				{/* Organization Structured Data */}
 				<JsonLd
@@ -97,10 +121,9 @@ export default function RootLayout({
 						name: "CodeWise AI",
 						url: "https://codewise-ai.vercel.app",
 						logo: "https://codewise-ai.vercel.app/logo.png",
-						description: "Smart AI Tools for Developers - Empower your coding with AI-powered tools for code explanation, content generation, translation, and more.",
-						sameAs: [
-							"https://twitter.com/codewise_ai",
-						],
+						description:
+							"Smart AI Tools for Developers - Empower your coding with AI-powered tools for code explanation, content generation, translation, and more.",
+						sameAs: ["https://twitter.com/codewise_ai"],
 					}}
 				/>
 
