@@ -1,9 +1,20 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Contact Us',
-  description: 'Get in touch with the CodeWise AI team. We\'d love to hear your questions, feedback, and suggestions about our AI tools platform.',
-  keywords: ['contact CodeWise AI', 'support', 'feedback', 'customer service', 'AI tools help', 'developer support'],
+  title: 'Contact CodeWise AI - Get Help & Share Feedback',
+  description: 'Get in touch with the CodeWise AI team. Need help with AI tools? Have feedback or suggestions? We\'re here to help developers succeed. 24/7 support available.',
+  keywords: ['contact CodeWise AI', 'AI tools support', 'developer support', 'customer service', 'technical help', 'feedback', 'tool suggestions', 'partnership inquiries'],
+  openGraph: {
+    title: 'Contact CodeWise AI - Get Help & Share Feedback',
+    description: 'Get in touch for support, feedback, or partnerships. We\'re here to help!',
+    type: 'website',
+    url: 'https://codewise-ai.vercel.app/contact',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Contact CodeWise AI',
+    description: 'Get in touch for support, feedback, or partnerships.',
+  },
 }
 
 export default function ContactPage() {

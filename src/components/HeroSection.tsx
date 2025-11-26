@@ -25,15 +25,15 @@ const HeroSection = () => {
 
           {/* Main Heading */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-slate-900 dark:text-white mb-6 leading-tight">
-            <span className="block animate-fade-in-up animate-delay-100">Empower your</span>
-            <span className="block gradient-text animate-fade-in-up animate-delay-200">coding with smart</span>
-            <span className="block animate-fade-in-up animate-delay-300">AI tools</span>
+            <span className="block animate-fade-in-up animate-delay-100">Best AI Tools for</span>
+            <span className="block gradient-text animate-fade-in-up animate-delay-200">Developers in 2025</span>
+            <span className="block animate-fade-in-up animate-delay-300">Boost Your Productivity</span>
           </h1>
 
           {/* Subtitle */}
           <p className="text-xl md:text-2xl text-slate-700 dark:text-slate-200 mb-8 max-w-3xl mx-auto leading-relaxed animate-fade-in-up animate-delay-400">
-            All in one place. Discover, learn, and enhance your development workflow
-            with our curated collection of AI and developer tools.
+            50+ free AI-powered tools for coding, content generation, and more.
+            Enhance your development workflow with cutting-edge AI technology.
           </p>
 
           {/* CTA Buttons */}

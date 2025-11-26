@@ -1,9 +1,20 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy',
-  description: 'Learn how CodeWise AI collects, uses, and protects your personal information. Read our comprehensive privacy policy and data protection practices.',
-  keywords: ['privacy policy', 'data protection', 'user privacy', 'GDPR compliance', 'data security', 'personal information'],
+  title: 'Privacy Policy - How We Protect Your Data | CodeWise AI',
+  description: 'CodeWise AI privacy policy: Learn how we collect, use, and protect your data. GDPR compliant. We respect your privacy and keep your information secure.',
+  keywords: ['privacy policy', 'data protection', 'user privacy', 'GDPR compliance', 'data security', 'personal information protection', 'privacy practices', 'secure platform'],
+  openGraph: {
+    title: 'Privacy Policy | CodeWise AI',
+    description: 'Learn how we protect your data and respect your privacy.',
+    type: 'website',
+    url: 'https://codewise-ai.vercel.app/privacy-policy',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Privacy Policy | CodeWise AI',
+    description: 'Learn how we protect your data.',
+  },
 }
 
 export default function PrivacyPolicyPage() {

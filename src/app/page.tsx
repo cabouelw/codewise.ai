@@ -7,9 +7,20 @@ import { categories } from '@/lib/data'
 import { getAllPosts } from '@/lib/mdx/blog'
 
 export const metadata: Metadata = {
-  title: 'Home',
-  description: 'Discover powerful AI tools for developers. From code explanation to content generation, find the perfect tools to enhance your development workflow and boost productivity.',
-  keywords: ['AI tools', 'developer tools', 'coding assistant', 'AI code tools', 'programming tools', 'software development', 'AI powered tools'],
+  title: 'Best AI Tools for Developers 2025 | CodeWise AI',
+  description: 'Discover 50+ powerful AI tools that every developer should know. Boost productivity with AI-powered code assistants, content generators, and more. Free tools to enhance your development workflow.',
+  keywords: ['AI tools for developers', 'best AI coding tools', 'developer productivity tools', 'AI code assistant', 'AI programming tools', 'software development tools', 'AI powered development', 'free developer tools', 'coding assistant AI', 'developer tools 2025'],
+  openGraph: {
+    title: 'Best AI Tools for Developers 2025 | CodeWise AI',
+    description: 'Discover 50+ powerful AI tools that boost developer productivity. Free AI-powered tools for coding, content generation, and more.',
+    type: 'website',
+    url: 'https://codewise-ai.vercel.app',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Best AI Tools for Developers 2025 | CodeWise AI',
+    description: 'Discover 50+ powerful AI tools that boost developer productivity.',
+  },
 }
 
 export default async function Home() {

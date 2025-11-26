@@ -25,37 +25,53 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
 	title: {
-		default: "CodeWise AI - Smart AI Tools for Developers",
+		default: "CodeWise AI - 50+ Free AI Tools for Developers",
 		template: "%s | CodeWise AI",
 	},
 	description:
-		"Empower your coding with smart AI tools — all in one place. Discover, learn, and enhance your development workflow with our curated collection of AI and developer tools.",
-	keywords: ["AI tools", "developer tools", "coding", "programming", "artificial intelligence", "web development", "code assistant", "AI coding tools"],
-	authors: [{ name: "CodeWise AI" }],
+		"Discover 50+ free AI tools for developers. AI code assistants, content generators, translators, and more. Boost your productivity with smart AI-powered development tools.",
+	keywords: [
+		"AI tools for developers",
+		"free AI coding tools",
+		"AI code assistant",
+		"developer productivity tools",
+		"programming tools",
+		"artificial intelligence development",
+		"web development tools",
+		"code explanation AI",
+		"AI content generator",
+		"free developer tools 2025"
+	],
+	authors: [{ name: "CodeWise AI Team" }],
 	creator: "CodeWise AI",
+	publisher: "CodeWise AI",
 	metadataBase: new URL("https://codewise-ai.vercel.app"),
+	alternates: {
+		canonical: "/",
+	},
 	openGraph: {
 		type: "website",
 		locale: "en_US",
 		url: "https://codewise-ai.vercel.app",
 		siteName: "CodeWise AI",
-		title: "CodeWise AI - Smart AI Tools for Developers",
-		description: "Empower your coding with smart AI tools — all in one place. Discover, learn, and enhance your development workflow.",
+		title: "CodeWise AI - 50+ Free AI Tools for Developers",
+		description: "Discover 50+ free AI tools for developers. AI code assistants, content generators, and more to boost your productivity.",
 		images: [
 			{
 				url: "/og-image.jpg",
 				width: 1200,
 				height: 630,
-				alt: "CodeWise AI - Smart AI Tools for Developers",
+				alt: "CodeWise AI - Free AI Tools for Developers",
 			},
 		],
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "CodeWise AI - Smart AI Tools for Developers",
-		description: "Empower your coding with smart AI tools — all in one place. Discover, learn, and enhance your development workflow.",
-		images: ["/og-image.jpg"],
+		site: "@codewise_ai",
 		creator: "@codewise_ai",
+		title: "CodeWise AI - 50+ Free AI Tools for Developers",
+		description: "Discover 50+ free AI tools to boost developer productivity.",
+		images: ["/og-image.jpg"],
 	},
 	robots: {
 		index: true,
@@ -68,6 +84,8 @@ export const metadata: Metadata = {
 			"max-snippet": -1,
 		},
 	},
+	category: "Technology",
+	classification: "Developer Tools",
 	verification: {
 		google: "your-google-verification-code",
 	},
