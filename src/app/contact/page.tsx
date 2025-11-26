@@ -9,6 +9,14 @@ export const metadata: Metadata = {
     description: 'Get in touch for support, feedback, or partnerships. We\'re here to help!',
     type: 'website',
     url: 'https://codewise-ai.vercel.app/contact',
+    images: [
+      {
+        url: '/images/blog/AI_vs_Human.png',
+        width: 1200,
+        height: 628,
+        alt: 'Contact CodeWise AI',
+      },
+    ],
   },
   twitter: {
     card: 'summary',

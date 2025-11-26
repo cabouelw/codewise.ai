@@ -9,6 +9,14 @@ export const metadata: Metadata = {
     description: 'Empowering 10,000+ developers with free AI tools. Learn about our mission and values.',
     type: 'website',
     url: 'https://codewise-ai.vercel.app/about',
+    images: [
+      {
+        url: '/images/blog/AI_vs_Human.png',
+        width: 1200,
+        height: 628,
+        alt: 'About CodeWise AI - Empowering Developers',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',

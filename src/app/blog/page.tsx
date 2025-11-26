@@ -11,6 +11,14 @@ export const metadata: Metadata = {
     description: 'Expert tutorials and guides on AI development, coding best practices, and the latest trends in software development.',
     type: 'website',
     url: 'https://codewise-ai.vercel.app/blog',
+    images: [
+      {
+        url: '/images/blog/AI_vs_Human.png',
+        width: 1200,
+        height: 628,
+        alt: 'AI Development Blog - Tutorials & Best Practices',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',

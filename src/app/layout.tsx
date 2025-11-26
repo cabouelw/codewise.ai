@@ -40,7 +40,7 @@ export const metadata: Metadata = {
 		"web development tools",
 		"code explanation AI",
 		"AI content generator",
-		"free developer tools 2025"
+		"free developer tools 2025",
 	],
 	authors: [{ name: "CodeWise AI Team" }],
 	creator: "CodeWise AI",
@@ -55,10 +55,11 @@ export const metadata: Metadata = {
 		url: "https://codewise-ai.vercel.app",
 		siteName: "CodeWise AI",
 		title: "CodeWise AI - 50+ Free AI Tools for Developers",
-		description: "Discover 50+ free AI tools for developers. AI code assistants, content generators, and more to boost your productivity.",
+		description:
+			"Discover 50+ free AI tools for developers. AI code assistants, content generators, and more to boost your productivity.",
 		images: [
 			{
-				url: "/og-image.jpg",
+				url: "/images/blog/AI_vs_Human.png",
 				width: 1200,
 				height: 630,
 				alt: "CodeWise AI - Free AI Tools for Developers",
@@ -71,7 +72,7 @@ export const metadata: Metadata = {
 		creator: "@codewise_ai",
 		title: "CodeWise AI - 50+ Free AI Tools for Developers",
 		description: "Discover 50+ free AI tools to boost developer productivity.",
-		images: ["/og-image.jpg"],
+		images: ["/images/blog/AI_vs_Human.png"],
 	},
 	robots: {
 		index: true,
@@ -106,6 +107,11 @@ export default function RootLayout({
 					crossOrigin="anonymous"></script>
 				<link rel="preconnect" href="https://fonts.googleapis.com" />
 				<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+				<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+				<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+				<link rel="shortcut icon" href="/favicon.ico" />
+				<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+				<link rel="manifest" href="/site.webmanifest" />
 
 				{/* Organization Structured Data */}
 				<JsonLd
@@ -115,10 +121,9 @@ export default function RootLayout({
 						name: "CodeWise AI",
 						url: "https://codewise-ai.vercel.app",
 						logo: "https://codewise-ai.vercel.app/logo.png",
-						description: "Smart AI Tools for Developers - Empower your coding with AI-powered tools for code explanation, content generation, translation, and more.",
-						sameAs: [
-							"https://twitter.com/codewise_ai",
-						],
+						description:
+							"Smart AI Tools for Developers - Empower your coding with AI-powered tools for code explanation, content generation, translation, and more.",
+						sameAs: ["https://twitter.com/codewise_ai"],
 					}}
 				/>
 

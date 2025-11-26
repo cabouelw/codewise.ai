@@ -9,6 +9,14 @@ export const metadata: Metadata = {
     description: 'Learn how we protect your data and respect your privacy.',
     type: 'website',
     url: 'https://codewise-ai.vercel.app/privacy-policy',
+    images: [
+      {
+        url: '/images/blog/AI_vs_Human.png',
+        width: 1200,
+        height: 628,
+        alt: 'Privacy Policy | CodeWise AI',
+      },
+    ],
   },
   twitter: {
     card: 'summary',
