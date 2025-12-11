@@ -7,15 +7,18 @@
 		"build": "next build --turbopack",
 		"start": "next start",
 		"lint": "next lint",
-		"postbuild": "next-sitemap"
+		"postbuild": "next-sitemap",
+		"generate-blog": "node scripts/generateDailyBlog.js",
+		"test-blog": "node scripts/testBlogGenerator.js"
 	},
 	"dependencies": {
 		"@tailwindcss/typography": "^0.5.19",
 		"@vercel/speed-insights": "^1.2.0",
+		"dotenv": "^17.2.3",
 		"framer-motion": "^12.23.22",
 		"gray-matter": "^4.0.3",
 		"lucide-react": "^0.545.0",
-		"next": "15.5.4",
+		"next": "16.0.8",
 		"next-mdx-remote": "^5.0.0",
 		"next-seo": "^6.8.0",
 		"next-sitemap": "^4.2.3",
@@ -33,8 +36,8 @@
 		"@types/react": "^19",
 		"@types/react-dom": "^19",
 		"critters": "^0.0.25",
-		"eslint": "^8",
-		"eslint-config-next": "15.5.4",
+		"eslint": "^9",
+		"eslint-config-next": "16.0.8",
 		"tailwindcss": "^4",
 		"typescript": "^5"
 	}
