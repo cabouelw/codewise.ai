@@ -18,18 +18,163 @@ const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 const BLOG_DIR = path.join(__dirname, '../src/content/blog');
 const BLOG_IMAGES_DIR = path.join(__dirname, '../public/images/blog');
 
-// Topics for blog generation (you can customize this)
+// Topics for blog generation (100+ trending and viral topics)
 const TOPICS = [
-  'AI development tools and best practices',
-  'productivity tips for developers',
-  'latest trends in web development',
-  'software engineering best practices',
-  'machine learning for beginners',
-  'cloud computing and DevOps',
-  'API design and architecture',
-  'frontend frameworks comparison',
-  'backend optimization techniques',
-  'developer career growth tips'
+  // AI & Machine Learning (Trending)
+  'GPT-5 and the future of large language models',
+  'Building AI-powered applications with OpenAI API',
+  'Machine learning model optimization techniques',
+  'Fine-tuning LLMs for specific use cases',
+  'AI code assistants: GitHub Copilot vs alternatives',
+  'Prompt engineering best practices for developers',
+  'Vector databases and semantic search implementation',
+  'Retrieval Augmented Generation (RAG) explained',
+  'AI ethics and responsible AI development',
+  'Computer vision applications in modern web apps',
+
+  // React & Frontend (Hot Topics)
+  'React Server Components security vulnerabilities',
+  'React 19 new features and migration guide',
+  'Next.js 15 App Router best practices',
+  'Server-side rendering vs client-side rendering in 2025',
+  'React performance optimization techniques',
+  'State management: Redux vs Zustand vs Jotai',
+  'React Native for cross-platform mobile development',
+  'Building micro-frontends with Module Federation',
+  'Animations in React: Framer Motion vs React Spring',
+  'Accessibility in React applications',
+
+  // JavaScript & TypeScript
+  'TypeScript 5.x advanced features and patterns',
+  'Modern JavaScript features you should know',
+  'Deno vs Node.js: which to choose in 2025',
+  'Bun: the fastest JavaScript runtime explained',
+  'JavaScript design patterns for scalable applications',
+  'Async/await best practices and error handling',
+  'Web Workers for performance optimization',
+  'JavaScript testing: Vitest vs Jest comparison',
+  'Type-safe APIs with tRPC and TypeScript',
+  'JavaScript bundlers: Vite vs Webpack vs Turbopack',
+
+  // Backend & Databases
+  'PostgreSQL advanced query optimization',
+  'Building REST APIs with Express.js best practices',
+  'GraphQL vs REST: choosing the right API architecture',
+  'Database indexing strategies for performance',
+  'Microservices architecture patterns and anti-patterns',
+  'Event-driven architecture with message queues',
+  'Serverless functions: AWS Lambda vs Vercel vs Cloudflare',
+  'Redis caching strategies for high-traffic applications',
+  'MongoDB schema design patterns',
+  'Building real-time applications with WebSockets',
+
+  // DevOps & Cloud
+  'Docker containerization best practices',
+  'Kubernetes for beginners: deployment guide',
+  'CI/CD pipeline optimization techniques',
+  'Infrastructure as Code with Terraform',
+  'Monitoring and observability in production',
+  'AWS cost optimization strategies',
+  'GitHub Actions workflow automation',
+  'Cloud security best practices',
+  'Load balancing and scaling strategies',
+  'Edge computing and CDN optimization',
+
+  // Web Performance
+  'Core Web Vitals optimization guide',
+  'Image optimization techniques for web',
+  'Lazy loading and code splitting strategies',
+  'Service Workers and Progressive Web Apps',
+  'Browser caching strategies explained',
+  'Reducing Time to First Byte (TTFB)',
+  'Web performance monitoring tools comparison',
+  'Bundle size optimization techniques',
+  'Network performance optimization',
+  'Mobile web performance best practices',
+
+  // Security
+  'Web application security vulnerabilities in 2025',
+  'Authentication vs authorization explained',
+  'JWT tokens: security best practices',
+  'Preventing XSS and CSRF attacks',
+  'API rate limiting and security',
+  'Password hashing and encryption techniques',
+  'OAuth 2.0 and OpenID Connect implementation',
+  'Security headers every developer should know',
+  'SQL injection prevention techniques',
+  'Securing React applications',
+
+  // Python & Data Science
+  'Python for data science: complete guide',
+  'FastAPI vs Django vs Flask comparison',
+  'Python async programming with asyncio',
+  'Data visualization with Python libraries',
+  'Building ML pipelines with Python',
+  'Python performance optimization tips',
+  'Web scraping with Python: legal and ethical guide',
+  'Python type hints and static typing',
+  'Pandas dataframe operations guide',
+  'Python testing with pytest',
+
+  // Mobile Development
+  'Flutter vs React Native in 2025',
+  'iOS development with SwiftUI',
+  'Android Jetpack Compose tutorial',
+  'Cross-platform app development strategies',
+  'Mobile app performance optimization',
+  'Push notifications implementation guide',
+  'Mobile app security best practices',
+  'App store optimization (ASO) techniques',
+  'Mobile-first design principles',
+  'Progressive Web Apps vs Native Apps',
+
+  // Blockchain & Web3
+  'Smart contract development with Solidity',
+  'Web3 development getting started guide',
+  'Blockchain use cases beyond cryptocurrency',
+  'NFT development tutorial',
+  'DeFi protocols explained for developers',
+  'Ethereum development best practices',
+  'Layer 2 scaling solutions comparison',
+  'Wallet integration in web applications',
+  'Blockchain security considerations',
+  'Building dApps with Web3.js',
+
+  // Career & Soft Skills
+  'Landing your first tech job in 2025',
+  'Remote work productivity tips for developers',
+  'Technical interview preparation guide',
+  'System design interview questions',
+  'Building a developer portfolio that stands out',
+  'Open source contribution guide for beginners',
+  'Salary negotiation tips for software engineers',
+  'Imposter syndrome: how to overcome it',
+  'Code review best practices',
+  'Technical writing for developers',
+
+  // Tools & Productivity
+  'VS Code extensions every developer needs',
+  'Git workflows and branching strategies',
+  'Terminal productivity hacks',
+  'Developer tools for debugging',
+  'API testing with Postman and alternatives',
+  'Documentation tools comparison',
+  'Project management for developers',
+  'Time management techniques for programmers',
+  'Automation scripts for daily tasks',
+  'Developer Chrome extensions you must have',
+
+  // Emerging Technologies
+  'WebAssembly: when and why to use it',
+  'Edge computing applications',
+  'Quantum computing for developers',
+  'AR/VR development getting started',
+  '5G technology impact on web development',
+  'IoT development with Node.js',
+  'Voice interfaces and conversational AI',
+  'Spatial computing and Apple Vision Pro development',
+  'Green computing and sustainable development',
+  'Low-code/no-code platforms evaluation'
 ];
 
 /**
