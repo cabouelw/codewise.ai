@@ -4,6 +4,20 @@ export const metadata: Metadata = {
   title: 'About CodeWise AI - Empowering Developers with AI Tools',
   description: 'Learn about CodeWise AI\'s mission to empower 10,000+ developers worldwide with the best free AI tools and resources. Discover our story, values, and commitment to developer success.',
   keywords: ['about CodeWise AI', 'AI tools platform', 'developer resources platform', 'AI for developers', 'coding tools platform', 'software development community', 'developer tools company', 'AI development platform'],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  alternates: {
+    canonical: 'https://codewise-ai.vercel.app/about',
+  },
   openGraph: {
     title: 'About CodeWise AI - Empowering Developers with AI Tools',
     description: 'Empowering 10,000+ developers with free AI tools. Learn about our mission and values.',

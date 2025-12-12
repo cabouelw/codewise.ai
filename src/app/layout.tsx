@@ -88,7 +88,7 @@ export const metadata: Metadata = {
 	category: "Technology",
 	classification: "Developer Tools",
 	verification: {
-		google: "your-google-verification-code",
+		google: "fel0A3XBXi1TVFr8G-zcxWfcvPkexyMjHx3rFeFWtR0",
 	},
 }
 

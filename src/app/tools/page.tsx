@@ -21,6 +21,17 @@ export const metadata: Metadata = {
     "image enhancement AI",
     "free developer tools 2025",
   ],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   openGraph: {
     title: "50+ Free AI Tools for Developers | CodeWise AI",
     description:

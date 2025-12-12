@@ -38,6 +38,17 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     title: `${post.title} | CodeWise AI`,
     description: post.description,
     authors: [{ name: post.author }],
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
     openGraph: {
       title: post.title,
       description: post.description,

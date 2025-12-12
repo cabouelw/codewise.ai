@@ -6,6 +6,20 @@ export const metadata: Metadata = {
   title: 'AI Development Blog - Tutorials, Tips & Best Practices | CodeWise AI',
   description: 'Expert tutorials, in-depth guides, and latest trends in AI development. Learn how to leverage AI tools, improve your coding workflow, and stay ahead in software development.',
   keywords: ['AI development blog', 'coding tutorials', 'AI tools tutorials', 'developer guides', 'programming tips', 'AI best practices', 'software development blog', 'coding tips', 'AI trends'],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  alternates: {
+    canonical: 'https://codewise-ai.vercel.app/blog',
+  },
   openGraph: {
     title: 'AI Development Blog - Tutorials & Best Practices | CodeWise AI',
     description: 'Expert tutorials and guides on AI development, coding best practices, and the latest trends in software development.',

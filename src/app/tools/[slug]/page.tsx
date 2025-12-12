@@ -37,6 +37,17 @@ export async function generateMetadata({ params }: ToolPageProps): Promise<Metad
     title: `${tool.name} - ${tool.category} | CodeWise AI`,
     description: tool.description,
     keywords: [...tool.tags, tool.category, tool.name, 'AI tools', 'developer tools'],
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
     openGraph: {
       title: `${tool.name} - ${tool.category}`,
       description: tool.description,

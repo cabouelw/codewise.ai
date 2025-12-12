@@ -4,6 +4,20 @@ export const metadata: Metadata = {
   title: 'Contact CodeWise AI - Get Help & Share Feedback',
   description: 'Get in touch with the CodeWise AI team. Need help with AI tools? Have feedback or suggestions? We\'re here to help developers succeed. 24/7 support available.',
   keywords: ['contact CodeWise AI', 'AI tools support', 'developer support', 'customer service', 'technical help', 'feedback', 'tool suggestions', 'partnership inquiries'],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  alternates: {
+    canonical: 'https://codewise-ai.vercel.app/contact',
+  },
   openGraph: {
     title: 'Contact CodeWise AI - Get Help & Share Feedback',
     description: 'Get in touch for support, feedback, or partnerships. We\'re here to help!',
