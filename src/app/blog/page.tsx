@@ -1,6 +1,10 @@
 import { Metadata } from 'next'
 import BlogCard from '@/components/BlogCard'
 import { getAllPosts } from '@/lib/mdx/blog'
+import Link from 'next/link'
+import { JsonLd } from '@/components/JsonLd'
+
+const POSTS_PER_PAGE = 9
 
 export const metadata: Metadata = {
   title: 'AI Development Blog - Tutorials, Tips & Best Practices | CodeWise AI',
@@ -44,9 +48,13 @@ export const metadata: Metadata = {
 export default async function BlogPage() {
   // Get all blog posts from MDX
   const blogPosts = await getAllPosts()
+  const totalPages = Math.ceil(blogPosts.length / POSTS_PER_PAGE)
+
+  // Get first page of posts
+  const paginatedPosts = blogPosts.slice(0, POSTS_PER_PAGE)
 
   // Transform MDX posts to match BlogCard props
-  const allPosts = blogPosts.map(post => ({
+  const allPosts = paginatedPosts.map(post => ({
     id: post.slug,
     title: post.title,
     excerpt: post.description,
@@ -54,15 +62,66 @@ export default async function BlogPage() {
     publishedAt: post.date,
     readTime: post.readingTime,
     category: post.category,
-    image: post.image
+    image: post.image,
+    author: post.author
   }))
 
   // Extract unique categories from posts
-  const postCategories = Array.from(new Set(allPosts.map(post => post.category)))
+  const postCategories = Array.from(new Set(blogPosts.map(post => post.category)))
   const categories = ['All', ...postCategories]
+
+  // CollectionPage structured data
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "AI Development Blog",
+    description: "Expert tutorials, in-depth guides, and latest trends in AI development",
+    url: "https://codewise-ai.vercel.app/blog",
+    publisher: {
+      "@type": "Organization",
+      name: "CodeWise AI",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://codewise-ai.vercel.app/logo.png"
+      }
+    },
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: allPosts.map((post, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        url: `https://codewise-ai.vercel.app/blog/${post.slug}`,
+        name: post.title
+      }))
+    }
+  }
+
+  // BreadcrumbList structured data
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://codewise-ai.vercel.app"
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: "https://codewise-ai.vercel.app/blog"
+      }
+    ]
+  }
 
   return (
     <div className="py-20 bg-slate-50 dark:bg-slate-900 min-h-screen">
+      {/* Add structured data */}
+      <JsonLd data={collectionSchema} />
+      <JsonLd data={breadcrumbSchema} />
+
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
@@ -75,21 +134,26 @@ export default async function BlogPage() {
           </p>
         </div>
 
-        {/* Categories Filter */}
+        {/* Categories Filter - SEO-friendly links */}
         <div className="mb-12">
-          <div className="flex flex-wrap gap-2 justify-center">
-            {categories.map((category) => (
-              <button
+          <nav className="flex flex-wrap gap-2 justify-center" aria-label="Blog categories">
+            <Link
+              href="/blog"
+              className="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-sky-500 text-white"
+              aria-current="page"
+            >
+              All
+            </Link>
+            {postCategories.map((category) => (
+              <Link
                 key={category}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${category === 'All'
-                  ? 'bg-sky-500 text-white'
-                  : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-sky-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-600'
-                  }`}
+                href={`/blog/category/${category.toLowerCase().replace(/\s+/g, '-')}`}
+                className="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-sky-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-600"
               >
                 {category}
-              </button>
+              </Link>
             ))}
-          </div>
+          </nav>
         </div>
 
         {/* Featured Post */}
@@ -131,15 +195,21 @@ export default async function BlogPage() {
           </div>
         </div>
 
-        {/* Load More */}
-        <div className="text-center mt-12">
-          <button className="inline-flex items-center gap-2 bg-sky-500 hover:bg-sky-600 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300">
-            Load More Articles
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
-          </button>
-        </div>
+        {/* SEO-Friendly Pagination */}
+        {totalPages > 1 && (
+          <nav className="mt-12 flex justify-center" aria-label="Blog pagination">
+            <Link
+              href="/blog/page/2"
+              className="inline-flex items-center gap-2 bg-sky-500 hover:bg-sky-600 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300"
+              rel="next"
+            >
+              View More Articles
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+          </nav>
+        )}
       </div>
     </div>
   )

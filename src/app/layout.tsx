@@ -9,6 +9,7 @@ import CookieConsent from "@/components/CookieConsent"
 import { JsonLd } from "@/components/JsonLd"
 import { Toaster } from "react-hot-toast"
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import Script from "next/script"
 
 const inter = Inter({
 	subsets: ["latin"],
@@ -101,17 +102,17 @@ export default function RootLayout({
 		<html lang="en" suppressHydrationWarning>
 			<head>
 				<meta name="google-site-verification" content="fel0A3XBXi1TVFr8G-zcxWfcvPkexyMjHx3rFeFWtR0" />
-				<script
-					async
-					src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8652734840791356"
-					crossOrigin="anonymous"></script>
+				{/* Preconnect to external domains for performance */}
 				<link rel="preconnect" href="https://fonts.googleapis.com" />
 				<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+				<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
+				
 				<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
 				<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 				<link rel="shortcut icon" href="/favicon.ico" />
 				<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 				<link rel="manifest" href="/site.webmanifest" />
+				<link rel="alternate" type="application/rss+xml" title="CodeWise AI Blog RSS Feed" href="/rss.xml" />
 
 				{/* Organization Structured Data */}
 				<JsonLd
@@ -146,6 +147,7 @@ export default function RootLayout({
 					}}
 				/>
 
+				{/* Inline critical theme script - executed before render to prevent FOUC */}
 				<script
 					dangerouslySetInnerHTML={{
 						__html: `
@@ -162,6 +164,14 @@ export default function RootLayout({
 				/>
 			</head>
 			<body className={`${inter.variable} ${poppins.variable} font-sans antialiased`}>
+				{/* Google AdSense - Deferred with afterInteractive to not block content rendering */}
+				<Script
+					async
+					src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8652734840791356"
+					crossOrigin="anonymous"
+					strategy="afterInteractive"
+				/>
+				
 				<ThemeProvider defaultTheme="system" enableSystem>
 					<Toaster
 						position="top-right"
