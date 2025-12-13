@@ -97,7 +97,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const currentUrl = `https://codewise-ai.vercel.app/blog/${slug}`
 
-  // Article structured data for SEO (BlogPosting is more specific than Article)
+  // Convert dates to ISO-8601 with timezone
+  const isoDatePublished = new Date(post.date).toISOString()
+  const isoDateModified = new Date(post.date).toISOString()
+
+  // BlogPosting structured data for SEO - fully Google-compliant
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -105,12 +109,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     description: post.description,
     image: {
       "@type": "ImageObject",
-      url: post.image,
+      url: `https://codewise-ai.vercel.app${post.image}`,
       width: 1200,
       height: 630
     },
-    datePublished: post.date,
-    dateModified: post.date,
+    datePublished: isoDatePublished,
+    dateModified: isoDateModified,
     author: {
       "@type": "Person",
       name: post.author,
@@ -127,6 +131,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         height: 60
       }
     },
+    url: currentUrl,
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": currentUrl,
