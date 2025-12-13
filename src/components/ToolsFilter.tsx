@@ -49,6 +49,7 @@ export default function ToolsFilter({ tools, categories }: ToolsFilterProps) {
         tool.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
 
       return matchesCategory && matchesSearch;
+      return matchesCategory && matchesSearch;
     });
   }, [searchQuery, selectedCategory, tools]);
 
@@ -84,16 +85,22 @@ export default function ToolsFilter({ tools, categories }: ToolsFilterProps) {
         {/* Category Filter */}
         <div className="flex items-center justify-center gap-2 flex-wrap">
           <Filter className="w-5 h-5 text-slate-500 dark:text-slate-400" />
-          {categories.map((category) => (
-            <button
+          <button
+            onClick={() => setSelectedCategory('All')}
+            className={`px-4 py-2 rounded-lg font-medium transition-all ${selectedCategory === 'All'
+              ? 'bg-sky-600 text-white shadow-lg scale-105'
+              : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700'
+              }`}>
+            All
+          </button>
+          {categories.filter(c => c !== 'All').map((category) => (
+            <Link
               key={category}
-              onClick={() => setSelectedCategory(category)}
-              className={`px-4 py-2 rounded-lg font-medium transition-all ${selectedCategory === category
-                ? 'bg-sky-600 text-white shadow-lg scale-105'
-                : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700'
-                }`}>
+              href={`/tools/category/${category.toLowerCase().replace(/\s+/g, '-')}`}
+              className="px-4 py-2 rounded-lg font-medium transition-all bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700"
+            >
               {category}
-            </button>
+            </Link>
           ))}
         </div>
       </motion.div>

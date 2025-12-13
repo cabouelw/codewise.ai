@@ -7,6 +7,7 @@ import Breadcrumb from '@/components/Breadcrumb'
 import ShareButtons from '@/components/ShareButtons'
 import RelatedPosts from '@/components/RelatedPosts'
 import { JsonLd } from '@/components/JsonLd'
+import Link from 'next/link'
 
 interface BlogPostPageProps {
   params: Promise<{
@@ -96,31 +97,44 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const currentUrl = `https://codewise-ai.vercel.app/blog/${slug}`
 
-  // Article structured data for SEO
+  // Article structured data for SEO (BlogPosting is more specific than Article)
   const articleSchema = {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
     headline: post.title,
     description: post.description,
-    image: post.image,
+    image: {
+      "@type": "ImageObject",
+      url: post.image,
+      width: 1200,
+      height: 630
+    },
     datePublished: post.date,
     dateModified: post.date,
     author: {
       "@type": "Person",
       name: post.author,
+      url: `https://codewise-ai.vercel.app/author/${post.author.toLowerCase().replace(/\s+/g, '-')}`
     },
     publisher: {
       "@type": "Organization",
       name: "CodeWise AI",
+      url: "https://codewise-ai.vercel.app",
       logo: {
         "@type": "ImageObject",
         url: "https://codewise-ai.vercel.app/logo.png",
-      },
+        width: 600,
+        height: 60
+      }
     },
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": currentUrl,
     },
+    keywords: post.tags.join(", "),
+    articleSection: post.category,
+    wordCount: post.content ? post.content.split(/\s+/).length : 0,
+    inLanguage: "en-US",
   }
 
   // BreadcrumbList structured data
@@ -179,17 +193,22 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </h1>
 
             <div className="flex items-center gap-6 text-slate-600 dark:text-slate-400 mb-8 flex-wrap">
-              <div className="flex items-center gap-2">
+              <Link
+                href={`/author/${post.author.toLowerCase().replace(/\s+/g, '-')}`}
+                className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+              >
                 <div className="w-10 h-10 bg-gradient-to-r from-sky-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg">
                   <span className="text-white font-semibold text-sm">
                     {post.author.charAt(0).toUpperCase()}
                   </span>
                 </div>
                 <div>
-                  <div className="font-medium text-slate-900 dark:text-white">{post.author}</div>
+                  <div className="font-medium text-slate-900 dark:text-white hover:text-sky-600 dark:hover:text-sky-400 transition-colors">
+                    {post.author}
+                  </div>
                   <div className="text-sm">{formattedDate}</div>
                 </div>
-              </div>
+              </Link>
               <div className="text-sm flex items-center gap-2">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -203,8 +222,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 <div className="relative h-[400px] w-full rounded-xl overflow-hidden">
                   <Image
                     src={post.image}
-                    alt={post.title}
+                    alt={`${post.title} - Featured image for CodeWise AI blog post`}
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 90vw, 896px"
                     className="object-cover"
                     priority
                   />
