@@ -10,6 +10,7 @@ import { JsonLd } from "@/components/JsonLd"
 import { Toaster } from "react-hot-toast"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import Script from "next/script"
+import { Analytics } from "@vercel/analytics/next"
 
 const inter = Inter({
 	subsets: ["latin"],
@@ -207,6 +208,7 @@ export default function RootLayout({
 						<CookieConsent />
 					</div>
 				</ThemeProvider>
+				<Analytics />
 			</body>
 		</html>
 	)

@@ -25,11 +25,11 @@ module.exports = {
       priority = 1.0
       changefreq = 'daily'
     } else if (path.startsWith('/blog')) {
-      priority = 0.8
-      changefreq = 'weekly'
-    } else if (path.startsWith('/tools')) {
       priority = 0.9
       changefreq = 'daily'
+    } else if (path.startsWith('/tools')) {
+      priority = 0.8
+      changefreq = 'weekly'
     }
 
     return {
@@ -69,8 +69,8 @@ module.exports = {
       for (let page = 2; page <= totalPages; page++) {
         result.push({
           loc: `/blog/page/${page}`,
-          changefreq: 'weekly',
-          priority: 0.7,
+          changefreq: 'daily',
+          priority: 1.0,
           lastmod: new Date().toISOString(),
         })
       }
@@ -149,8 +149,8 @@ module.exports = {
       toolsData.tools.forEach((tool) => {
         result.push({
           loc: `/tools/${tool.slug}`,
-          changefreq: 'daily',
-          priority: 0.9,
+          changefreq: 'weekly',
+          priority: 0.7,
           lastmod: new Date().toISOString(),
         })
       })
