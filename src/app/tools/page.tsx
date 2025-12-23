@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     description:
       "Browse 50+ free AI-powered tools: code assistants, content generators, translators & more. Boost your productivity!",
     type: "website",
-    url: "https://codewise-ai.vercel.app/tools",
+    url: "https://codewize-ai.website/tools",
     images: [
       {
         url: "/images/blog/AI_vs_Human.png",
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     description: "Free AI tools for coding, content generation, translation & more.",
   },
   alternates: {
-    canonical: "https://codewise-ai.vercel.app/tools",
+    canonical: "https://codewize-ai.website/tools",
   },
 }
 
@@ -79,7 +79,7 @@ export default function ToolsPage() {
         name: tool.title,
         description: tool.description,
         applicationCategory: tool.category,
-        url: tool.href.startsWith("http") ? tool.href : `https://codewise-ai.vercel.app${tool.href}`,
+        url: tool.href.startsWith("http") ? tool.href : `https://codewize-ai.website${tool.href}`,
       },
     })),
   }
@@ -93,13 +93,13 @@ export default function ToolsPage() {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://codewise-ai.vercel.app",
+        item: "https://codewize-ai.website",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Tools",
-        item: "https://codewise-ai.vercel.app/tools",
+        item: "https://codewize-ai.website/tools",
       },
     ],
   }

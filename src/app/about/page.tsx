@@ -16,13 +16,13 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: 'https://codewise-ai.vercel.app/about',
+    canonical: 'https://codewize-ai.website/about',
   },
   openGraph: {
     title: 'About CodeWise AI - Empowering Developers with AI Tools',
     description: 'Empowering 10,000+ developers with free AI tools. Learn about our mission and values.',
     type: 'website',
-    url: 'https://codewise-ai.vercel.app/about',
+    url: 'https://codewize-ai.website/about',
     images: [
       {
         url: '/images/blog/AI_vs_Human.png',
@@ -46,7 +46,7 @@ export default function AboutPage() {
         {/* Hero Section */}
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">
-            About codewise-ai.vercel.app
+            About codewize-ai.website
           </h1>
           <p className="text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
             We're on a mission to empower developers with the best AI tools and resources
@@ -59,7 +59,7 @@ export default function AboutPage() {
           <div className="bg-gradient-to-r from-sky-50 to-blue-50 dark:from-sky-900/20 dark:to-blue-900/20 rounded-2xl p-8 md:p-12">
             <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-6">Our Mission</h2>
             <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-              At codewise-ai.vercel.app, we believe that the future of software development lies in the
+              At codewize-ai.website, we believe that the future of software development lies in the
               intelligent collaboration between humans and AI. Our platform serves as a bridge,
               connecting developers with cutting-edge AI tools and resources that enhance
               productivity, creativity, and innovation.
@@ -111,7 +111,7 @@ export default function AboutPage() {
           <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-8">Our Story</h2>
           <div className="prose prose-slate dark:prose-invert max-w-none prose-lg">
             <p>
-              Founded in 2024, codewise-ai.vercel.app emerged from the recognition that while AI tools
+              Founded in 2024, codewize-ai.website emerged from the recognition that while AI tools
               were becoming increasingly powerful, developers often struggled to discover,
               evaluate, and integrate these tools into their workflows effectively.
             </p>

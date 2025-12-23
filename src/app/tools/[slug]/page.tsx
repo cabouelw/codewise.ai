@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: ToolPageProps): Promise<Metad
     }
   }
 
-  const url = `https://codewise-ai.vercel.app/tools/${slug}`
+  const url = `https://codewize-ai.website/tools/${slug}`
 
   return {
     title: `${tool.name} - ${tool.category} | CodeWise AI`,
@@ -115,19 +115,19 @@ export default async function ToolPage({ params }: ToolPageProps) {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://codewise-ai.vercel.app",
+        item: "https://codewize-ai.website",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Tools",
-        item: "https://codewise-ai.vercel.app/tools",
+        item: "https://codewize-ai.website/tools",
       },
       {
         "@type": "ListItem",
         position: 3,
         name: tool.name,
-        item: `https://codewise-ai.vercel.app/tools/${slug}`,
+        item: `https://codewize-ai.website/tools/${slug}`,
       },
     ],
   }

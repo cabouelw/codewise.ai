@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     }
   }
 
-  const url = `https://codewise-ai.vercel.app/blog/${slug}`
+  const url = `https://codewize-ai.website/blog/${slug}`
 
   return {
     title: `${post.title} | CodeWise AI`,
@@ -95,7 +95,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     day: 'numeric'
   })
 
-  const currentUrl = `https://codewise-ai.vercel.app/blog/${slug}`
+  const currentUrl = `https://codewize-ai.website/blog/${slug}`
 
   // Convert dates to ISO-8601 with timezone
   const isoDatePublished = new Date(post.date).toISOString()
@@ -109,7 +109,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     description: post.description,
     image: {
       "@type": "ImageObject",
-      url: `https://codewise-ai.vercel.app${post.image}`,
+      url: `https://codewize-ai.website${post.image}`,
       width: 1200,
       height: 630
     },
@@ -118,15 +118,15 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     author: {
       "@type": "Person",
       name: post.author,
-      url: `https://codewise-ai.vercel.app/author/${post.author.toLowerCase().replace(/\s+/g, '-')}`
+      url: `https://codewize-ai.website/author/${post.author.toLowerCase().replace(/\s+/g, '-')}`
     },
     publisher: {
       "@type": "Organization",
       name: "CodeWise AI",
-      url: "https://codewise-ai.vercel.app",
+      url: "https://codewize-ai.website",
       logo: {
         "@type": "ImageObject",
-        url: "https://codewise-ai.vercel.app/logo.png",
+        url: "https://codewize-ai.website/logo.png",
         width: 600,
         height: 60
       }
@@ -151,13 +151,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://codewise-ai.vercel.app",
+        item: "https://codewize-ai.website",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Blog",
-        item: "https://codewise-ai.vercel.app/blog",
+        item: "https://codewize-ai.website/blog",
       },
       {
         "@type": "ListItem",

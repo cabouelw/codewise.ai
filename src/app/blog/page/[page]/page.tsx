@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
     }
   }
 
-  const baseUrl = 'https://codewise-ai.vercel.app/blog'
+  const baseUrl = 'https://codewize-ai.website/blog'
   const currentUrl = pageNumber === 1 ? baseUrl : `${baseUrl}/page/${pageNumber}`
 
   // Canonical should point to page 1 if we're on page 1, otherwise current page
@@ -112,7 +112,7 @@ export default async function PaginatedBlogPage({ params }: BlogPageProps) {
   const categories = ['All', ...postCategories]
 
   // SEO: Prev/Next URLs
-  const baseUrl = 'https://codewise-ai.vercel.app/blog'
+  const baseUrl = 'https://codewize-ai.website/blog'
   const prevUrl = pageNumber > 2 ? `${baseUrl}/page/${pageNumber - 1}` : pageNumber === 2 ? baseUrl : null
   const nextUrl = pageNumber < totalPages ? `${baseUrl}/page/${pageNumber + 1}` : null
 
@@ -212,8 +212,8 @@ export default async function PaginatedBlogPage({ params }: BlogPageProps) {
                       key={num}
                       href={num === 1 ? '/blog' : `/blog/page/${num}`}
                       className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${num === pageNumber
-                          ? 'bg-sky-500 text-white'
-                          : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-600 hover:bg-sky-50 dark:hover:bg-slate-700'
+                        ? 'bg-sky-500 text-white'
+                        : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-600 hover:bg-sky-50 dark:hover:bg-slate-700'
                         }`}
                       aria-current={num === pageNumber ? 'page' : undefined}
                     >

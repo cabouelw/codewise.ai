@@ -21,7 +21,7 @@ const Footer = () => {
                 <span className="text-white font-bold text-sm">C</span>
               </div>
               <span className="text-xl font-bold text-slate-900 dark:text-white">
-                codewise-ai.vercel.app
+                codewize-ai.website
               </span>
             </Link>
             <p className="text-slate-700 dark:text-slate-300 max-w-md">
@@ -73,7 +73,7 @@ const Footer = () => {
         {/* Bottom */}
         <div className="mt-8 pt-8 border-t border-slate-200 dark:border-slate-700 flex flex-col sm:flex-row justify-between items-center">
           <p className="text-slate-700 dark:text-slate-300 text-sm">
-            © {currentYear} codewise-ai.vercel.app. All rights reserved.
+            © {currentYear} codewize-ai.website. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 sm:mt-0">
             <a

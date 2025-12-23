@@ -24,7 +24,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: AuthorPageProps): Promise<Metadata> {
   const { author } = await params
   const displayAuthor = author.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
-  const url = `https://codewise-ai.vercel.app/author/${author}`
+  const url = `https://codewize-ai.website/author/${author}`
 
   return {
     title: `${displayAuthor} - Articles & Tutorials | CodeWise AI`,
@@ -86,7 +86,7 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
     "@context": "https://schema.org",
     "@type": "Person",
     name: displayAuthor,
-    url: `https://codewise-ai.vercel.app/author/${author}`,
+    url: `https://codewize-ai.website/author/${author}`,
     jobTitle: "Technical Writer & Developer",
     worksFor: {
       "@type": "Organization",
@@ -107,19 +107,19 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
           "@type": "ListItem",
           position: 1,
           name: "Home",
-          item: "https://codewise-ai.vercel.app"
+          item: "https://codewize-ai.website"
         },
         {
           "@type": "ListItem",
           position: 2,
           name: "Authors",
-          item: "https://codewise-ai.vercel.app/blog"
+          item: "https://codewize-ai.website/blog"
         },
         {
           "@type": "ListItem",
           position: 3,
           name: displayAuthor,
-          item: `https://codewise-ai.vercel.app/author/${author}`
+          item: `https://codewize-ai.website/author/${author}`
         }
       ]
     }

@@ -38,26 +38,26 @@ const BlogCard: React.FC<BlogCardProps> = ({
     "@type": "BlogPosting",
     headline: title,
     description: excerpt,
-    image: image ? `https://codewise-ai.vercel.app${image}` : undefined,
+    image: image ? `https://codewize-ai.website${image}` : undefined,
     datePublished: isoDate,
     dateModified: isoDate,
     author: {
       "@type": "Person",
       name: author,
-      url: `https://codewise-ai.vercel.app/author/${author.toLowerCase().replace(/\s+/g, '-')}`,
+      url: `https://codewize-ai.website/author/${author.toLowerCase().replace(/\s+/g, '-')}`,
     },
     publisher: {
       "@type": "Organization",
       name: "CodeWise AI",
       logo: {
         "@type": "ImageObject",
-        url: "https://codewise-ai.vercel.app/logo.png",
+        url: "https://codewize-ai.website/logo.png",
       },
     },
-    url: `https://codewise-ai.vercel.app/blog/${slug}`,
+    url: `https://codewize-ai.website/blog/${slug}`,
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://codewise-ai.vercel.app/blog/${slug}`,
+      "@id": `https://codewize-ai.website/blog/${slug}`,
     },
     inLanguage: "en-US",
   }

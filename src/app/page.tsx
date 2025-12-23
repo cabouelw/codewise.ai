@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     title: 'Best AI Tools for Developers 2025 | CodeWise AI',
     description: 'Discover 50+ powerful AI tools that boost developer productivity. Free AI-powered tools for coding, content generation, and more.',
     type: 'website',
-    url: 'https://codewise-ai.vercel.app',
+    url: 'https://codewize-ai.website',
     images: [
       {
         url: '/images/blog/AI_vs_Human.png',

@@ -22,13 +22,13 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: 'https://codewise-ai.vercel.app/blog',
+    canonical: 'https://codewize-ai.website/blog',
   },
   openGraph: {
     title: 'AI Development Blog - Tutorials & Best Practices | CodeWise AI',
     description: 'Expert tutorials and guides on AI development, coding best practices, and the latest trends in software development.',
     type: 'website',
-    url: 'https://codewise-ai.vercel.app/blog',
+    url: 'https://codewize-ai.website/blog',
     images: [
       {
         url: '/images/blog/AI_vs_Human.png',
@@ -76,13 +76,13 @@ export default async function BlogPage() {
     "@type": "CollectionPage",
     name: "AI Development Blog",
     description: "Expert tutorials, in-depth guides, and latest trends in AI development",
-    url: "https://codewise-ai.vercel.app/blog",
+    url: "https://codewize-ai.website/blog",
     publisher: {
       "@type": "Organization",
       name: "CodeWise AI",
       logo: {
         "@type": "ImageObject",
-        url: "https://codewise-ai.vercel.app/logo.png"
+        url: "https://codewize-ai.website/logo.png"
       }
     },
     mainEntity: {
@@ -90,7 +90,7 @@ export default async function BlogPage() {
       itemListElement: allPosts.map((post, index) => ({
         "@type": "ListItem",
         position: index + 1,
-        url: `https://codewise-ai.vercel.app/blog/${post.slug}`,
+        url: `https://codewize-ai.website/blog/${post.slug}`,
         name: post.title
       }))
     }
@@ -105,13 +105,13 @@ export default async function BlogPage() {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://codewise-ai.vercel.app"
+        item: "https://codewize-ai.website"
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Blog",
-        item: "https://codewise-ai.vercel.app/blog"
+        item: "https://codewize-ai.website/blog"
       }
     ]
   }

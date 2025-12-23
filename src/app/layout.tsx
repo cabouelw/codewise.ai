@@ -47,14 +47,14 @@ export const metadata: Metadata = {
 	authors: [{ name: "CodeWise AI Team" }],
 	creator: "CodeWise AI",
 	publisher: "CodeWise AI",
-	metadataBase: new URL("https://codewise-ai.vercel.app"),
+	metadataBase: new URL("https://codewize-ai.website"),
 	alternates: {
 		canonical: "/",
 	},
 	openGraph: {
 		type: "website",
 		locale: "en_US",
-		url: "https://codewise-ai.vercel.app",
+		url: "https://codewize-ai.website",
 		siteName: "CodeWise AI",
 		title: "CodeWise AI - 50+ Free AI Tools for Developers",
 		description:
@@ -107,7 +107,7 @@ export default function RootLayout({
 				<link rel="preconnect" href="https://fonts.googleapis.com" />
 				<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
 				<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
-				
+
 				<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
 				<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 				<link rel="shortcut icon" href="/favicon.ico" />
@@ -121,8 +121,8 @@ export default function RootLayout({
 						"@context": "https://schema.org",
 						"@type": "Organization",
 						name: "CodeWise AI",
-						url: "https://codewise-ai.vercel.app",
-						logo: "https://codewise-ai.vercel.app/logo.png",
+						url: "https://codewize-ai.website",
+						logo: "https://codewize-ai.website/logo.png",
 						description:
 							"Smart AI Tools for Developers - Empower your coding with AI-powered tools for code explanation, content generation, translation, and more.",
 						sameAs: ["https://twitter.com/codewise_ai"],
@@ -134,14 +134,14 @@ export default function RootLayout({
 					data={{
 						"@context": "https://schema.org",
 						"@type": "WebSite",
-						url: "https://codewise-ai.vercel.app",
+						url: "https://codewize-ai.website",
 						name: "CodeWise AI",
 						description: "Smart AI Tools for Developers",
 						potentialAction: {
 							"@type": "SearchAction",
 							target: {
 								"@type": "EntryPoint",
-								urlTemplate: "https://codewise-ai.vercel.app/tools?search={search_term_string}",
+								urlTemplate: "https://codewize-ai.website/tools?search={search_term_string}",
 							},
 							"query-input": "required name=search_term_string",
 						},
@@ -172,7 +172,7 @@ export default function RootLayout({
 					crossOrigin="anonymous"
 					strategy="afterInteractive"
 				/>
-				
+
 				<ThemeProvider defaultTheme="system" enableSystem>
 					<Toaster
 						position="top-right"

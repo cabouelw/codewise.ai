@@ -23,7 +23,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
   const { category } = await params
   const displayCategory = category.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
-  const url = `https://codewise-ai.vercel.app/tools/category/${category}`
+  const url = `https://codewize-ai.website/tools/category/${category}`
 
   return {
     title: `${displayCategory} Tools - Free AI & Developer Tools | CodeWise AI`,
@@ -74,19 +74,19 @@ export default async function ToolCategoryPage({ params }: CategoryPageProps) {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://codewise-ai.vercel.app"
+        item: "https://codewize-ai.website"
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Tools",
-        item: "https://codewise-ai.vercel.app/tools"
+        item: "https://codewize-ai.website/tools"
       },
       {
         "@type": "ListItem",
         position: 3,
         name: displayCategory,
-        item: `https://codewise-ai.vercel.app/tools/category/${category}`
+        item: `https://codewize-ai.website/tools/category/${category}`
       }
     ]
   }
@@ -146,8 +146,8 @@ export default async function ToolCategoryPage({ params }: CategoryPageProps) {
                   key={cat}
                   href={`/tools/category/${catSlug}`}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${isActive
-                      ? 'bg-sky-500 text-white'
-                      : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-sky-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-600'
+                    ? 'bg-sky-500 text-white'
+                    : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-sky-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-600'
                     }`}
                   aria-current={isActive ? 'page' : undefined}
                 >

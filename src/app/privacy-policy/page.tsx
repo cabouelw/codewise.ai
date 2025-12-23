@@ -16,13 +16,13 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: 'https://codewise-ai.vercel.app/privacy-policy',
+    canonical: 'https://codewize-ai.website/privacy-policy',
   },
   openGraph: {
     title: 'Privacy Policy | CodeWise AI',
     description: 'Learn how we protect your data and respect your privacy.',
     type: 'website',
-    url: 'https://codewise-ai.vercel.app/privacy-policy',
+    url: 'https://codewize-ai.website/privacy-policy',
     images: [
       {
         url: '/images/blog/AI_vs_Human.png',
@@ -51,7 +51,7 @@ export default function PrivacyPolicyPage() {
 
           <h2>Introduction</h2>
           <p>
-            At codewise-ai.vercel.app, we take your privacy seriously. This Privacy Policy explains how we collect,
+            At codewize-ai.website, we take your privacy seriously. This Privacy Policy explains how we collect,
             use, disclose, and safeguard your information when you visit our website or use our services.
           </p>
 
@@ -154,7 +154,7 @@ export default function PrivacyPolicyPage() {
             If you have any questions about this Privacy Policy, please contact us at:
           </p>
           <ul>
-            <li>Email: privacy@codewise-ai.vercel.app</li>
+            <li>Email: privacy@codewize-ai.website</li>
             <li>Address: 123 Tech Street, San Francisco, CA 94105</li>
           </ul>
 

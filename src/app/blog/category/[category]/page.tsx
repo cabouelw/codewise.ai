@@ -23,7 +23,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
   const { category } = await params
   const displayCategory = category.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
-  const url = `https://codewise-ai.vercel.app/blog/category/${category}`
+  const url = `https://codewize-ai.website/blog/category/${category}`
 
   return {
     title: `${displayCategory} Articles | CodeWise AI Blog`,
@@ -146,8 +146,8 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                   key={cat}
                   href={`/blog/category/${catSlug}`}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${isActive
-                      ? 'bg-sky-500 text-white'
-                      : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-sky-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-600'
+                    ? 'bg-sky-500 text-white'
+                    : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-sky-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-600'
                     }`}
                   aria-current={isActive ? 'page' : undefined}
                 >

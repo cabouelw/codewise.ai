@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.SITE_URL || 'https://codewise-ai.vercel.app',
+  siteUrl: process.env.SITE_URL || 'https://codewize-ai.website',
   generateRobotsTxt: true,
   generateIndexSitemap: false,
   exclude: ['/api/*'],

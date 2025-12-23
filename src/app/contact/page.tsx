@@ -16,13 +16,13 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: 'https://codewise-ai.vercel.app/contact',
+    canonical: 'https://codewize-ai.website/contact',
   },
   openGraph: {
     title: 'Contact CodeWise AI - Get Help & Share Feedback',
     description: 'Get in touch for support, feedback, or partnerships. We\'re here to help!',
     type: 'website',
-    url: 'https://codewise-ai.vercel.app/contact',
+    url: 'https://codewize-ai.website/contact',
     images: [
       {
         url: '/images/blog/AI_vs_Human.png',
@@ -157,8 +157,8 @@ export default function ContactPage() {
                     <p className="text-slate-600 dark:text-slate-300 text-sm mb-2">
                       Send us an email and we'll respond within 24 hours.
                     </p>
-                    <a href="mailto:hello@codewise-ai.vercel.app" className="text-sky-600 dark:text-sky-400 hover:underline">
-                      hello@codewise-ai.vercel.app
+                    <a href="mailto:hello@codewize-ai.website" className="text-sky-600 dark:text-sky-400 hover:underline">
+                      hello@codewize-ai.website
                     </a>
                   </div>
                 </div>
@@ -220,7 +220,7 @@ export default function ContactPage() {
                     </svg>
                   </summary>
                   <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
-                    You can submit a new tool by emailing us at hello@codewise-ai.vercel.app with details about the tool and why it should be featured.
+                    You can submit a new tool by emailing us at hello@codewize-ai.website with details about the tool and why it should be featured.
                   </p>
                 </details>
 
