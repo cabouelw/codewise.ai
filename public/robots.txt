@@ -8,7 +8,7 @@ Disallow: /api/
 Disallow: /_next/
 
 # Host
-Host: https://codewize-ai.website
+Host: https://www.codewize-ai.website
 
 # Sitemaps
-Sitemap: https://codewize-ai.website/sitemap.xml
+Sitemap: https://www.codewize-ai.website/sitemap.xml

@@ -16,22 +16,6 @@ const nextConfig: NextConfig = {
 	// Ensure trailing slashes for consistency
 	trailingSlash: false,
 
-	async redirects() {
-		return [
-			{
-				source: "/:path*",
-				has: [
-					{
-						type: "host",
-						value: "www.codewize-ai.website",
-					},
-				],
-				destination: "https://codewize-ai.website/:path*",
-				permanent: true,
-			},
-		]
-	},
-
 	// Enable experimental features for better performance
 	experimental: {
 		optimizeCss: true,

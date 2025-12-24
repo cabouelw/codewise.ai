@@ -3,8 +3,8 @@ export const siteConfig = {
 	title: "CodeWise AI - Smart AI Tools for Developers",
 	description:
 		"Empower your coding with smart AI tools — all in one place. Discover, learn, and enhance your development workflow with our curated collection of AI and developer tools.",
-	url: "https://codewize-ai.website",
-	ogImage: "https://codewize-ai.website/images/blog/AI_vs_Human.png",
+	url: "https://www.codewize-ai.website",
+	ogImage: "https://www.codewize-ai.website/images/blog/AI_vs_Human.png",
 	links: {
 		twitter: "https://twitter.com/codewise_ai",
 	},
