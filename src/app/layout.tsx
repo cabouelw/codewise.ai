@@ -163,16 +163,13 @@ export default function RootLayout({
             `,
 					}}
 				/>
-			</head>
-			<body className={`${inter.variable} ${poppins.variable} font-sans antialiased`}>
-				{/* Google AdSense - Deferred with afterInteractive to not block content rendering */}
-				<Script
+				<script
 					async
 					src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8652734840791356"
 					crossOrigin="anonymous"
-					strategy="afterInteractive"
 				/>
-
+			</head>
+			<body className={`${inter.variable} ${poppins.variable} font-sans antialiased`}>
 				<ThemeProvider defaultTheme="system" enableSystem>
 					<Toaster
 						position="top-right"
