@@ -16,16 +16,11 @@ const nextConfig: NextConfig = {
 	// Ensure trailing slashes for consistency
 	trailingSlash: false,
 
-	// Enable experimental features for better performance
-	experimental: {
-		optimizeCss: true,
-	},
-
 	// Configure headers for security and caching
 	async headers() {
 		return [
 			{
-				source: "/((?!sitemap.xml).*)",
+				source: "/((?!sitemap.xml|robots.txt).*)",
     			headers: [
 					{
 						key: "X-DNS-Prefetch-Control",

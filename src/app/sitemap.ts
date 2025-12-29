@@ -5,6 +5,8 @@ import { MetadataRoute } from "next"
 import toolsData from "@/data/tools.json"
 import { siteConfig } from "@/lib/seo"
 
+export const dynamic = "force-static"
+
 interface BlogMeta {
 	slug: string
 	category?: string
