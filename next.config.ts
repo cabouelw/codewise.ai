@@ -20,8 +20,21 @@ const nextConfig: NextConfig = {
 	async headers() {
 		return [
 			{
+				source: "/sitemap.xml",
+				headers: [
+					{
+						key: "x-vercel-disable-early-hints",
+						value: "1",
+					},
+					{
+						key: "Cache-Control",
+						value: "public, max-age=0, s-maxage=86400, stale-while-revalidate=3600",
+					},
+				],
+			},
+			{
 				source: "/((?!sitemap.xml|robots.txt).*)",
-    			headers: [
+				headers: [
 					{
 						key: "X-DNS-Prefetch-Control",
 						value: "on",
