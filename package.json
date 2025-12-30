@@ -5,6 +5,7 @@
 	"scripts": {
 		"dev": "next dev --turbopack",
 		"build": "next build --turbopack",
+		"postbuild": "node scripts/generateSitemap.js",
 		"start": "next start",
 		"lint": "next lint",
 		"generate-blog": "node scripts/generateDailyBlog.js",
