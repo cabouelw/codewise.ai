@@ -1,0 +1,103 @@
+---
+title: "Trusted Publishing with OIDC: The End of Long-Lived Deployment Tokens"
+description: "In an era where security breaches are becoming increasingly common, ensuring the integrity and safety of our applications has never been more critical."
+date: "2026-01-23"
+author: "CodeWise AI Team"
+image: "/images/blog/trusted-publishing-with-oidc-the-end-of-long-lived-deploymen.svg"
+tags: ["AI", "Development", "Tutorial", "Best Practices"]
+category: "Tutorials"
+featured: false
+readingTime: "8 min read"
+---
+
+In an era where security breaches are becoming increasingly common, ensuring the integrity and safety of our applications has never been more critical. One of the areas that have come under scrutiny is the use of long-lived deployment tokens. With the advent of OpenID Connect (OIDC), developers now have a more secure method to manage authentication and authorization in their deployment pipelines. In this blog post, we will explore what OIDC is, why long-lived deployment tokens pose a risk, and how you can implement trusted publishing using OIDC.
+
+## Understanding OIDC and Its Benefits
+
+OpenID Connect is an identity layer on top of the OAuth 2.0 protocol. It allows clients to verify the identity of users based on the authentication performed by an authorization server. Here are some benefits of using OIDC:
+
+- **Enhanced Security**: OIDC reduces the risk of token exposure by eliminating long-lived tokens, which can be stolen and misused.
+- **Scalability**: OIDC scales well with microservices architectures, allowing for a centralized authentication mechanism that can be easily integrated across multiple services.
+- **User Experience**: OIDC allows for single sign-on (SSO), simplifying the user experience by reducing the number of logins required across different applications.
+
+## The Risks of Long-Lived Deployment Tokens
+
+Long-lived deployment tokens have been a norm in many systems. However, they come with significant risks:
+
+- **Token Theft**: If a long-lived token is compromised, an attacker can gain unauthorized access to your systems indefinitely until the token is revoked.
+- **Lack of Granularity**: Long-lived tokens often provide broad access, making it challenging to implement the principle of least privilege.
+- **Difficult Revocation**: Revoking access for a long-lived token can be cumbersome, particularly if it has been distributed widely across multiple services or environments.
+
+## Transitioning to OIDC for Trusted Publishing
+
+Making the switch to OIDC for your deployment processes can significantly enhance security. Here’s a step-by-step guide to help you transition:
+
+### Step 1: Choose an OIDC Provider
+
+Select a reliable OIDC provider that fits your organization's needs. Popular options include:
+
+- **Auth0**
+- **Okta**
+- **Google Identity Platform**
+- **AWS Cognito**
+
+### Step 2: Configure Your OIDC Provider
+
+Once you've chosen a provider, you need to set up an application within the OIDC platform. Here’s a general outline of the configuration steps:
+
+1. **Create a new application** in your OIDC provider's dashboard.
+2. **Set redirect URIs** to handle the authentication response.
+3. **Configure scopes** to limit access to only what is necessary.
+4. **Enable PKCE (Proof Key for Code Exchange)** for enhanced security.
+
+### Step 3: Implement OIDC in Your Deployment Pipeline
+
+Next, integrate OIDC into your deployment pipeline. Here's a basic example using a CI/CD tool like GitHub Actions:
+
+```yaml
+name: Deploy Application
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Authenticate with OIDC
+        id: oidc-auth
+        run: |
+          # Use OIDC to retrieve a short-lived access token
+          TOKEN=$(curl -X POST -H "Content-Type: application/x-www-form-urlencoded" \
+          -d "client_id=${{ secrets.CLIENT_ID }}" \
+          -d "client_secret=${{ secrets.CLIENT_SECRET }}" \
+          -d "scope=openid" \
+          -d "grant_type=client_credentials" \
+          "https://your-oidc-provider.com/token")
+          echo "::set-output name=token::$TOKEN"
+          
+      - name: Deploy Application
+        run: |
+          # Use the access token to deploy
+          curl -X POST -H "Authorization: Bearer ${{ steps.oidc-auth.outputs.token }}" \
+          "https://your-deployment-url.com/deploy"
+```
+
+### Step 4: Monitor and Audit Token Usage
+
+Regularly monitor and audit the usage of your tokens. Most OIDC providers offer built-in logging features. Additionally, consider implementing alerts for unusual activity, such as:
+
+- Unrecognized IP addresses
+- Multiple failed login attempts
+- Unusual patterns in token usage
+
+## Conclusion
+
+The transition from long-lived deployment tokens to a trusted publishing model using OIDC is not just a trend; it's a necessary evolution in securing our applications. By leveraging OIDC, you can significantly reduce the risks associated with token theft and unauthorized access while streamlining your deployment processes.
+
+As developers, it is essential to embrace these modern authentication mechanisms to safeguard our systems. Take the first step today: evaluate your current token management practices, explore OIDC providers, and start implementing these strategies in your deployment pipelines. The future of secure publishing is not just about protecting data; it’s about building trust in our systems.
