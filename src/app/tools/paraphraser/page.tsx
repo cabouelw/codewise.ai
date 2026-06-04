@@ -89,6 +89,26 @@ export default function ParaphraserPage() {
       description="Rewrite text while preserving meaning. Choose from multiple styles and tones."
       icon={RefreshCw}
       gradient="from-blue-500 to-cyan-500"
+      aboutContent="The AI Paraphraser is a free writing tool that helps you rewrite text while maintaining the original meaning. Whether you need to rephrase content for better clarity, adjust the tone for a different audience, avoid unintentional plagiarism in academic work, or simply find better ways to express your ideas, this tool uses advanced natural language processing to generate alternative phrasings. It's particularly useful for content creators, students, marketers, and developers writing documentation who want to express complex ideas in simpler terms."
+      howToUse={[
+        'Enter or paste the text you want to paraphrase into the input field.',
+        'Select your preferred writing style or tone (e.g., formal, casual, academic, simplified).',
+        'Click "Paraphrase" to generate rewritten versions of your text.',
+        'Review the output and copy the version that best suits your needs.',
+        'Use the result in your documents, emails, or content — the paraphrased text is yours to use freely.'
+      ]}
+      features={[
+        { title: 'Multiple Tone Options', description: 'Choose from formal, casual, academic, creative, or simplified styles to match your target audience and purpose.' },
+        { title: 'Meaning Preservation', description: 'Advanced AI ensures the core meaning and factual content of your text is preserved while changing the wording and structure.' },
+        { title: 'Grammar Enhancement', description: 'The paraphraser also corrects grammar issues and improves sentence flow in the rewritten output.' },
+        { title: 'Instant Results', description: 'Get high-quality paraphrased text in seconds, saving hours of manual rewriting and editing time.' }
+      ]}
+      faq={[
+        { question: 'Does paraphrasing count as plagiarism?', answer: 'Properly paraphrased content that substantially changes wording and sentence structure while crediting original ideas is generally acceptable. However, always check your institution or publisher guidelines. Our tool helps you create genuinely reworded text, but proper attribution is still recommended.' },
+        { question: 'What types of text work best?', answer: 'The paraphraser works well with paragraphs, articles, essays, emails, technical documentation, and marketing copy. It handles texts from 1 sentence to several paragraphs effectively.' },
+        { question: 'Can I paraphrase in languages other than English?', answer: 'Currently, the paraphraser is optimized for English text. Support for additional languages is planned for future updates.' },
+        { question: 'Is there a word limit?', answer: 'For optimal results, we recommend paraphrasing text up to 1000 words at a time. For longer documents, break them into sections and paraphrase each separately.' }
+      ]}
     >
       <div className="space-y-8">
         <motion.div

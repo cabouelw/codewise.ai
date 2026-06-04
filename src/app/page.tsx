@@ -8,11 +8,11 @@ import { getAllPosts } from '@/lib/mdx/blog'
 
 export const metadata: Metadata = {
   title: 'Best AI Tools for Developers 2025 | CodeWise AI',
-  description: 'Discover 50+ powerful AI tools that every developer should know. Boost productivity with AI-powered code assistants, content generators, and more. Free tools to enhance your development workflow.',
+  description: 'Discover powerful AI tools that every developer should know. Boost productivity with AI-powered code assistants, content generators, and more. Free tools to enhance your development workflow.',
   keywords: ['AI tools for developers', 'best AI coding tools', 'developer productivity tools', 'AI code assistant', 'AI programming tools', 'software development tools', 'AI powered development', 'free developer tools', 'coding assistant AI', 'developer tools 2025'],
   openGraph: {
     title: 'Best AI Tools for Developers 2025 | CodeWise AI',
-    description: 'Discover 50+ powerful AI tools that boost developer productivity. Free AI-powered tools for coding, content generation, and more.',
+    description: 'Discover powerful AI tools that boost developer productivity. Free AI-powered tools for coding, content generation, and more.',
     type: 'website',
     url: 'https://codewize-ai.website',
     images: [
@@ -184,6 +184,46 @@ export default async function Home() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </a>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* About Our Platform - Editorial Content */}
+      <section className="py-20 bg-slate-50 dark:bg-slate-800">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+          <AnimatedSection animation="fade-up">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-8 text-center">
+              Why Developers Choose CodeWise AI
+            </h2>
+            <div className="prose prose-lg prose-slate dark:prose-invert max-w-none">
+              <p>
+                CodeWise AI is a comprehensive platform built by developers, for developers. In today&apos;s rapidly evolving tech landscape, artificial intelligence has become an indispensable part of the software development workflow. From writing boilerplate code to debugging complex applications, AI tools save hours of manual work every single day. Our mission is to curate, review, and provide the best AI-powered tools that genuinely improve developer productivity.
+              </p>
+              <p>
+                Unlike generic tool directories, every tool on CodeWise AI has been tested and evaluated by our team of experienced software engineers. We assess tools based on real-world usability, output quality, integration capabilities, and value for money. Whether you&apos;re a frontend developer looking for AI-assisted UI generation, a backend engineer seeking intelligent code completion, or a full-stack developer wanting to automate repetitive tasks — our platform helps you find exactly what you need.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-8 not-prose">
+                <div className="bg-white dark:bg-slate-700 p-6 rounded-xl shadow-sm">
+                  <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">Hands-On Tool Reviews</h3>
+                  <p className="text-slate-600 dark:text-slate-300 text-sm">Every AI tool we feature has been personally tested by our development team. We provide honest assessments of strengths, limitations, and ideal use cases so you can make informed decisions.</p>
+                </div>
+                <div className="bg-white dark:bg-slate-700 p-6 rounded-xl shadow-sm">
+                  <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">Free Built-In AI Tools</h3>
+                  <p className="text-slate-600 dark:text-slate-300 text-sm">Beyond reviews, we offer free AI-powered utilities directly on our platform — code explainers, content generators, translators, and more — so you can boost productivity without switching between apps.</p>
+                </div>
+                <div className="bg-white dark:bg-slate-700 p-6 rounded-xl shadow-sm">
+                  <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">Developer-Focused Blog</h3>
+                  <p className="text-slate-600 dark:text-slate-300 text-sm">Our blog covers practical tutorials, industry trends, and in-depth guides on integrating AI into your development workflow. Learn how to leverage AI effectively without sacrificing code quality.</p>
+                </div>
+                <div className="bg-white dark:bg-slate-700 p-6 rounded-xl shadow-sm">
+                  <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">Always Up to Date</h3>
+                  <p className="text-slate-600 dark:text-slate-300 text-sm">The AI landscape changes fast. We continuously update our tool listings, add new categories, and revise reviews to reflect the latest features, pricing changes, and emerging alternatives.</p>
+                </div>
+              </div>
+              <p>
+                Whether you&apos;re just beginning to explore AI-assisted development or you&apos;re a seasoned engineer evaluating enterprise solutions, CodeWise AI provides the context and tools you need. Our platform is completely free to use — we believe every developer deserves access to information that helps them write better code and ship products faster.
+              </p>
+            </div>
           </AnimatedSection>
         </div>
       </section>

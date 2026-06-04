@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
+import ToolContentSection from '@/components/ToolContentSection'
 
 type EnhancementType = 'enhance' | 'remove-bg' | 'upscale' | 'restore'
 
@@ -212,8 +213,8 @@ export default function ImageEnhancer() {
                       onClick={() => setEnhancementType(option.type)}
                       disabled={isProcessing}
                       className={`p-4 rounded-xl border-2 transition-all duration-300 text-left ${enhancementType === option.type
-                          ? 'border-pink-500 bg-pink-500/10'
-                          : 'border-slate-600 hover:border-slate-500 bg-slate-700/30'
+                        ? 'border-pink-500 bg-pink-500/10'
+                        : 'border-slate-600 hover:border-slate-500 bg-slate-700/30'
                         } disabled:opacity-50 disabled:cursor-not-allowed`}
                     >
                       <div className="text-3xl mb-2">{option.icon}</div>
@@ -377,6 +378,30 @@ export default function ImageEnhancer() {
             </div>
           ))}
         </motion.div>
+
+        <ToolContentSection
+          title="AI Image Enhancer"
+          description="The AI Image Enhancer is a free tool that uses advanced machine learning algorithms to improve image quality, remove backgrounds, upscale resolution, and restore damaged photos. Whether you need to enhance product photos for an e-commerce store, clean up screenshots for documentation, remove backgrounds for design work, or upscale low-resolution images for printing, our AI processes your images intelligently to deliver professional-quality results in seconds without requiring any photo editing skills."
+          howToUse={[
+            'Upload your image by dragging and dropping it into the upload area or clicking to browse files.',
+            'Select the enhancement type: AI Enhance (improve quality), Remove Background, Upscale (increase resolution), or Restore (fix damaged photos).',
+            'Click the process button to apply the selected enhancement.',
+            'Preview the before-and-after comparison to see the improvement.',
+            'Download your enhanced image in high quality.'
+          ]}
+          features={[
+            { title: 'AI Quality Enhancement', description: 'Automatically adjusts brightness, contrast, sharpness, and color balance using AI to produce visually appealing results.' },
+            { title: 'Background Removal', description: 'Precisely removes image backgrounds using AI segmentation, creating clean transparent PNGs perfect for design and product photos.' },
+            { title: 'Smart Upscaling', description: 'Increase image resolution up to 4x without the blurriness of traditional resizing. AI fills in details intelligently.' },
+            { title: 'Photo Restoration', description: 'Repair old, scratched, or damaged photos by intelligently reconstructing missing or corrupted areas.' }
+          ]}
+          faq={[
+            { question: 'What image formats are supported?', answer: 'The tool accepts JPEG, PNG, and WebP images. Output is provided in PNG format for maximum quality and transparency support.' },
+            { question: 'Is there a file size limit?', answer: 'For optimal processing speed, we recommend images under 10MB. Very large files may take longer to process but are still supported.' },
+            { question: 'Are my images stored on your servers?', answer: 'Images are processed in real-time and automatically deleted from our servers after processing is complete. We do not retain or use your images for any other purpose.' },
+            { question: 'Can I use this for commercial purposes?', answer: 'Yes! Enhanced images can be used for any purpose including commercial projects, e-commerce, social media, and print materials.' }
+          ]}
+        />
       </div>
     </div>
   )

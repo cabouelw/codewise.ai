@@ -6,8 +6,11 @@ const Footer = () => {
   const footerLinks = [
     { href: '/about', label: 'About' },
     { href: '/blog', label: 'Blog' },
-    { href: '/privacy-policy', label: 'Privacy Policy' },
+    { href: '/tools', label: 'Tools' },
     { href: '/contact', label: 'Contact' },
+    { href: '/privacy-policy', label: 'Privacy Policy' },
+    { href: '/terms-of-service', label: 'Terms of Service' },
+    { href: '/disclaimer', label: 'Disclaimer' },
   ]
 
   return (

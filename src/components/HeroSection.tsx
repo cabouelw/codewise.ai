@@ -32,7 +32,7 @@ const HeroSection = () => {
 
           {/* Subtitle */}
           <p className="text-xl md:text-2xl text-slate-700 dark:text-slate-200 mb-8 max-w-3xl mx-auto leading-relaxed animate-fade-in-up animate-delay-400">
-            50+ free AI-powered tools for coding, content generation, and more.
+            Free AI-powered tools for coding, content generation, and more.
             Enhance your development workflow with cutting-edge AI technology.
           </p>
 

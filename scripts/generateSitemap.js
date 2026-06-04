@@ -82,7 +82,11 @@ function main() {
   const outputPath = path.join(repoRoot, "public/sitemap.xml")
 
   const rawSiteUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || process.env.VERCEL_PROJECT_PRODUCTION_URL || "https://www.codewize-ai.website"
+    process.env.SITE_URL ||
+    // Vercel-provided URLs usually do NOT include your preferred canonical host (e.g. www).
+    // Prefer explicit env vars above; otherwise default to the canonical domain.
+    "https://www.codewize-ai.website"
+
   const siteUrl = String(rawSiteUrl).replace(/\/$/, "").startsWith("http")
     ? String(rawSiteUrl).replace(/\/$/, "")
     : `https://${String(rawSiteUrl).replace(/\/$/, "")}`

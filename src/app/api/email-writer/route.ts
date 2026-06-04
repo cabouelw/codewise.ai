@@ -1,12 +1,8 @@
 import { NextRequest, NextResponse } from "next/server"
-import OpenAI from "openai"
+import { createNvidiaClient, NVIDIA_MODEL, defaultParams } from "@/lib/nvidia"
 
-// Initialize OpenAI client
-const openai = new OpenAI({
-	apiKey: process.env.OPENAI_API_KEY || "",
-})
-
-export const runtime = "edge"
+// Initialize NVIDIA client
+const nvidia = createNvidiaClient()
 
 export async function POST(request: NextRequest) {
 	try {
@@ -27,9 +23,9 @@ export async function POST(request: NextRequest) {
 		}
 
 		// Check if API key is configured
-		if (!process.env.OPENAI_API_KEY) {
+		if (!process.env.NVIDIA_API_KEY) {
 			// Mock response for development
-			console.warn("⚠️  OpenAI API key not configured. Returning mock response.")
+			console.warn("⚠️  NVIDIA API key not configured. Returning mock response.")
 
 			const mockEmail = generateMockEmail(prompt, tone as string, type as string)
 
@@ -64,21 +60,22 @@ export async function POST(request: NextRequest) {
 		const emailType = emailTypes[type as string] || emailTypes.general
 		const toneInstruction = toneInstructions[tone as string] || toneInstructions.professional
 
-		// Call OpenAI API
-		const completion = await openai.chat.completions.create({
-			model: "gpt-4o-mini",
+		// Call NVIDIA API
+		const completion = await nvidia!.chat.completions.create({
+			model: NVIDIA_MODEL,
 			messages: [
 				{
 					role: "system",
-					content: `You are a professional email writer. Write ${emailType} with a ${toneInstruction} tone. Include a proper greeting, body, and closing. Make it clear, concise, and well-structured.`,
+					content: `You are a professional email writer. Write ${emailType} with a ${toneInstruction} tone. Include a subject line prefixed with "Subject:", then a proper greeting, body, and closing. Make it clear, concise, and well-structured.`,
 				},
 				{
 					role: "user",
 					content: `Write an email based on this prompt:\n\n${prompt}`,
 				},
 			],
-			temperature: 0.7,
-			max_tokens: 800,
+			temperature: defaultParams.temperature,
+			top_p: defaultParams.top_p,
+			max_tokens: 2048,
 		})
 
 		const emailContent = completion.choices[0]?.message?.content || ""
@@ -92,23 +89,7 @@ export async function POST(request: NextRequest) {
 			subject = subjectMatch[1].trim()
 			email = emailContent.replace(/Subject:\s*.+\n*/i, "").trim()
 		} else {
-			// Generate subject with another API call
-			const subjectCompletion = await openai.chat.completions.create({
-				model: "gpt-4o-mini",
-				messages: [
-					{
-						role: "system",
-						content: "Generate a concise email subject line (5-10 words) based on the prompt.",
-					},
-					{
-						role: "user",
-						content: prompt,
-					},
-				],
-				temperature: 0.5,
-				max_tokens: 50,
-			})
-			subject = subjectCompletion.choices[0]?.message?.content?.trim() || "Important Message"
+			subject = "Important Message"
 		}
 
 		// Return response
@@ -122,11 +103,6 @@ export async function POST(request: NextRequest) {
 		})
 	} catch (error: unknown) {
 		console.error("❌ Error in /api/email-writer:", error)
-
-		// Handle OpenAI specific errors
-		if (error instanceof OpenAI.APIError) {
-			return NextResponse.json({ error: `OpenAI API Error: ${error.message}` }, { status: error.status || 500 })
-		}
 
 		// Generic error response
 		return NextResponse.json({ error: "An unexpected error occurred while processing your request" }, { status: 500 })
@@ -154,7 +130,7 @@ function generateMockEmail(prompt: string, tone: string, type: string): string {
 	const greeting = greetings[tone] || greetings.professional
 	const closing = closings[tone] || closings.professional
 
-	return `${greeting}\n\n${prompt}\n\nThis is a mock email generated for development purposes. Configure your OpenAI API key to get real AI-generated emails.\n\n${closing}`
+	return `${greeting}\n\n${prompt}\n\nThis is a mock email generated for development purposes. Configure your NVIDIA API key to get real AI-generated emails.\n\n${closing}`
 }
 
 // Mock subject generator for development

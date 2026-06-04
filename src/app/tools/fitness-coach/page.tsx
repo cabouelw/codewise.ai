@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send, Dumbbell, Apple, TrendingUp, Target, Calendar, Activity } from 'lucide-react';
+import ToolContentSection from '@/components/ToolContentSection';
 import FormattedMessage from '@/components/FormattedMessage';
 
 interface Message {
@@ -299,6 +300,32 @@ export default function FitnessCoachPage() {
             </motion.div>
           </div>
         </div>
+      </div>
+
+      <div className="container mx-auto px-4 max-w-5xl">
+        <ToolContentSection
+          title="AI Fitness Coach"
+          description="The AI Fitness Coach is a free virtual fitness assistant that provides personalized workout plans, nutrition advice, and wellness guidance tailored to your goals. Whether you're a developer looking to combat the effects of sedentary work, a beginner starting your fitness journey, or an experienced athlete seeking to optimize your routine, our AI coach offers evidence-based recommendations for exercise, diet, and recovery. It considers your fitness level, available equipment, time constraints, and health goals to create actionable plans."
+          howToUse={[
+            'Tell the AI about your fitness goals (e.g., lose weight, build muscle, improve flexibility, increase energy).',
+            'Provide relevant context like your experience level, available equipment, and time constraints.',
+            'Ask specific questions about workouts, nutrition, stretching, or recovery.',
+            'Get personalized recommendations with sets, reps, exercise descriptions, and meal suggestions.',
+            'Follow up with questions to refine your plan or get alternatives.'
+          ]}
+          features={[
+            { title: 'Personalized Workout Plans', description: 'Get exercise routines tailored to your goals, fitness level, and available time — from 15-minute desk stretches to full gym sessions.' },
+            { title: 'Nutrition Guidance', description: 'Receive meal suggestions, macro breakdowns, and healthy eating tips aligned with your fitness objectives.' },
+            { title: 'Developer-Friendly Advice', description: 'Specific guidance for combating sedentary lifestyle effects: posture exercises, desk stretches, and eye strain prevention.' },
+            { title: 'Progressive Planning', description: 'The coach adapts recommendations based on your progress and provides progressive overload suggestions for continued improvement.' }
+          ]}
+          faq={[
+            { question: 'Is this a replacement for a real personal trainer?', answer: 'No. The AI Fitness Coach provides general fitness guidance based on established exercise science. For specific medical conditions, injuries, or advanced athletic training, consult a certified personal trainer or healthcare professional.' },
+            { question: 'Can it create meal plans?', answer: 'Yes, the AI can suggest meal ideas and general nutrition frameworks. However, for specific dietary needs, allergies, or medical conditions, consult a registered dietitian.' },
+            { question: 'What if I have no equipment?', answer: 'The coach excels at bodyweight exercises and no-equipment workouts. Just specify that you want equipment-free routines and it will provide creative alternatives.' },
+            { question: 'How often should I use it?', answer: 'Use the coach whenever you need workout ideas, want to try something new, or need motivation. Many users check in weekly to get fresh routines and track their progress mentally.' }
+          ]}
+        />
       </div>
     </div>
   );

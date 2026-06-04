@@ -46,7 +46,7 @@ export default function PrivacyPolicyPage() {
         <div className="prose prose-slate dark:prose-invert max-w-none">
           <h1>Privacy Policy</h1>
           <p className="text-lg text-slate-600 dark:text-slate-300">
-            Last updated: January 1, 2024
+            Last updated: June 1, 2025
           </p>
 
           <h2>Introduction</h2>
@@ -98,6 +98,37 @@ export default function PrivacyPolicyPage() {
           <p>
             We implement appropriate technical and organizational security measures to protect your
             personal information against unauthorized access, alteration, disclosure, or destruction.
+          </p>
+
+          <h2>Advertising</h2>
+          <p>
+            We use third-party advertising companies, including Google AdSense, to serve advertisements on our website. These companies may use cookies, web beacons, and similar technologies to collect information about your visits to this and other websites in order to provide relevant advertisements about goods and services that may interest you.
+          </p>
+          <p>
+            Google, as a third-party vendor, uses cookies to serve ads on our site. Google&apos;s use of the DART cookie enables it to serve ads based on your visit to our site and other sites on the Internet. You may opt out of the use of the DART cookie by visiting the <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">Google ad and content network privacy policy</a>.
+          </p>
+          <p>We and our advertising partners may collect and use the following information for advertising purposes:</p>
+          <ul>
+            <li>Browser type and version</li>
+            <li>Operating system</li>
+            <li>Pages visited and time spent on our site</li>
+            <li>Geographic location (country/region level)</li>
+            <li>Referring URLs</li>
+          </ul>
+          <p>
+            You can control advertising cookies through your browser settings or by using our Cookie Consent tool. Opting out of personalized advertising does not mean you will stop seeing ads — it means the ads you see may be less relevant to your interests.
+          </p>
+
+          <h2>Cookies and Tracking Technologies</h2>
+          <p>We use the following types of cookies on our website:</p>
+          <ul>
+            <li><strong>Essential Cookies:</strong> Required for the website to function properly (e.g., session management, security).</li>
+            <li><strong>Analytics Cookies:</strong> Help us understand how visitors interact with our website (e.g., Google Analytics).</li>
+            <li><strong>Advertising Cookies:</strong> Used by advertising partners (e.g., Google AdSense) to deliver relevant advertisements.</li>
+            <li><strong>Preference Cookies:</strong> Remember your settings and preferences (e.g., dark mode, language).</li>
+          </ul>
+          <p>
+            You can manage your cookie preferences at any time through the cookie consent banner displayed on our website or through your browser settings.
           </p>
 
           <h2>Cookies and Tracking Technologies</h2>

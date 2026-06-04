@@ -5,9 +5,9 @@ import { JsonLd } from "@/components/JsonLd"
 
 // Generate metadata for SEO
 export const metadata: Metadata = {
-  title: "50+ Free AI Tools for Developers - Code, Content & More | CodeWise AI",
+  title: "Free AI Tools for Developers - Code, Content & More | CodeWise AI",
   description:
-    "Browse 50+ free AI-powered tools for developers. AI code assistants, content generators, translators, image enhancers, and more. Boost your productivity today!",
+    "Browse our collection of free AI-powered tools for developers. AI code assistants, content generators, translators, image enhancers, and more. Boost your productivity today!",
   keywords: [
     "free AI tools",
     "AI tools for developers",
@@ -33,9 +33,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "50+ Free AI Tools for Developers | CodeWise AI",
+    title: "Free AI Tools for Developers | CodeWise AI",
     description:
-      "Browse 50+ free AI-powered tools: code assistants, content generators, translators & more. Boost your productivity!",
+      "Browse our free AI-powered tools: code assistants, content generators, translators & more. Boost your productivity!",
     type: "website",
     url: "https://codewize-ai.website/tools",
     images: [
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "50+ Free AI Tools for Developers | CodeWise AI",
+    title: "Free AI Tools for Developers | CodeWise AI",
     description: "Free AI tools for coding, content generation, translation & more.",
   },
   alternates: {
@@ -121,6 +121,25 @@ export default function ToolsPage() {
 
         {/* Client-side filtering component */}
         <ToolsFilter tools={featuredTools} categories={categories} />
+
+        {/* Editorial Content Section */}
+        <div className="mt-20 max-w-4xl mx-auto">
+          <div className="prose prose-slate dark:prose-invert max-w-none">
+            <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-6">About Our AI Tools Collection</h2>
+            <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+              CodeWise AI offers a growing collection of free, browser-based AI tools designed specifically for developers and content creators. Each tool leverages state-of-the-art artificial intelligence models to automate tedious tasks, spark creativity, and accelerate your workflow — all without requiring any sign-up, installation, or payment.
+            </p>
+            <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+              Our tools span multiple categories to address different aspects of the development and content creation process. The <strong>Code Explainer</strong> helps you understand unfamiliar code by providing detailed plain-language breakdowns. The <strong>Content Generator</strong> produces blog posts, social media copy, and marketing materials from simple prompts. The <strong>Paraphraser</strong> and <strong>Summarizer</strong> help you rewrite and condense text efficiently. The <strong>Translator</strong> enables seamless communication across 20+ languages with context-aware accuracy.
+            </p>
+            <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+              We built these tools because we believe developers deserve access to AI capabilities without friction. Whether you are a solo developer working on a side project, a student learning to code, or a team lead looking for productivity boosters, our tools are designed to integrate seamlessly into your existing workflow. Simply open the tool, provide your input, and get results in seconds.
+            </p>
+            <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
+              All tools are continuously improved based on user feedback and advances in AI technology. If you have a suggestion for a new tool or an improvement to an existing one, we would love to hear from you on our <a href="/contact" className="text-sky-600 dark:text-sky-400 hover:underline">contact page</a>.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   )

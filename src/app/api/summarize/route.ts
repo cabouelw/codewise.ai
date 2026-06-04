@@ -1,12 +1,8 @@
 import { NextRequest, NextResponse } from "next/server"
-import OpenAI from "openai"
+import { createNvidiaClient, NVIDIA_MODEL, defaultParams } from "@/lib/nvidia"
 
-// Initialize OpenAI client
-const openai = new OpenAI({
-	apiKey: process.env.OPENAI_API_KEY || "",
-})
-
-export const runtime = "edge"
+// Initialize NVIDIA client
+const nvidia = createNvidiaClient()
 
 export async function POST(request: NextRequest) {
 	try {
@@ -27,9 +23,9 @@ export async function POST(request: NextRequest) {
 		}
 
 		// Check if API key is configured
-		if (!process.env.OPENAI_API_KEY) {
+		if (!process.env.NVIDIA_API_KEY) {
 			// Mock response for development
-			console.warn("⚠️  OpenAI API key not configured. Returning mock response.")
+			console.warn("⚠️  NVIDIA API key not configured. Returning mock response.")
 
 			const mockSummary = generateMockSummary(text, length)
 
@@ -50,9 +46,9 @@ export async function POST(request: NextRequest) {
 		}
 		const lengthInstructions = lengthMap[length as string] || "in 1-2 paragraphs"
 
-		// Call OpenAI API
-		const completion = await openai.chat.completions.create({
-			model: "gpt-4o-mini",
+		// Call NVIDIA API
+		const completion = await nvidia!.chat.completions.create({
+			model: NVIDIA_MODEL,
 			messages: [
 				{
 					role: "system",
@@ -64,7 +60,8 @@ export async function POST(request: NextRequest) {
 				},
 			],
 			temperature: 0.5,
-			max_tokens: length === "short" ? 150 : length === "long" ? 500 : 300,
+			top_p: defaultParams.top_p,
+			max_tokens: length === "short" ? 500 : length === "long" ? 2048 : 1024,
 		})
 
 		const summary = completion.choices[0]?.message?.content || ""
@@ -80,13 +77,8 @@ export async function POST(request: NextRequest) {
 	} catch (error: unknown) {
 		console.error("❌ Error in /api/summarize:", error)
 
-		// Handle OpenAI specific errors
-		if (error instanceof OpenAI.APIError) {
-			return NextResponse.json({ error: `OpenAI API Error: ${error.message}` }, { status: error.status || 500 })
-		}
-
-		// Generic error response
-		return NextResponse.json({ error: "An unexpected error occurred while processing your request" }, { status: 500 })
+		const message = error instanceof Error ? error.message : "An unexpected error occurred"
+		return NextResponse.json({ error: `NVIDIA API Error: ${message}` }, { status: 500 })
 	}
 }
 

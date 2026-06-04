@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Search, ShoppingCart, TrendingDown, Star, ExternalLink, Filter, Tag } from 'lucide-react';
+import ToolContentSection from '@/components/ToolContentSection';
 
 interface Product {
   id: string;
@@ -327,6 +328,30 @@ export default function ShoppingAssistantPage() {
             </div>
           </motion.div>
         )}
+
+        <ToolContentSection
+          title="AI Shopping Assistant"
+          description="The AI Shopping Assistant is a free tool that helps you find the best products, compare prices, and make informed purchasing decisions. Whether you're shopping for developer hardware (keyboards, monitors, standing desks), tech gadgets, software subscriptions, or everyday items, our AI analyzes your requirements, budget, and preferences to provide personalized product recommendations with pros, cons, and value assessments. It's like having a knowledgeable friend who has researched every product category."
+          howToUse={[
+            'Describe what you are looking for — include your budget, must-have features, and intended use case.',
+            'Optionally set filters like price range, category, or brand preferences.',
+            'Click "Search" to get AI-powered product recommendations.',
+            'Review the results which include product details, pros/cons, price comparisons, and ratings.',
+            'Use the provided information to make a confident purchasing decision.'
+          ]}
+          features={[
+            { title: 'Smart Recommendations', description: 'AI analyzes your needs and budget to suggest products that offer the best value for your specific use case and preferences.' },
+            { title: 'Price Comparison', description: 'Get comparative pricing information to ensure you are getting the best deal available for your chosen product.' },
+            { title: 'Pros & Cons Analysis', description: 'Each recommendation includes a balanced overview of strengths and weaknesses to help you make informed decisions.' },
+            { title: 'Developer-Focused', description: 'Especially strong at recommending tech products, developer tools, hardware, and productivity accessories.' }
+          ]}
+          faq={[
+            { question: 'Does the assistant actually search live prices?', answer: 'The AI provides general pricing guidance and recommendations based on its training data. For real-time prices, we recommend checking the specific retailer links provided in the recommendations.' },
+            { question: 'Are the recommendations biased by sponsorships?', answer: 'No. Our AI provides objective recommendations based on product quality, user reviews, and value for money. We disclose any affiliate relationships in our Disclaimer page.' },
+            { question: 'Can it help with software purchases?', answer: 'Yes! The assistant is great at comparing SaaS tools, development software, IDEs, cloud services, and subscription-based products with feature-by-feature analysis.' },
+            { question: 'How current are the recommendations?', answer: 'The AI is trained on data up to its knowledge cutoff. For the latest product releases or pricing, verify details on manufacturer or retailer websites.' }
+          ]}
+        />
       </div>
     </div>
   );

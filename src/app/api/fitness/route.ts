@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server"
-import OpenAI from "openai"
-
-export const runtime = "edge"
+import { createNvidiaClient, NVIDIA_MODEL, defaultParams } from "@/lib/nvidia"
 
 const SYSTEM_PROMPT = `You are a professional AI Fitness Coach and Personal Trainer. Your role is to:
 
@@ -120,8 +118,8 @@ export async function POST(request: Request) {
 
 		const startTime = Date.now()
 
-		// Check if OpenAI API key is configured
-		if (!process.env.OPENAI_API_KEY) {
+		// Check if NVIDIA API key is configured
+		if (!process.env.NVIDIA_API_KEY) {
 			// Mock mode
 			const lowerMessage = message.toLowerCase().trim()
 			let response = ""
@@ -147,7 +145,7 @@ Based on your question, I recommend:
 
 Remember, fitness is a journey, not a destination! Keep going! 🎯
 
-*Note: This is a mock response. Add OPENAI_API_KEY to .env for personalized AI coaching.*`
+*Note: This is a mock response. Add NVIDIA_API_KEY to .env for personalized AI coaching.*`
 			}
 
 			const processingTime = Date.now() - startTime
@@ -159,11 +157,9 @@ Remember, fitness is a journey, not a destination! Keep going! 🎯
 			})
 		}
 
-		// Real OpenAI integration
+		// Real NVIDIA integration
 		try {
-			const openai = new OpenAI({
-				apiKey: process.env.OPENAI_API_KEY,
-			})
+			const nvidia = createNvidiaClient()
 
 			// Build conversation history
 			const messages: any[] = [
@@ -189,11 +185,12 @@ Remember, fitness is a journey, not a destination! Keep going! 🎯
 				content: message,
 			})
 
-			const completion = await openai.chat.completions.create({
-				model: "gpt-4o-mini",
+			const completion = await nvidia!.chat.completions.create({
+				model: NVIDIA_MODEL,
 				messages,
-				temperature: 0.7,
-				max_tokens: 500,
+				temperature: defaultParams.temperature,
+				top_p: defaultParams.top_p,
+				max_tokens: defaultParams.max_tokens,
 			})
 
 			const response = completion.choices[0]?.message?.content || "Sorry, I couldn't generate a response."
@@ -202,10 +199,10 @@ Remember, fitness is a journey, not a destination! Keep going! 🎯
 			return NextResponse.json({
 				response,
 				processingTime,
-				model: "gpt-4o-mini",
+				model: NVIDIA_MODEL,
 			})
 		} catch (apiError: any) {
-			console.error("OpenAI API Error:", apiError)
+			console.error("NVIDIA API Error:", apiError)
 
 			// Fallback to mock response
 			const mockResponse = `💪 I'm here to help with your fitness journey!
@@ -238,7 +235,7 @@ What specific aspect of fitness would you like to focus on? 🎯
 				error: "Failed to process fitness request",
 				details: error.message,
 			},
-			{ status: 500 }
+			{ status: 500 },
 		)
 	}
 }

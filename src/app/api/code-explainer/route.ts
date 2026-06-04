@@ -1,12 +1,8 @@
 import { NextRequest, NextResponse } from "next/server"
-import OpenAI from "openai"
+import { createNvidiaClient, NVIDIA_MODEL, defaultParams } from "@/lib/nvidia"
 
-// Initialize OpenAI client
-const openai = new OpenAI({
-	apiKey: process.env.OPENAI_API_KEY || "",
-})
-
-export const runtime = "edge"
+// Initialize NVIDIA client
+const nvidia = createNvidiaClient()
 
 export async function POST(request: NextRequest) {
 	try {
@@ -27,9 +23,9 @@ export async function POST(request: NextRequest) {
 		}
 
 		// Check if API key is configured
-		if (!process.env.OPENAI_API_KEY) {
+		if (!process.env.NVIDIA_API_KEY) {
 			// Mock response for development
-			console.warn("⚠️  OpenAI API key not configured. Returning mock response.")
+			console.warn("⚠️  NVIDIA API key not configured. Returning mock response.")
 
 			const mockExplanation = generateMockExplanation(code, language as string, level as string)
 
@@ -56,9 +52,9 @@ export async function POST(request: NextRequest) {
 		const languageHint =
 			language !== "auto" ? `The code is written in ${language}.` : "Detect the programming language."
 
-		// Call OpenAI API
-		const completion = await openai.chat.completions.create({
-			model: "gpt-4o-mini",
+		// Call NVIDIA API
+		const completion = await nvidia!.chat.completions.create({
+			model: NVIDIA_MODEL,
 			messages: [
 				{
 					role: "system",
@@ -70,7 +66,8 @@ export async function POST(request: NextRequest) {
 				},
 			],
 			temperature: 0.6,
-			max_tokens: 1500,
+			top_p: defaultParams.top_p,
+			max_tokens: defaultParams.max_tokens,
 		})
 
 		const fullResponse = completion.choices[0]?.message?.content || ""
@@ -80,15 +77,15 @@ export async function POST(request: NextRequest) {
 		const detectedLanguage = detectedLanguageMatch
 			? detectedLanguageMatch[1].trim()
 			: language !== "auto"
-			? language
-			: "Unknown"
+				? language
+				: "Unknown"
 
 		const complexityMatch = fullResponse.match(/(?:Complexity|Time Complexity):\s*([^\n]+)/i)
 		const complexity = complexityMatch ? complexityMatch[1].trim() : "Not specified"
 
 		// Extract key points (look for numbered lists or bullet points)
 		const keyPointsMatch = fullResponse.match(
-			/(?:Key (?:Concepts|Points)):\s*((?:\d+\.|[-•]|\n)+[^\n]+(?:\n(?:\d+\.|[-•])[^\n]+)*)/i
+			/(?:Key (?:Concepts|Points)):\s*((?:\d+\.|[-•]|\n)+[^\n]+(?:\n(?:\d+\.|[-•])[^\n]+)*)/i,
 		)
 		let keyPoints: string[] = []
 
@@ -113,13 +110,8 @@ export async function POST(request: NextRequest) {
 	} catch (error: unknown) {
 		console.error("❌ Error in /api/code-explainer:", error)
 
-		// Handle OpenAI specific errors
-		if (error instanceof OpenAI.APIError) {
-			return NextResponse.json({ error: `OpenAI API Error: ${error.message}` }, { status: error.status || 500 })
-		}
-
-		// Generic error response
-		return NextResponse.json({ error: "An unexpected error occurred while processing your request" }, { status: 500 })
+		const message = error instanceof Error ? error.message : "An unexpected error occurred"
+		return NextResponse.json({ error: `NVIDIA API Error: ${message}` }, { status: 500 })
 	}
 }
 
@@ -149,14 +141,14 @@ ${code
 
 ## Key Concepts
 1. The code uses ${detectedLanguage} syntax
-2. This is a mock explanation - configure OpenAI API key for detailed analysis
+2. This is a mock explanation - configure NVIDIA API key for detailed analysis
 3. Understanding the logic requires knowledge of programming fundamentals
 
 ## Complexity
 **Time Complexity:** O(n) - estimated based on code structure
 
 ---
-*Note: This is a mock response for development. Configure your OpenAI API key to get AI-powered code explanations.*`
+*Note: This is a mock response for development. Configure your NVIDIA API key to get AI-powered code explanations.*`
 
 	return {
 		explanation,
@@ -164,7 +156,7 @@ ${code
 		complexity: "O(n) - estimated",
 		keyPoints: [
 			`Uses ${detectedLanguage} syntax`,
-			"Mock explanation - configure OpenAI API",
+			"Mock explanation - configure NVIDIA API",
 			"Requires programming fundamentals knowledge",
 		],
 	}

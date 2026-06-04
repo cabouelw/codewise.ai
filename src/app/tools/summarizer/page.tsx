@@ -90,6 +90,26 @@ export default function SummarizerPage() {
       description="Condense long texts into concise summaries. Perfect for articles, reports, and research papers."
       icon={FileText}
       gradient="from-purple-500 to-pink-500"
+      aboutContent="The AI Text Summarizer is a free tool that condenses lengthy articles, reports, research papers, and documents into clear, concise summaries. Using advanced natural language understanding, it identifies the most important points, arguments, and conclusions in your text and presents them in a fraction of the original length. This is invaluable for researchers reviewing large volumes of literature, students studying for exams, professionals processing reports, and content creators researching topics for their work."
+      howToUse={[
+        'Paste the article, report, or document text you want to summarize into the input area.',
+        'Choose your preferred summary length (brief, medium, or detailed).',
+        'Click "Summarize" to generate a condensed version of the text.',
+        'Review the summary which highlights key points, main arguments, and important conclusions.',
+        'Copy the summary for your notes, presentations, or further research.'
+      ]}
+      features={[
+        { title: 'Adjustable Length', description: 'Control how detailed your summary should be — from bullet-point briefs to comprehensive overviews that retain important nuances.' },
+        { title: 'Key Point Extraction', description: 'The AI identifies and prioritizes the most important information, arguments, and conclusions from your source text.' },
+        { title: 'Structure Preservation', description: 'Maintains the logical flow and argument structure of the original document in the condensed output.' },
+        { title: 'Multi-Format Support', description: 'Works with articles, academic papers, news stories, technical documentation, meeting notes, and any other text format.' }
+      ]}
+      faq={[
+        { question: 'How long should the input text be?', answer: 'The summarizer works best with texts between 200 and 5000 words. For very short texts, there may not be enough content to meaningfully summarize. For extremely long documents, consider splitting them into sections.' },
+        { question: 'Does it work with technical content?', answer: 'Yes! The AI handles technical, scientific, and specialized content well. It preserves key terminology and technical details while removing redundant explanations.' },
+        { question: 'Can I use summaries in my own work?', answer: 'The summaries generated are original text created by AI based on your input. You can use them in your notes, reports, and work. However, if you publish them, proper citation of the original source material is still recommended.' },
+        { question: 'What languages are supported?', answer: 'The summarizer is optimized for English text but can handle content in other major languages with reasonable accuracy.' }
+      ]}
     >
       <div className="space-y-8">
         {/* Input Section */}

@@ -1,12 +1,8 @@
 import { NextRequest, NextResponse } from "next/server"
-import OpenAI from "openai"
+import { createNvidiaClient, NVIDIA_MODEL, defaultParams } from "@/lib/nvidia"
 
-// Initialize OpenAI client
-const openai = new OpenAI({
-	apiKey: process.env.OPENAI_API_KEY || "",
-})
-
-export const runtime = "edge"
+// Initialize NVIDIA client
+const nvidia = createNvidiaClient()
 
 export async function POST(request: NextRequest) {
 	try {
@@ -27,9 +23,9 @@ export async function POST(request: NextRequest) {
 		}
 
 		// Check if API key is configured
-		if (!process.env.OPENAI_API_KEY) {
+		if (!process.env.NVIDIA_API_KEY) {
 			// Mock response for development
-			console.warn("⚠️  OpenAI API key not configured. Returning mock response.")
+			console.warn("⚠️  NVIDIA API key not configured. Returning mock response.")
 
 			const mockParaphrase = generateMockParaphrase(text, style as string)
 
@@ -53,9 +49,9 @@ export async function POST(request: NextRequest) {
 
 		const instruction = styleInstructions[style as string] || styleInstructions.professional
 
-		// Call OpenAI API
-		const completion = await openai.chat.completions.create({
-			model: "gpt-4o-mini",
+		// Call NVIDIA API
+		const completion = await nvidia!.chat.completions.create({
+			model: NVIDIA_MODEL,
 			messages: [
 				{
 					role: "system",
@@ -66,8 +62,9 @@ export async function POST(request: NextRequest) {
 					content: `Paraphrase this text:\n\n${text}`,
 				},
 			],
-			temperature: 0.7,
-			max_tokens: 1000,
+			temperature: defaultParams.temperature,
+			top_p: defaultParams.top_p,
+			max_tokens: 2048,
 		})
 
 		const paraphrase = completion.choices[0]?.message?.content || ""
@@ -83,13 +80,8 @@ export async function POST(request: NextRequest) {
 	} catch (error: unknown) {
 		console.error("❌ Error in /api/paraphrase:", error)
 
-		// Handle OpenAI specific errors
-		if (error instanceof OpenAI.APIError) {
-			return NextResponse.json({ error: `OpenAI API Error: ${error.message}` }, { status: error.status || 500 })
-		}
-
-		// Generic error response
-		return NextResponse.json({ error: "An unexpected error occurred while processing your request" }, { status: 500 })
+		const message = error instanceof Error ? error.message : "An unexpected error occurred"
+		return NextResponse.json({ error: `NVIDIA API Error: ${message}` }, { status: 500 })
 	}
 }
 
@@ -112,5 +104,5 @@ function generateMockParaphrase(text: string, style: string): string {
 		.reverse()
 		.join(" ")
 
-	return `${prefix}${shuffled}. [This is a mock paraphrase - configure OpenAI API key for real results]`
+	return `${prefix}${shuffled}. [This is a mock paraphrase - configure NVIDIA API key for real results]`
 }

@@ -1,13 +1,7 @@
 import { NextResponse } from "next/server"
-import OpenAI from "openai"
+import { createNvidiaClient, NVIDIA_MODEL, defaultParams } from "@/lib/nvidia"
 
-export const runtime = "edge"
-
-const openai = process.env.OPENAI_API_KEY
-	? new OpenAI({
-			apiKey: process.env.OPENAI_API_KEY,
-	  })
-	: null
+const nvidia = createNvidiaClient()
 
 export async function POST(request: Request) {
 	try {
@@ -18,7 +12,7 @@ export async function POST(request: Request) {
 		}
 
 		// Mock response if no API key
-		if (!openai) {
+		if (!nvidia) {
 			const mockContent = generateMockContent(contentType, topic, tone, length)
 			return NextResponse.json(mockContent)
 		}
@@ -49,14 +43,15 @@ export async function POST(request: Request) {
 				userPrompt = `Write ${length} content about: ${topic}`
 		}
 
-		const completion = await openai.chat.completions.create({
-			model: "gpt-4o-mini",
+		const completion = await nvidia.chat.completions.create({
+			model: NVIDIA_MODEL,
 			messages: [
 				{ role: "system", content: systemPrompt },
 				{ role: "user", content: userPrompt },
 			],
-			max_tokens: length === "short" ? 500 : length === "medium" ? 1000 : 1500,
-			temperature: tone === "creative" ? 0.9 : 0.7,
+			max_tokens: length === "short" ? 1000 : length === "medium" ? 2000 : 4096,
+			temperature: tone === "creative" ? 0.9 : defaultParams.temperature,
+			top_p: defaultParams.top_p,
 		})
 
 		const generatedText = completion.choices[0]?.message?.content || ""
@@ -89,7 +84,7 @@ export async function POST(request: Request) {
 				error: "Failed to generate content",
 				details: error.message,
 			},
-			{ status: 500 }
+			{ status: 500 },
 		)
 	}
 }
@@ -197,6 +192,6 @@ P.S. This offer won't last long, so don't wait to take advantage of this opportu
 		wordCount,
 		readTime,
 		mock: true,
-		message: "Mock mode: Sample content generated. Add OPENAI_API_KEY to .env for AI-generated content.",
+		message: "Mock mode: Sample content generated. Add NVIDIA_API_KEY to .env for AI-generated content.",
 	}
 }

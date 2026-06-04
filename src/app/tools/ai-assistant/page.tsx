@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import FormattedMessage from '@/components/FormattedMessage'
+import ToolContentSection from '@/components/ToolContentSection'
 
 interface Message {
   id: string
@@ -237,6 +238,30 @@ export default function AIAssistant() {
             </div>
           ))}
         </motion.div>
+
+        <ToolContentSection
+          title="AI Personal Assistant"
+          description="The AI Personal Assistant is a free, intelligent chatbot designed to help developers and professionals manage their daily tasks more efficiently. It can answer questions on a wide range of topics, help you brainstorm ideas, draft quick responses, set reminders, and provide personalized recommendations based on your needs. Unlike basic chatbots, our AI assistant maintains context throughout your conversation, allowing for natural follow-up questions and multi-step problem solving. It's ideal for quick research, planning sessions, and getting instant answers without leaving your workflow."
+          howToUse={[
+            'Type your question or request in the message input at the bottom of the chat.',
+            'Press Enter or click Send to submit your message.',
+            'The AI will process your request and respond with helpful information or suggestions.',
+            'Continue the conversation naturally — the assistant remembers context from earlier messages.',
+            'Use the quick action buttons for common tasks like setting reminders or getting recommendations.'
+          ]}
+          features={[
+            { title: 'Contextual Conversations', description: 'The assistant remembers your conversation history within a session, enabling natural multi-turn dialogues and follow-up questions.' },
+            { title: 'General Knowledge', description: 'Ask about programming, technology, science, business, or any topic. The AI draws from broad training data to provide informative answers.' },
+            { title: 'Task Planning', description: 'Describe a project or goal and get step-by-step plans, time estimates, and actionable next steps to move forward.' },
+            { title: 'Writing Assistance', description: 'Get help drafting messages, emails, documentation, or any written content quickly and professionally.' }
+          ]}
+          faq={[
+            { question: 'Is the AI assistant free to use?', answer: 'Yes, the AI Personal Assistant is completely free. There are no hidden fees, subscriptions, or usage limits for casual use.' },
+            { question: 'Does it remember previous conversations?', answer: 'The assistant maintains context within your current session. Once you close or refresh the page, the conversation history is cleared for your privacy.' },
+            { question: 'Can it help with coding questions?', answer: 'Absolutely! You can ask about programming concepts, debug approaches, algorithm explanations, best practices, and more. For code-specific analysis, try our dedicated Code Explainer tool.' },
+            { question: 'How is my data handled?', answer: 'Your conversations are processed in real-time and are not stored on our servers after the session ends. We do not use your messages for training purposes.' }
+          ]}
+        />
       </div>
     </div>
   )

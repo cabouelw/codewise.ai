@@ -1,12 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import { Code } from 'lucide-react';
+import { Code, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 import toast from 'react-hot-toast';
 import ToolLayout from '@/components/tools/ToolLayout';
-import ResultDisplay from '@/components/tools/ResultDisplay';
 import LoadingSpinner from '@/components/tools/LoadingSpinner';
+import CopyButton from '@/components/tools/CopyButton';
+import ShareButton from '@/components/tools/ShareButton';
+import FormattedMessage from '@/components/FormattedMessage';
 import { consentedStorage, hasConsentFor } from '@/lib/consent';
 
 export default function CodeExplainerPage() {
@@ -83,7 +85,7 @@ export default function CodeExplainerPage() {
       });
 
       if (data.mock) {
-        toast('Using mock response - configure OpenAI API key', { icon: '⚠️', duration: 5000 });
+        toast('Using mock response - configure NVIDIA API key', { icon: '⚠️', duration: 5000 });
       } else {
         toast.success('Code explained successfully!');
       }
@@ -101,6 +103,26 @@ export default function CodeExplainerPage() {
       description="Understand code snippets with detailed explanations. Supports multiple languages."
       icon={Code}
       gradient="from-orange-500 to-red-500"
+      aboutContent="The AI Code Explainer is a free developer tool that uses artificial intelligence to break down complex code into plain-language explanations. Whether you're learning a new programming language, reviewing unfamiliar code during a pull request, or trying to understand legacy code in a large codebase, this tool provides line-by-line explanations that help you understand what the code does, why it works that way, and how different parts connect together. It supports all major programming languages including JavaScript, TypeScript, Python, Java, C++, Go, Rust, and many more."
+      howToUse={[
+        'Paste your code snippet into the input area — it can be a function, class, algorithm, or any block of code you want explained.',
+        'Select the programming language from the dropdown menu for more accurate explanations.',
+        'Click the "Explain Code" button to generate a detailed breakdown.',
+        'Review the explanation which covers what the code does, key concepts used, and potential improvements.',
+        'Use the explanation to learn, document, or share knowledge with your team.'
+      ]}
+      features={[
+        { title: 'Multi-Language Support', description: 'Supports JavaScript, Python, TypeScript, Java, C++, Go, Rust, PHP, Ruby, and 20+ more programming languages with accurate syntax understanding.' },
+        { title: 'Line-by-Line Breakdown', description: 'Get detailed explanations of each significant line or block, including what it does, data flow, and side effects.' },
+        { title: 'Concept Identification', description: 'Automatically identifies design patterns, algorithms, and programming concepts used in the code.' },
+        { title: 'Beginner-Friendly Output', description: 'Explanations are written in clear, accessible language suitable for developers at any skill level.' }
+      ]}
+      faq={[
+        { question: 'What programming languages are supported?', answer: 'Our code explainer supports all popular languages including JavaScript, TypeScript, Python, Java, C#, C++, Go, Rust, PHP, Ruby, Swift, Kotlin, and more. The AI is trained on a wide variety of programming languages and can identify syntax patterns automatically.' },
+        { question: 'Is my code stored or shared?', answer: 'No. Code submitted to our explainer is processed in real-time and not stored on our servers. We do not retain, share, or use your code for training purposes. Your intellectual property remains yours.' },
+        { question: 'How accurate are the explanations?', answer: 'The AI provides high-quality explanations for most code patterns. However, for highly specialized domain logic or proprietary business rules, the AI may provide general explanations. Always use your judgment to verify accuracy for critical documentation.' },
+        { question: 'Can I use this for learning a new language?', answer: 'Absolutely! Many developers use our code explainer to understand code examples in languages they are learning. It helps bridge the gap between seeing code and understanding the concepts behind it.' }
+      ]}
     >
       <div className="space-y-8">
         <motion.div
@@ -185,26 +207,51 @@ export default function CodeExplainerPage() {
 
         {result && metadata && (
           <div className="space-y-6">
-            <ResultDisplay
-              result={result}
-              title="Code Explanation"
-              metadata={
-                <div className="flex flex-wrap gap-4 text-sm">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 overflow-hidden"
+            >
+              <div className="px-6 py-5 bg-gradient-to-r from-orange-50 via-amber-50 to-red-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800 border-b border-slate-200 dark:border-slate-700">
+                <div className="flex flex-wrap items-start justify-between gap-4">
                   <div>
-                    <span className="font-medium">Language:</span> {metadata.detectedLanguage}
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                      <Sparkles className="w-5 h-5 text-orange-600 dark:text-orange-400" />
+                      AI Code Explanation
+                    </h3>
+                    <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
+                      Structured breakdown with concepts, complexity, and learning notes.
+                    </p>
                   </div>
-                  <div>
-                    <span className="font-medium">Complexity:</span> {metadata.complexity}
+
+                  <div className="flex flex-wrap gap-2">
+                    <CopyButton text={result} label="Copy Explanation" />
+                    <ShareButton text={result} title="AI Code Explanation" />
                   </div>
-                  <div>
-                    <span className="font-medium">Level:</span> {level}
-                  </div>
+                </div>
+
+                <div className="mt-4 flex flex-wrap gap-2">
+                  <span className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold bg-orange-100 text-orange-800 dark:bg-orange-900/40 dark:text-orange-200">
+                    Language: {metadata.detectedLanguage}
+                  </span>
+                  <span className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-200">
+                    Complexity: {metadata.complexity}
+                  </span>
+                  <span className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-200">
+                    Level: {level}
+                  </span>
                   {metadata.mock && (
-                    <div className="text-amber-600 dark:text-amber-400">⚠️ Mock Response</div>
+                    <span className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold bg-yellow-100 text-yellow-800 dark:bg-yellow-900/40 dark:text-yellow-200">
+                      ⚠ Mock Response
+                    </span>
                   )}
                 </div>
-              }
-            />
+              </div>
+
+              <div className="px-6 py-6">
+                <FormattedMessage content={result} accentColor="orange" />
+              </div>
+            </motion.div>
 
             {metadata.keyPoints && metadata.keyPoints.length > 0 && (
               <motion.div

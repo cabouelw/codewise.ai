@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Languages, Volume2, Copy, RefreshCw, Globe } from 'lucide-react';
+import ToolContentSection from '@/components/ToolContentSection';
 
 const LANGUAGES = [
   { code: 'auto', name: 'Auto-detect', flag: '🌐' },
@@ -313,6 +314,30 @@ export default function TranslatorPage() {
             </p>
           </div>
         </motion.div>
+
+        <ToolContentSection
+          title="AI Translator"
+          description="The AI Translator is a free, intelligent translation tool that converts text between 20+ languages with high accuracy. Unlike basic word-for-word translators, our AI understands context, idioms, and nuance to produce natural-sounding translations that read as if written by a native speaker. It's ideal for developers working with international teams, content creators localizing their work, students studying foreign languages, and professionals communicating across language barriers."
+          howToUse={[
+            'Enter or paste the text you want to translate in the source text area.',
+            'Select the source language (or use auto-detect to let the AI identify it automatically).',
+            'Choose your target language from the 20+ supported options.',
+            'Click "Translate" to generate the translation.',
+            'Use the copy button to quickly grab the translated text for use elsewhere.'
+          ]}
+          features={[
+            { title: '20+ Languages', description: 'Translate between English, Spanish, French, German, Japanese, Chinese, Korean, Arabic, Hindi, and many more languages with high accuracy.' },
+            { title: 'Auto-Detection', description: 'Not sure what language the source text is in? Our AI automatically detects the input language for seamless translation.' },
+            { title: 'Context-Aware Translation', description: 'The AI understands sentence context, idioms, and cultural nuances to produce translations that sound natural rather than mechanical.' },
+            { title: 'Instant Results', description: 'Get accurate translations in seconds, even for longer texts. No waiting, no word limits for reasonable usage.' }
+          ]}
+          faq={[
+            { question: 'How accurate are the translations?', answer: 'Our AI translator produces high-quality translations for most content types. It excels at general text, business communication, and technical documentation. For legal or medical documents requiring certified translation, we recommend professional human review.' },
+            { question: 'Can it translate technical/programming content?', answer: 'Yes! The translator handles technical documentation, README files, API docs, and developer-focused content well. It preserves code snippets and technical terminology appropriately.' },
+            { question: 'Is there a character limit?', answer: 'For optimal performance, we recommend translating up to 2000 characters at a time. For longer documents, break them into paragraphs for best results.' },
+            { question: 'Does it support right-to-left languages?', answer: 'Yes. Arabic, Hebrew, and other RTL languages are fully supported with proper text direction handling in the output.' }
+          ]}
+        />
       </div>
     </div>
   );

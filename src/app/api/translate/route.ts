@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server"
-
-export const runtime = "edge"
+import { createNvidiaClient, NVIDIA_MODEL, defaultParams } from "@/lib/nvidia"
 
 // Mock translations for common phrases
 const mockTranslations: Record<string, Record<string, string>> = {
@@ -80,31 +79,37 @@ export async function POST(request: Request) {
 		// Auto-detect language if needed
 		const detectedLanguage = sourceLang === "auto" ? detectLanguage(text) : sourceLang
 
-		// Check if API keys are configured
-		const hasGoogleTranslate = !!process.env.GOOGLE_TRANSLATE_API_KEY
-		const hasDeepL = !!process.env.DEEPL_API_KEY
+		// Language names for prompting
+		const langNames: Record<string, string> = {
+			es: "Spanish",
+			fr: "French",
+			de: "German",
+			it: "Italian",
+			pt: "Portuguese",
+			ru: "Russian",
+			ja: "Japanese",
+			zh: "Chinese",
+			ko: "Korean",
+			ar: "Arabic",
+			hi: "Hindi",
+			en: "English",
+			tr: "Turkish",
+			nl: "Dutch",
+			pl: "Polish",
+			sv: "Swedish",
+			vi: "Vietnamese",
+			th: "Thai",
+			id: "Indonesian",
+		}
 
-		if (!hasGoogleTranslate && !hasDeepL) {
-			// Mock mode - use simple mock translations
+		const nvidia = createNvidiaClient()
+
+		// Mock mode if API key is missing
+		if (!nvidia) {
 			const lowerText = text.toLowerCase().trim()
 			let translatedText = mockTranslations[lowerText]?.[targetLang]
 
 			if (!translatedText) {
-				// Generate a mock translation by adding language indicator
-				const langNames: Record<string, string> = {
-					es: "Spanish",
-					fr: "French",
-					de: "German",
-					it: "Italian",
-					pt: "Portuguese",
-					ru: "Russian",
-					ja: "Japanese",
-					zh: "Chinese",
-					ko: "Korean",
-					ar: "Arabic",
-					hi: "Hindi",
-					en: "English",
-				}
 				translatedText = `[${langNames[targetLang] || targetLang} translation]: ${text}`
 			}
 
@@ -117,92 +122,50 @@ export async function POST(request: Request) {
 				targetLang,
 				processingTime,
 				mock: true,
-				message: "Mock mode: Add GOOGLE_TRANSLATE_API_KEY or DEEPL_API_KEY to .env for real translations.",
+				message: "Mock mode: Add NVIDIA_API_KEY to .env for real translations.",
 			})
 		}
 
-		// Real API integration
+		// Real NVIDIA API translation
 		try {
-			let translatedText = ""
+			const targetLangName = langNames[targetLang] || targetLang
+			const sourceLangName = langNames[detectedLanguage] || detectedLanguage
 
-			if (hasGoogleTranslate) {
-				// Google Translate API
-				const apiKey = process.env.GOOGLE_TRANSLATE_API_KEY
-				const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`
+			const completion = await nvidia.chat.completions.create({
+				model: NVIDIA_MODEL,
+				messages: [
+					{
+						role: "system",
+						content: `You are a professional translator. Translate the given text from ${sourceLangName} to ${targetLangName}. Output ONLY the translated text, nothing else. Preserve formatting, tone, and meaning.`,
+					},
+					{
+						role: "user",
+						content: text,
+					},
+				],
+				temperature: 0.3,
+				top_p: defaultParams.top_p,
+				max_tokens: 2048,
+			})
 
-				const response = await fetch(url, {
-					method: "POST",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({
-						q: text,
-						target: targetLang,
-						source: sourceLang === "auto" ? undefined : sourceLang,
-						format: "text",
-					}),
-				})
+			const translatedText = completion.choices[0]?.message?.content?.trim() || ""
+			const processingTime = Date.now() - startTime
 
-				if (!response.ok) {
-					throw new Error(`Google Translate API error: ${response.status}`)
-				}
-
-				const data = await response.json()
-				translatedText = data.data.translations[0].translatedText
-				const detectedLang = data.data.translations[0].detectedSourceLanguage || detectedLanguage
-
-				const processingTime = Date.now() - startTime
-
-				return NextResponse.json({
-					translatedText,
-					detectedLanguage: detectedLang,
-					sourceLang: detectedLang,
-					targetLang,
-					processingTime,
-					provider: "Google Translate",
-				})
-			} else if (hasDeepL) {
-				// DeepL API
-				const apiKey = process.env.DEEPL_API_KEY!
-				const url = "https://api-free.deepl.com/v2/translate"
-
-				const formData = new URLSearchParams()
-				formData.append("auth_key", apiKey)
-				formData.append("text", text)
-				formData.append("target_lang", targetLang.toUpperCase())
-				if (sourceLang !== "auto") {
-					formData.append("source_lang", sourceLang.toUpperCase())
-				}
-
-				const response = await fetch(url, {
-					method: "POST",
-					headers: { "Content-Type": "application/x-www-form-urlencoded" },
-					body: formData.toString(),
-				})
-
-				if (!response.ok) {
-					throw new Error(`DeepL API error: ${response.status}`)
-				}
-
-				const data = await response.json()
-				translatedText = data.translations[0].text
-				const detectedLang = data.translations[0].detected_source_language?.toLowerCase() || detectedLanguage
-
-				const processingTime = Date.now() - startTime
-
-				return NextResponse.json({
-					translatedText,
-					detectedLanguage: detectedLang,
-					sourceLang: detectedLang,
-					targetLang,
-					processingTime,
-					provider: "DeepL",
-				})
-			}
+			return NextResponse.json({
+				translatedText,
+				detectedLanguage,
+				sourceLang: detectedLanguage,
+				targetLang,
+				processingTime,
+				provider: "NVIDIA Nemotron",
+			})
 		} catch (apiError: any) {
-			console.error("Translation API Error:", apiError)
+			console.error("NVIDIA Translation API Error:", apiError)
 
 			// Fallback to mock mode
 			const lowerText = text.toLowerCase().trim()
-			const translatedText = mockTranslations[lowerText]?.[targetLang] || `[${targetLang} translation]: ${text}`
+			const translatedText =
+				mockTranslations[lowerText]?.[targetLang] || `[${langNames[targetLang] || targetLang} translation]: ${text}`
 			const processingTime = Date.now() - startTime
 
 			return NextResponse.json({
@@ -224,7 +187,7 @@ export async function POST(request: Request) {
 				error: "Failed to translate text",
 				details: error.message,
 			},
-			{ status: 500 }
+			{ status: 500 },
 		)
 	}
 }

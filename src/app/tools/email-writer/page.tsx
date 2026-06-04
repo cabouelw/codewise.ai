@@ -94,6 +94,26 @@ export default function EmailWriterPage() {
       description="Generate professional emails from simple prompts. Save time on correspondence."
       icon={Mail}
       gradient="from-green-500 to-emerald-500"
+      aboutContent="The AI Email Writer is a free productivity tool that generates professional, well-structured emails from brief descriptions or prompts. Whether you need to write a cold outreach email, respond to a client inquiry, request time off, follow up after a meeting, or compose a formal business proposal, this tool crafts contextually appropriate emails with proper greetings, body structure, and sign-offs. It saves professionals, freelancers, and developers significant time on daily correspondence while maintaining a polished, professional tone."
+      howToUse={[
+        'Describe what your email should communicate — include the recipient context, purpose, and any key points to cover.',
+        'Select the desired tone (formal, friendly, persuasive, apologetic, etc.).',
+        'Click "Generate Email" to create a professionally written email.',
+        'Review and customize the generated email — adjust any specific details or personal touches.',
+        'Copy the final email and paste it into your email client to send.'
+      ]}
+      features={[
+        { title: 'Multiple Tone Presets', description: 'Generate emails in formal, friendly, persuasive, concise, or apologetic tones to match any professional situation.' },
+        { title: 'Context-Aware Writing', description: 'The AI understands business context and generates appropriate language for client communications, internal emails, and cold outreach.' },
+        { title: 'Structure & Formatting', description: 'Every generated email includes a proper greeting, well-organized body paragraphs, clear call-to-action, and professional sign-off.' },
+        { title: 'Quick Iterations', description: 'Not satisfied with the first draft? Regenerate with adjusted parameters to get the perfect email in seconds.' }
+      ]}
+      faq={[
+        { question: 'What types of emails can it write?', answer: 'The email writer handles virtually any professional email type: business proposals, follow-ups, meeting requests, apologies, introductions, thank-you notes, feedback requests, job applications, resignation letters, and more.' },
+        { question: 'Will the emails sound robotic?', answer: 'No. The AI is trained to produce natural, human-sounding prose. The outputs are designed to be indistinguishable from manually written professional emails. You can further personalize them before sending.' },
+        { question: 'Can I specify a word count or length?', answer: 'You can indicate in your prompt whether you want a brief, standard, or detailed email. The AI will adjust the output length accordingly.' },
+        { question: 'Is my email content private?', answer: 'Yes. We do not store the content of your generated emails. Each generation is processed in real-time and not retained on our servers.' }
+      ]}
     >
       <div className="space-y-8">
         <motion.div

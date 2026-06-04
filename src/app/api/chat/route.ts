@@ -1,13 +1,7 @@
 import { NextResponse } from "next/server"
-import OpenAI from "openai"
+import { createNvidiaClient, NVIDIA_MODEL, defaultParams } from "@/lib/nvidia"
 
-export const runtime = "edge"
-
-const openai = process.env.OPENAI_API_KEY
-	? new OpenAI({
-			apiKey: process.env.OPENAI_API_KEY,
-	  })
-	: null
+const nvidia = createNvidiaClient()
 
 export async function POST(request: Request) {
 	try {
@@ -18,7 +12,7 @@ export async function POST(request: Request) {
 		}
 
 		// Mock response if no API key
-		if (!openai) {
+		if (!nvidia) {
 			const mockResponses = [
 				"I can help you with that! As your AI assistant, I'm here to manage reminders, schedule events, answer questions, and provide recommendations. What would you like to do?",
 				"Great question! I can assist you with various tasks like setting reminders, organizing your schedule, providing information, and offering personalized recommendations based on your needs.",
@@ -51,11 +45,12 @@ export async function POST(request: Request) {
 			},
 		]
 
-		const completion = await openai.chat.completions.create({
-			model: "gpt-4o-mini",
+		const completion = await nvidia.chat.completions.create({
+			model: NVIDIA_MODEL,
 			messages,
-			max_tokens: 500,
-			temperature: 0.7,
+			max_tokens: defaultParams.max_tokens,
+			temperature: defaultParams.temperature,
+			top_p: defaultParams.top_p,
 		})
 
 		const response =
@@ -77,7 +72,7 @@ export async function POST(request: Request) {
 				error: "Failed to process chat message",
 				details: error.message,
 			},
-			{ status: 500 }
+			{ status: 500 },
 		)
 	}
 }
