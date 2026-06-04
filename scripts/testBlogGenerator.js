@@ -74,7 +74,7 @@ console.log('✅ Length limits: Enforced');
 console.log('✅ Edge cases: Handled\n');
 
 console.log('💡 Next Steps:');
-console.log('1. Set AI_API_KEY in .env file');
+console.log('1. Set NVIDIA_API_KEY in .env file');
 console.log('2. Run: node scripts/generateDailyBlog.js');
 console.log('3. Check generated file in src/content/blog/\n');
 

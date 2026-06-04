@@ -13,8 +13,9 @@ require('dotenv').config({ path: path.join(__dirname, '../.env') });
  */
 
 // Configuration
-const AI_API_ENDPOINT = 'https://api.openai.com/v1/chat/completions';
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+const AI_API_ENDPOINT = 'https://integrate.api.nvidia.com/v1/chat/completions';
+const NVIDIA_API_KEY = process.env.NVIDIA_API_KEY;
+const NVIDIA_MODEL = 'nvidia/nemotron-3-ultra-550b-a55b';
 const BLOG_DIR = path.join(__dirname, '../src/content/blog');
 const BLOG_IMAGES_DIR = path.join(__dirname, '../public/images/blog');
 // Topics/titles for blog generation (daily viral, SEO-focused)
@@ -32,7 +33,7 @@ const TOPICS = [
   'Autonomous Coding Agents: Scaling Long-Running AI Development Sessions',
   'Rogue AI Agents: A Practical Threat Model for Tool-Using LLMs in 2026',
   'The Rise of Micro Apps: How Non-Developers Are Building Apps Instead of Buying Them',
-  
+
   // LLM Engineering & Production
   'Running LLMs in Production 50x Faster: A Complete Infrastructure Guide',
   'LLM Evaluation That Actually Works: Metrics That Predict User Satisfaction',
@@ -42,7 +43,7 @@ const TOPICS = [
   'Human-Centric AI Design: Building Apps That Actually Help Users',
   'Open Source LLM Engineering Framework: From Prototype to Production',
   'The AI Healthcare Gold Rush: Building Medical AI Applications Responsibly',
-  
+
   // RAG & Knowledge Systems
   'RAG in 2026: Vector Search vs Hybrid Search vs Knowledge Graphs Compared',
   'LightRAG vs Traditional RAG: A Performance and Accuracy Comparison Guide',
@@ -50,7 +51,7 @@ const TOPICS = [
   'Knowledge Graphs for AI: When They Help and When They Hurt Performance',
   'Document AI Stack 2026: OCR, Extraction, and Validation Pipelines Explained',
   'From PDF to Structured Data: The Complete Developer Guide for 2026',
-  
+
   // Web Development & Frameworks
   'Next.js App Router Performance: What Actually Moves Core Web Vitals in 2026',
   'React Server Components Security: Threat Models and Safe Patterns for Production',
@@ -58,68 +59,68 @@ const TOPICS = [
   'Tailwind CSS in 2026: How AI Is Changing the Framework Industry',
   'WebAssembly Performance: How to Boost Your Text Parser by 350%',
   'URL Pattern API: The Missing Piece for Cleaner Web Routing Logic',
-  
+
   // Rust & Systems Programming
   'Lapce: The Rust-Based Code Editor That Is Lighter Than VS Code and Zed',
   'Learning Rust as a Working Software Engineer: A Practical Journey in 2026',
   'Building Real-Time Aircraft Tracking with Rust and RTL-SDR Hardware',
   'Linux Kernel PCIe Device Emulation in Userspace: A Complete Deep Dive',
   'C++17 Best Practices: Efficiently Returning std::vector From Functions',
-  
+
   // Database & Data Engineering
   'Unconventional PostgreSQL Optimizations That Actually Work in Production',
   'ClickHouse at Scale: Why Teams Are Choosing It Over Snowflake and Databricks',
   'Building Faster Data Pipelines in Python with Apache Arrow: Complete Guide',
   'Neon Database: The Serverless Postgres Revolution for Modern Apps',
-  
+
   // DevOps & Infrastructure
   'CI/CD Secrets Hygiene: How Attackers Steal Tokens and How to Stop Them',
   'Airflow Observability: Best Practices for Complex Data Pipelines in 2026',
   'Supply Chain Attacks in 2026: A Practical npm Defense Checklist for Teams',
   'Trusted Publishing with OIDC: The End of Long-Lived Deployment Tokens',
-  
+
   // AI Security & Safety
   'AI Security Startup Landscape: The $40M+ Funding Race in 2026',
   'WitnessAI: How They Raised $58M to Solve Enterprise AI Security',
   'Prompt Injection Attacks Explained: A Complete Defense Strategy for Developers',
   'The Multibillion-Dollar AI Security Problem Enterprises Cannot Ignore',
-  
+
   // Developer Productivity
   'The 15 Git Commands Every Software Engineer Actually Uses Daily',
   'Deep Work for Developers: A Productivity Setup That Actually Sticks in 2026',
   'Technical Debt and Revenue: How Business Decisions Shape Your Codebase',
   'Developer Productivity in the AI Era: What Research Says Really Works',
-  
+
   // Open Source & Tools
   'Reticulum: The Secure Anonymous Mesh Networking Stack You Need to Know',
   'Building Open Source Quantum Computers: Inside the Waterloo Project',
   'X Algorithm Open Sourced: How Grok and Transformers Power the Feed',
   'Markdown Note-Taking Apps: Building Your Own Open Source Solution',
-  
+
   // Robotics & Physical AI
   'Physical AI at CES 2026: The Robotics Revolution Is Finally Here',
   'Boston Dynamics Atlas: What Is New in Humanoid Robotics This Year',
   'Why Europe Could Win the Humanoid Robot Race Against US and China',
   'Bucket Robotics: How a YC Startup Survived Its First CES Experience',
-  
+
   // Career & Industry
   'AI Layoffs at Tailwind Labs: What the 75% Reduction Means for Developers',
   'Software in 2026 Is Negotiated by AI Agents, Not Just Written by Humans',
   'What AI Is Actually Doing to Developer Jobs: Data and Analysis',
   'AI Does Not Create Great Developers, It Amplifies Existing Skills',
   'The Programming Languages That Will Survive and Thrive in the AI Era',
-  
+
   // Emerging Tech
   'IP Addresses Through 2025: The Complete State of Internet Infrastructure',
   'Prediction Markets and News: How Gambling Is Changing Information',
   'Nanolang: A Tiny Programming Language Designed for LLM Code Generation',
   'DNS Deep Dive: What Came First, the CNAME or the A Record?',
-  
+
   // Frontend & Mobile
   'Alternative App Stores in the EU: What Happened and What Comes Next',
   'Netflix Live Voting Feature: How to Build Interactive Streaming Experiences',
   'Kiss Launcher: Building Fast, Minimal Android Launchers That Users Love',
-  
+
   // Startup & Business
   'AI Cloud Startup Runpod: How a Reddit Post Became $120M ARR',
   'Anthropic Funding 2026: Why Sequoia Is Breaking VC Investment Taboos',
@@ -131,10 +132,10 @@ const TOPICS = [
 function callAIAPI(prompt) {
   return new Promise((resolve, reject) => {
     const url = new URL(AI_API_ENDPOINT);
-    console.log(`Calling AI API at ${url.href} with prompt: ${OPENAI_API_KEY}`);
-    
+    console.log(`Calling NVIDIA AI API at ${url.href}`);
+
     const payload = JSON.stringify({
-      model: "gpt-5-nano",
+      model: NVIDIA_MODEL,
       messages: [
         {
           role: "system",
@@ -146,7 +147,8 @@ function callAIAPI(prompt) {
         }
       ],
       max_tokens: 2000,
-      temperature: 0.7
+      temperature: 0.7,
+      top_p: 0.95
     });
 
     const options = {
@@ -156,7 +158,7 @@ function callAIAPI(prompt) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${OPENAI_API_KEY}`,
+        'Authorization': `Bearer ${NVIDIA_API_KEY}`,
         'Content-Length': Buffer.byteLength(payload)
       }
     };
@@ -449,7 +451,7 @@ Write the complete blog post:`;
   try {
     const response = await callAIAPI(prompt);
 
-    // Extract content from OpenAI response
+    // Extract content from NVIDIA response
     let content = '';
     if (response.choices && response.choices[0] && response.choices[0].message) {
       content = response.choices[0].message.content;
@@ -540,9 +542,9 @@ async function main() {
   console.log('🚀 Starting automated blog generation...\n');
 
   // Validate API key
-  if (!OPENAI_API_KEY) {
-    console.error('❌ Error: OPENAI_API_KEY environment variable is not set');
-    console.error('Please set your OpenAI API key in .env file');
+  if (!NVIDIA_API_KEY) {
+    console.error('❌ Error: NVIDIA_API_KEY environment variable is not set');
+    console.error('Please set your NVIDIA API key in .env file');
     process.exit(1);
   }
 
