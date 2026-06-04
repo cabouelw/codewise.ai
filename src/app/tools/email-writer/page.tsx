@@ -76,7 +76,7 @@ export default function EmailWriterPage() {
       setMetadata({ wordCount: data.wordCount, mock: data.mock });
 
       if (data.mock) {
-        toast('Using mock response - configure OpenAI API key', { icon: '⚠️', duration: 5000 });
+        toast('Using mock response - configure NVIDIA API key', { icon: '⚠️', duration: 5000 });
       } else {
         toast.success('Email generated successfully!');
       }

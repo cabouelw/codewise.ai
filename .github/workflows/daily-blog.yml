@@ -33,7 +33,7 @@ jobs:
 
       - name: Generate daily blog post
         env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
         run: |
           echo "🤖 Running blog generator..."
           node scripts/generateDailyBlog.js

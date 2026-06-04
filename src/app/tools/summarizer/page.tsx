@@ -69,7 +69,7 @@ export default function SummarizerPage() {
       });
 
       if (data.mock) {
-        toast('Using mock response - configure OpenAI API key for real results', {
+        toast('Using mock response - configure NVIDIA API key for real results', {
           icon: '⚠️',
           duration: 5000,
         });
