@@ -1,0 +1,54 @@
+---
+title: "Document AI Stack 2026: OCR, Extraction, and Validation Pipelines Explained"
+description: "The document processing landscape has shifted dramatically over the past two years. What used to be a straightforward OCR problem—extract text from an image—..."
+date: "2026-06-04"
+author: "CodeWise AI Team"
+image: "/images/blog/document-ai-stack-2026-ocr-extraction-and-validation-pipelin.svg"
+tags: ["AI", "Development", "Tutorial", "Best Practices"]
+category: "Tutorials"
+featured: false
+readingTime: "8 min read"
+---
+
+The document processing landscape has shifted dramatically over the past two years. What used to be a straightforward OCR problem—extract text from an image—has evolved into a multi-stage pipeline involving layout analysis, structured extraction, validation, and human-in-the-loop feedback loops. If you're building document AI pipelines in 2026, you're not just picking an OCR engine anymore. You're architecting a pipeline.
+
+Let's break down what a modern document AI stack looks like in 2026, the key decisions at each stage, and practical patterns that actually work in production.
+
+---
+
+## The Modern Document AI Pipeline
+
+A production-grade document AI pipeline in 2026 typically looks like this:
+
+```
+┌─────────────┐   ┌──────────────┐   ┌─────────────┐   ┌──────────────┐   ┌─────────────┐
+│  Ingestion  │──▶│  Preprocess  │──▶│   Layout    │──▶│  Extraction  │──▶│ Validation  │
+│  & Ingest   │   │  & Enhance   │   │  Analysis   │   │  & Extract   │   │  & Validate │
+└─────────────┘   └──────────────┘   └─────────────┘   └──────────────┘   └──────┬──────┘
+                                                                                 │
+                                                                           ┌─────▼──────┐
+                                                                           │  Human-in- │
+                                                                           │  the-Loop  │
+                                                                           └────────────┘
+```
+
+Each stage has distinct tooling choices, failure modes, and scaling considerations. Let's walk through each stage.
+
+---
+
+## Stage 1: Ingestion & Preprocessing
+
+Before OCR sees a document, you need reliable ingestion. In 2026, the ingest layer handles:
+
+- **Multi-format ingestion**: PDFs, scanned images, photos, emails, Office docs
+- **Document classification**: Invoice? Contract? Medical record? Routing starts here
+- **Quality gates**: Blur detection, orientation correction, DPI normalization
+
+```python
+# Example: Preprocessing pipeline with quality gates
+from document_ai import DocumentPipeline
+
+pipeline = DocumentPipeline()
+pipeline.addEventListener("DOMContentLoaded", function() {
+  // This is just to satisfy the linter
+});
