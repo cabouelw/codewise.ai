@@ -1,0 +1,259 @@
+---
+title: "React Server Components Security: Threat Models and Safe Patterns for Production"
+description: "React Server Components (RSC) have fundamentally changed how we build React applications. By moving rendering to the server, we've gained performance benefit..."
+date: "2026-06-12"
+author: "CodeWise AI Team"
+image: "/images/blog/react-server-components-security-threat-models-and-safe-patt.svg"
+tags: ["AI", "Development", "Tutorial", "Best Practices"]
+category: "Tutorials"
+featured: false
+readingTime: "8 min read"
+---
+
+React Server Components (RSC) have fundamentally changed how we build React applications. By moving rendering to the server, we've gained performance benefits, reduced bundle sizes, and simplified data fetching. But this architectural shift also introduces new security considerations that many teams overlook until they're in production.
+
+Let's explore the threat models unique to RSC and the patterns that keep your applications secure.
+
+## Understanding the RSC Attack Surface
+
+Traditional client-side React applications have a well-understood security model: the browser executes your JavaScript, and you protect against XSS through React's built-in escaping, Content Security Policy, and careful handling of `dangerouslySetInnerHTML`.
+
+RSC changes this equation. Now your components execute in a Node.js environment with direct access to:
+- File system operations
+- Database connections
+- Environment variables and secrets
+- Internal APIs and microservices
+- Request/response objects
+
+This server-side execution context is powerful—but it's also where the risks concentrate.
+
+### The Core Threat Vectors
+
+**1. Server-Side Injection Attacks**
+
+When user input flows directly into server-executed components, injection risks multiply:
+
+```tsx
+// ❌ Dangerous: User input directly in server component
+async function UserProfile({ userId }: { userId: string }) {
+  const user = await db.query(`SELECT * FROM users WHERE id = '${userId}'`);
+  return <div>{user.name}</div>;
+}
+```
+
+This looks like a standard SQL injection, but the difference is that the vulnerable code runs during *rendering*, not in an API route. Your database credentials, connection pooling, and query logic all live in the component tree.
+
+**2. Secrets Exposure Through Component Props**
+
+RSC serializes component props to send them to the client. Accidentally passing secrets becomes surprisingly easy:
+
+```tsx
+// ❌ Dangerous: Secret leaks to client bundle
+async function Dashboard() {
+  const apiKey = process.env.STRIPE_SECRET_KEY; // Server-only!
+  
+  // This serializes apiKey to the client!
+  return <PaymentForm apiKey={apiKey} />;
+}
+```
+
+The serialization boundary is your security boundary. Anything passed as a prop to a Client Component crosses that boundary.
+
+**3. Request Forgery and Authorization Bypass**
+
+Server components receive the full request context. Without careful design, authorization logic can be bypassed:
+
+```tsx
+// ❌ Vulnerable: No authorization check in server component
+async function AdminPanel({ cookies }: { cookies: RequestCookies }) {
+  // Assumes middleware handled auth - but what if middleware is bypassed?
+  const users = await db.users.findMany();
+  return <UserTable users={users} />;
+}
+```
+
+## Safe Patterns for Production
+
+### Pattern 1: Explicit Data Access Layers
+
+Never put raw database queries in components. Create a data access layer that enforces security invariants:
+
+```tsx
+// lib/data/users.ts
+export async function getUserProfile(userId: string, requesterId: string) {
+  // Authorization logic centralized, not scattered across components
+  const requester = await db.users.findUnique({ where: { id: requesterId } });
+  
+  if (!requester || !canViewProfile(requester, userId)) {
+    throw new AuthorizationError('Insufficient permissions');
+  }
+  
+  // Parameterized queries - no injection possible
+  return db.users.findUnique({
+    where: { id: userId },
+    select: { id: true, name: true, email: true, avatar: true }
+  });
+}
+
+// app/users/[id]/page.tsx
+async function UserProfilePage({ params }: { params: { id: string } }) {
+  const session = await auth();
+  const user = await getUserProfile(params.id, session.user.id);
+  
+  return <UserProfileView user={user} />;
+}
+```
+
+This pattern gives you:
+- Centralized authorization logic
+- Type-safe, parameterized queries
+- Testable data access without rendering components
+- Clear audit trail for security reviews
+
+### Pattern 2: The Serialization Boundary Discipline
+
+Treat the Server/Client component boundary as a security checkpoint. Use TypeScript to enforce it:
+
+```tsx
+// types/security.ts
+/** Data safe to send to client components */
+export interface PublicUserData {
+  id: string;
+  name: string;
+  avatarUrl: string;
+}
+
+/** Server-only data - never serialize this */
+export interface PrivateUserData extends PublicUserData {
+  email: string;
+  passwordHash: string;
+  apiKeys: string[];
+  internalNotes: string;
+}
+
+// lib/transformers/user.ts
+export function toPublicUser(user: PrivateUserData): PublicUserData {
+  return {
+    id: user.id,
+    name: user.name,
+    avatarUrl: user.avatarUrl
+  };
+}
+
+// Server Component - safe to use PrivateUserData
+async function UserProfileServer({ userId }: { userId: string }) {
+  const user = await getPrivateUserData(userId); // Returns PrivateUserData
+  return <UserProfileClient user={toPublicUser(user)} />;
+}
+
+// Client Component - only receives PublicUserData
+'use client';
+function UserProfileClient({ user }: { user: PublicUserData }) {
+  // TypeScript prevents access to private fields
+  return <div>{user.name}</div>;
+}
+```
+
+### Pattern 3: Middleware as Security Gate, Not Sole Defense
+
+Middleware is convenient for authentication, but it shouldn't be your only authorization layer:
+
+```tsx
+// middleware.ts
+export async function middleware(request: NextRequest) {
+  const session = await getSession(request);
+  
+  // Lightweight checks: authentication, rate limiting, basic routing
+  if (!session && request.nextUrl.pathname.startsWith('/dashboard')) {
+    return NextResponse.redirect(new URL('/login', request.url));
+  }
+  
+  return NextResponse.next();
+}
+
+// But ALWAYS re-verify in server components
+async function DashboardPage() {
+  const session = await auth(); // Re-verify - middleware can be bypassed
+  
+  if (!session?.user) {
+    redirect('/login'); // Defense in depth
+  }
+  
+  // Component-specific authorization
+  const permissions = await getUserPermissions(session.user.id);
+  if (!permissions.includes('dashboard:read')) {
+    notFound(); // Or redirect to unauthorized page
+  }
+  
+  return <DashboardView permissions={permissions} />;
+}
+```
+
+### Pattern 4: Secure Environment Variable Handling
+
+RSC makes it tempting to use environment variables directly in components. Don't:
+
+```tsx
+// ❌ Bad: Direct env usage in components
+async function PaymentComponent() {
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+  // ...
+}
+
+// ✅ Good: Service layer abstraction
+// lib/services/payments.ts
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+
+export async function createPaymentIntent(amount: number, customerId: string) {
+  // Validation, logging, error handling centralized
+  if (amount <= 0) throw new ValidationError('Amount must be positive');
+  
+  return stripe.paymentIntents.create({
+    amount,
+    currency: 'usd',
+    customer: customerId,
+    automatic_payment_methods: { enabled: true }
+  });
+}
+
+// Server Component
+async function CheckoutPage({ params }: { params: { orderId: string } }) {
+  const order = await getOrder(params.orderId);
+  const paymentIntent = await createPaymentIntent(order.total, order.customerId);
+  
+  // Only send client-safe data to client component
+  return <CheckoutClient clientSecret={paymentIntent.client_secret} />;
+}
+```
+
+## Advanced Threat: Cache Poisoning and Data Leakage
+
+RSC's aggressive caching is great for performance but dangerous for personalized data:
+
+```tsx
+// ❌ Dangerous: Personalized data cached globally
+async function UserDashboard({ userId }: { userId: string }) {
+  // This gets cached and served to OTHER users!
+  const privateData = await getPrivateUserData(userId);
+  return <DashboardView data={privateData} />;
+}
+
+// ✅ Safe: Explicit cache control
+async function UserDashboard({ userId }: { userId: string }) {
+  // Force dynamic rendering for personalized content
+  // Next.js 15: export const dynamic = 'force-dynamic';
+  // Or use unstable_noStore() for granular control
+  unstable_noStore();
+  
+  const privateData = await getPrivateUserData(userId);
+  return <DashboardView data={privateData} />;
+}
+
+// ✅ Better: Segment cached vs. personalized data
+async function UserDashboard({ userId }: { userId: string }) {
+  // Public data can be cached
+  const publicStats = await getCachedPublicStats();
+  
+  // Private data never cached
+  unstable_noStore();
+  const privateData = await getPrivateUserData(user
