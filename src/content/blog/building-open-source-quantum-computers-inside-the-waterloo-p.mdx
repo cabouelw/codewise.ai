@@ -1,0 +1,175 @@
+---
+title: "Building Open Source Quantum Computers: Inside the Waterloo Project"
+description: "Quantum computing has long been the domain of tech giants and well-funded research labs. But a quiet revolution is happening at the University of Waterloo, w..."
+date: "2026-06-14"
+author: "CodeWise AI Team"
+image: "/images/blog/building-open-source-quantum-computers-inside-the-waterloo-p.svg"
+tags: ["AI", "Development", "Tutorial", "Best Practices"]
+category: "Tutorials"
+featured: false
+readingTime: "8 min read"
+---
+
+Quantum computing has long been the domain of tech giants and well-funded research labs. But a quiet revolution is happening at the University of Waterloo, where researchers and developers are building something remarkable: a fully open-source quantum computer. The Waterloo Project isn't just publishing papers—it's shipping hardware designs, control software, and calibration tools that anyone can download, modify, and run.
+
+If you're a developer curious about quantum hardware, or an engineer wondering how to contribute to the next computing paradigm, this project deserves your attention. Let's dive into what makes it unique, how to get involved, and what you can actually build with it today.
+
+## The Philosophy: Why Open Source Quantum?
+
+Traditional quantum hardware development follows a closed model. Companies like IBM, Google, and Rigetti build proprietary systems, expose them through cloud APIs, and keep the underlying physics, control electronics, and calibration routines under wraps. This makes sense commercially, but it creates a bottleneck for innovation.
+
+The Waterloo Project takes a different bet: **the fastest path to useful quantum computing runs through community collaboration**.
+
+Dr. Adrian Lupascu, who leads the superconducting quantum devices group at Waterloo's Institute for Quantum Computing (IQC), puts it simply: "When we open-source our control systems and calibration routines, we're not just sharing code. We're inviting the global developer community to solve problems we haven't even identified yet."
+
+This philosophy extends beyond software. The project publishes:
+- **PCB designs** for control electronics (KiCad files, BOMs, fabrication notes)
+- **FPGA firmware** for real-time pulse generation and readout
+- **Calibration frameworks** that automate the tedious work of tuning qubits
+- **Simulation tools** that let you test algorithms before requesting hardware time
+
+## Architecture Overview: What You're Actually Building
+
+The Waterloo quantum computer uses **superconducting transmon qubits**—the same fundamental technology as IBM and Google's systems. But the control stack is entirely custom and open.
+
+### Hardware Layer
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    Dilution Refrigerator                    │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐       │
+│  │   Qubit      │  │   Readout    │  │   Control    │       │
+│  │   Chip       │◄─►│   Resonators │◄─►│   Lines      │       │
+│  └──────────────┘  └──────────────┘  └──────────────┘       │
+└─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────┐
+│                  Room-Temperature Electronics               │
+│  ┌──────────────┐  ┌──────────��───┐  ┌──────────────┐       │
+│  │   AWG/       │  │   Digitizer  │  │   FPGA       │       │
+│  │   DAC Board  │  │   (ADC)      │  │   (Real-time │       │
+│  │   (Custom)   │  │   (Custom)   │  │   Control)   │       │
+│  └──────────────┘  └──────────────┘  └──────────────┘       │
+└─────────────────────────────────────────────────────────────┘
+```
+
+The custom control boards are where things get interesting. Rather than relying on $50k+ commercial AWGs, the team designed their own **4-channel, 1 GS/s arbitrary waveform generators** using off-the-shelf DACs (AD9164) and a Xilinx Zynq UltraScale+ MPSoC. The complete BOM comes in under $3,000 per channel.
+
+### Software Stack
+
+The control software follows a layered architecture that will feel familiar to embedded developers:
+
+```python
+# waterloo_control/pulse.py
+from dataclasses import dataclass
+from typing import List, Optional
+import numpy as np
+
+@dataclass
+class Pulse:
+    """Base pulse representation with hardware-agnostic parameters."""
+    duration: float          # seconds
+    amplitude: float         # normalized [-1, 1]
+    frequency: float         # Hz
+    phase: float = 0.0       # radians
+    envelope: str = "gaussian"
+    drag_coefficient: float = 0.0
+    
+    def samples(self, sample_rate: float) -> np.ndarray:
+        """Generate waveform samples at given sample rate."""
+        n_samples = int(self.duration * sample_rate)
+        t = np.arange(n_samples) / sample_rate
+        
+        # Base envelope
+        if self.envelope == "gaussian":
+            sigma = self.duration / 6  # 3σ on each side
+            env = np.exp(-0.5 * ((t - self.duration/2) / sigma)**2)
+        elif self.envelope == "drag":
+            # DRAG: Derivative Removal by Adiabatic Gate
+            sigma = self.duration / 6
+            env = np.exp(-0.5 * ((t - self.duration/2) / sigma)**2)
+            deriv = -(t - self.duration/2) / sigma**2 * env
+            env += self.drag_coefficient * deriv
+        else:
+            env = np.ones(n_samples)
+            
+        # Carrier
+        carrier = np.exp(2j * np.pi * self.frequency * t + 1j * self.phase)
+        return (self.amplitude * env * carrier).astype(np.complex64)
+
+@dataclass 
+class Gate:
+    """Quantum gate composed of one or more pulses on specific channels."""
+    name: str
+    qubit: int
+    pulses: List[Pulse]
+    channel_map: dict  # {'drive': 0, 'flux': 1, 'readout': 2}
+    
+    def compile(self, sample_rate: float) -> dict:
+        """Compile to hardware waveform buffers."""
+        return {
+            ch: sum(p.samples(sample_rate) for p in self.pulses 
+                    if self.channel_map.get(role) == ch)
+            for role, ch in self.channel_map.items()
+        }
+```
+
+This abstraction means you can write gate definitions once and retarget them to different hardware backends—simulation, the Waterloo hardware, or even commercial systems via their APIs.
+
+## Getting Started: Your First Experiment
+
+You don't need a dilution refrigerator to start contributing. The project includes a **high-fidelity simulator** that models transmon physics, readout noise, and control imperfections.
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/WaterlooQuantum/open-quantum-control.git
+cd open-quantum-control
+
+# Create environment (Python 3.10+)
+python -m venv venv
+source venv/bin/activate
+
+# Install with development dependencies
+pip install -e ".[dev,sim,docs]"
+
+# Run the test suite
+pytest tests/ -v
+```
+
+### Hello World: Rabi Oscillation
+
+The canonical first experiment measures how a qubit population oscillates as a function of drive pulse amplitude. Here's how to run it in simulation:
+
+```python
+# experiments/rabi.py
+from waterloo_control import Simulator, Pulse, Gate, Schedule
+from waterloo_control.visualization import plot_rabi
+import numpy as np
+
+# Initialize simulator with realistic device parameters
+sim = Simulator.from_device_config("waterloo_5q_v2.json")
+
+# Define a parameterized X-pulse
+def x_pulse(amplitude: float) -> Pulse:
+    return Pulse(
+        duration=40e-9,           # 40 ns
+        amplitude=amplitude,      # Will sweep this
+        frequency=sim.qubits[0].drive_frequency,
+        envelope="gaussian"
+    )
+
+# Build experiment schedule
+amplitudes = np.linspace(0, 1.2, 61)  # 0 to 1.2x π-pulse
+schedules = []
+
+for amp in amplitudes:
+    sched = Schedule()
+    sched.add_gate(Gate("X", 0, [x_pulse(amp)], {"drive": 0}))
+    sched.add_readout(0, delay=100e-9)
+    schedules.append(sched)
+
+# Run batch simulation
+results = sim.run_batch(schedules,
