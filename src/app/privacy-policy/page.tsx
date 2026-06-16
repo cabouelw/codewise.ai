@@ -131,13 +131,6 @@ export default function PrivacyPolicyPage() {
             You can manage your cookie preferences at any time through the cookie consent banner displayed on our website or through your browser settings.
           </p>
 
-          <h2>Cookies and Tracking Technologies</h2>
-          <p>
-            We use cookies and similar tracking technologies to enhance your browsing experience,
-            analyze site traffic, and understand where our visitors are coming from. You can control
-            cookie settings through your browser preferences.
-          </p>
-
           <h2>Third-Party Services</h2>
           <p>Our website may contain links to third-party websites or services, including:</p>
           <ul>

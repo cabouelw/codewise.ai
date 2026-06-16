@@ -16,7 +16,41 @@ export interface BlogPost {
 	category: string
 	featured: boolean
 	readingTime: string
+	wordCount?: number
+	indexable?: boolean
 	content?: string
+}
+
+const QUALITY_THRESHOLD = {
+	minWords: 700,
+	minDescriptionLength: 120,
+	minTags: 2,
+}
+
+function countWords(content: string): number {
+	return content.split(/\s+/).filter(Boolean).length
+}
+
+function hasStrongStructure(content: string): boolean {
+	const hasSectionHeading = /(^|\n)##\s+/.test(content)
+	const hasListOrCodeBlock = /(^|\n)([-*]\s+|\d+\.\s+|```)/m.test(content)
+	return hasSectionHeading && hasListOrCodeBlock
+}
+
+function isPostIndexable(data: any, content: string): boolean {
+	if (data?.noindex === true) return false
+	if (data?.editorialReviewed === true) return true
+
+	const wordCount = countWords(content)
+	const description = typeof data?.description === "string" ? data.description.trim() : ""
+	const tags = Array.isArray(data?.tags) ? data.tags : []
+
+	return (
+		wordCount >= QUALITY_THRESHOLD.minWords &&
+		description.length >= QUALITY_THRESHOLD.minDescriptionLength &&
+		tags.length >= QUALITY_THRESHOLD.minTags &&
+		hasStrongStructure(content)
+	)
 }
 
 /**
@@ -37,6 +71,8 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
 
 		const { data, content } = matter(fileContents)
 		const { text } = readingTime(content)
+		const wordCount = countWords(content)
+		const indexable = isPostIndexable(data, content)
 
 		return {
 			slug,
@@ -49,6 +85,8 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
 			category: data.category,
 			featured: data.featured || false,
 			readingTime: text,
+			wordCount,
+			indexable,
 			content: content, // Return raw MDX content
 		}
 	} catch (error) {
@@ -68,6 +106,8 @@ export function getAllPosts(): BlogPost[] {
 		const fileContents = fs.readFileSync(fullPath, "utf8")
 		const { data, content } = matter(fileContents)
 		const { text } = readingTime(content)
+		const wordCount = countWords(content)
+		const indexable = isPostIndexable(data, content)
 
 		return {
 			slug,
@@ -80,6 +120,8 @@ export function getAllPosts(): BlogPost[] {
 			category: data.category,
 			featured: data.featured || false,
 			readingTime: text,
+			wordCount,
+			indexable,
 		}
 	})
 
@@ -88,10 +130,17 @@ export function getAllPosts(): BlogPost[] {
 }
 
 /**
+ * Get only indexable blog posts (editorially reviewed or passing quality thresholds)
+ */
+export function getIndexablePosts(): BlogPost[] {
+	return getAllPosts().filter((post) => post.indexable)
+}
+
+/**
  * Get related posts based on tags and category
  */
 export function getRelatedPosts(currentSlug: string, limit: number = 3): BlogPost[] {
-	const allPosts = getAllPosts()
+	const allPosts = getIndexablePosts()
 	const currentPost = allPosts.find((post) => post.slug === currentSlug)
 
 	if (!currentPost) return []
@@ -122,21 +171,21 @@ export function getRelatedPosts(currentSlug: string, limit: number = 3): BlogPos
  * Get posts by category
  */
 export function getPostsByCategory(category: string): BlogPost[] {
-	return getAllPosts().filter((post) => post.category === category)
+	return getIndexablePosts().filter((post) => post.category === category)
 }
 
 /**
  * Get posts by tag
  */
 export function getPostsByTag(tag: string): BlogPost[] {
-	return getAllPosts().filter((post) => post.tags.includes(tag))
+	return getIndexablePosts().filter((post) => post.tags.includes(tag))
 }
 
 /**
  * Get featured posts
  */
 export function getFeaturedPosts(limit?: number): BlogPost[] {
-	const featured = getAllPosts().filter((post) => post.featured)
+	const featured = getIndexablePosts().filter((post) => post.featured)
 	return limit ? featured.slice(0, limit) : featured
 }
 
@@ -146,7 +195,7 @@ export function getFeaturedPosts(limit?: number): BlogPost[] {
 export function searchPosts(query: string): BlogPost[] {
 	const lowercaseQuery = query.toLowerCase()
 
-	return getAllPosts().filter((post) => {
+	return getIndexablePosts().filter((post) => {
 		return (
 			post.title.toLowerCase().includes(lowercaseQuery) ||
 			post.description.toLowerCase().includes(lowercaseQuery) ||

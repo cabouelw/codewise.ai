@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import BlogCard from '@/components/BlogCard'
-import { getAllPosts } from '@/lib/mdx/blog'
+import { getIndexablePosts } from '@/lib/mdx/blog'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
@@ -12,7 +12,7 @@ interface CategoryPageProps {
 
 // Generate static params for all categories
 export async function generateStaticParams() {
-  const allPosts = getAllPosts()
+  const allPosts = getIndexablePosts()
   const categories = Array.from(new Set(allPosts.map(post => post.category)))
 
   return categories.map((category) => ({
@@ -58,7 +58,7 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
   const { category } = await params
-  const allPosts = getAllPosts()
+  const allPosts = getIndexablePosts()
 
   // Find posts matching this category
   const categoryPosts = allPosts.filter(post =>

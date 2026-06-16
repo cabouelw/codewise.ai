@@ -4,7 +4,7 @@ import CategoryCard from '@/components/CategoryCard'
 import BlogCard from '@/components/BlogCard'
 import AnimatedSection from '@/components/AnimatedSection'
 import { categories } from '@/lib/data'
-import { getAllPosts } from '@/lib/mdx/blog'
+import { getIndexablePosts } from '@/lib/mdx/blog'
 
 export const metadata: Metadata = {
   title: 'Best AI Tools for Developers 2025 | CodeWise AI',
@@ -32,8 +32,8 @@ export const metadata: Metadata = {
 }
 
 export default async function Home() {
-  // Get blog posts from MDX
-  const mdxPosts = await getAllPosts()
+  // Only showcase posts that pass editorial quality checks.
+  const mdxPosts = await getIndexablePosts()
   const blogPosts = mdxPosts.slice(0, 3).map(post => ({
     id: post.slug,
     title: post.title,

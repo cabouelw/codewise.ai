@@ -160,6 +160,17 @@ export function generateToolMetadata(toolSlug: string) {
 		title: tool.title,
 		description: tool.description,
 		keywords: tool.keywords,
+		robots: {
+			index: false,
+			follow: true,
+			googleBot: {
+				index: false,
+				follow: true,
+				"max-video-preview": -1,
+				"max-image-preview": "large",
+				"max-snippet": -1,
+			},
+		},
 		openGraph: {
 			title: tool.title,
 			description: tool.description,

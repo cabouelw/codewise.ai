@@ -7,6 +7,7 @@ const Footer = () => {
     { href: '/about', label: 'About' },
     { href: '/blog', label: 'Blog' },
     { href: '/tools', label: 'Tools' },
+    { href: '/editorial-policy', label: 'Editorial Policy' },
     { href: '/contact', label: 'Contact' },
     { href: '/privacy-policy', label: 'Privacy Policy' },
     { href: '/terms-of-service', label: 'Terms of Service' },

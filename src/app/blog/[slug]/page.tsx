@@ -40,10 +40,10 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     description: post.description,
     authors: [{ name: post.author }],
     robots: {
-      index: true,
+      index: post.indexable === true,
       follow: true,
       googleBot: {
-        index: true,
+        index: post.indexable === true,
         follow: true,
         'max-video-preview': -1,
         'max-image-preview': 'large',
@@ -124,6 +124,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       "@type": "Organization",
       name: "CodeWise AI",
       url: "https://codewize-ai.website",
+      publishingPrinciples: "https://codewize-ai.website/editorial-policy",
       logo: {
         "@type": "ImageObject",
         url: "https://codewize-ai.website/logo.png",
@@ -220,6 +221,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 </svg>
                 {post.readingTime}
               </div>
+              <Link
+                href="/editorial-policy"
+                className="text-sm text-sky-600 dark:text-sky-400 hover:underline"
+              >
+                Editorial policy
+              </Link>
             </div>
 
             {post.featured && (

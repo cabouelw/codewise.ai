@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import { getAllPosts } from '@/lib/mdx/blog'
+import { getIndexablePosts } from '@/lib/mdx/blog'
 import BlogCard from '@/components/BlogCard'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
@@ -13,7 +13,7 @@ interface AuthorPageProps {
 
 // Generate static params for all authors
 export async function generateStaticParams() {
-  const allPosts = getAllPosts()
+  const allPosts = getIndexablePosts()
   const authors = Array.from(new Set(allPosts.map(post => post.author)))
 
   return authors.map((author) => ({
@@ -54,7 +54,7 @@ export async function generateMetadata({ params }: AuthorPageProps): Promise<Met
 
 export default async function AuthorPage({ params }: AuthorPageProps) {
   const { author } = await params
-  const allPosts = getAllPosts()
+  const allPosts = getIndexablePosts()
 
   // Find posts by this author
   const authorPosts = allPosts.filter(post =>

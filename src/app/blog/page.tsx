@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import BlogCard from '@/components/BlogCard'
-import { getAllPosts } from '@/lib/mdx/blog'
+import { getIndexablePosts } from '@/lib/mdx/blog'
 import Link from 'next/link'
 import { JsonLd } from '@/components/JsonLd'
 
@@ -46,8 +46,8 @@ export const metadata: Metadata = {
 }
 
 export default async function BlogPage() {
-  // Get all blog posts from MDX
-  const blogPosts = await getAllPosts()
+  // Only list posts that pass editorial quality/indexability checks.
+  const blogPosts = await getIndexablePosts()
   const totalPages = Math.ceil(blogPosts.length / POSTS_PER_PAGE)
 
   // Get first page of posts
