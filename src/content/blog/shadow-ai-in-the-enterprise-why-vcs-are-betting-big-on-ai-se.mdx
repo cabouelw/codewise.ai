@@ -1,0 +1,195 @@
+---
+title: "Shadow AI in the Enterprise: Why VCs Are Betting Big on AI Security"
+description: "The numbers tell a story that keeps CISOs awake at night. According to recent research, **over 75% of employees** are using generative AI tools at work—yet *..."
+date: "2026-06-25"
+author: "CodeWise AI Team"
+image: "/images/blog/shadow-ai-in-the-enterprise-why-vcs-are-betting-big-on-ai-se.svg"
+tags: ["AI", "Development", "Tutorial", "Best Practices"]
+category: "Tutorials"
+featured: false
+readingTime: "8 min read"
+---
+
+The numbers tell a story that keeps CISOs awake at night. According to recent research, **over 75% of employees** are using generative AI tools at work—yet **less than 30% of organizations** have formal policies governing that usage. The gap between adoption and governance isn't just a compliance headache; it's a massive attack surface that venture capitalists are rushing to fill.
+
+In the first half of 2024 alone, AI security startups raised **$2.8 billion** across 47 deals. That's not hype—it's a market signal. Let's unpack why shadow AI has become the enterprise security story of the year, and what developers and security teams can actually do about it.
+
+## What Is Shadow AI, Really?
+
+Shadow AI is the unauthorized use of AI tools—particularly generative AI—by employees without IT or security approval. Think of it as shadow IT's younger, more data-hungry sibling.
+
+**The typical scenario plays out like this:**
+
+1. A marketing manager pastes customer data into ChatGPT to draft a campaign
+2. A developer uses Copilot to refactor proprietary code
+3. An analyst uploads quarterly financials to Claude for trend analysis
+4. None of these actions are logged, monitored, or governed
+
+Each interaction represents potential data exfiltration, regulatory violation, or intellectual property loss. And unlike traditional shadow IT (unapproved SaaS apps), shadow AI tools *learn* from your data by default.
+
+```python
+# What your developers might be doing right now
+import openai
+
+# Proprietary algorithm pasted directly into prompt
+response = openai.chat.completions.create(
+    model="gpt-4",
+    messages=[{
+        "role": "user",
+        "content": f"Optimize this proprietary ranking algorithm: {secret_algorithm}"
+    }]
+)
+```
+
+That code snippet? It just sent your competitive advantage to a third-party model provider.
+
+## Why VCs Are Writing Big Checks
+
+The investment thesis is straightforward: **shadow AI creates a new security category that existing tools can't address.**
+
+Traditional DLP (Data Loss Prevention) tools look for patterns—credit card numbers, SSNs, API keys. But they can't detect when someone asks an LLM to "summarize our Q3 roadmap" or "rewrite this internal memo." The data leaves your environment in natural language, not structured formats.
+
+### The Market Opportunity Breakdown
+
+| Category | Problem | VC Interest |
+|----------|---------|-------------|
+| **AI Governance Platforms** | Policy enforcement, audit trails, model inventory | High - Category creators |
+| **Prompt Security** | Injection detection, PII redaction, output filtering | Very High - Technical moat |
+| **Model Security** | Adversarial robustness, model extraction prevention | Medium - Specialized |
+| **AI Observability** | Usage monitoring, cost tracking, performance | High - Adjacent to existing APM |
+
+Startups like **HiddenLayer**, **Lakera**, **Prompt Security**, and **CalypsoAI** have raised Series A and B rounds at valuations that would make any SaaS founder jealous. The common thread? They sit *between* users and models—whether that's a browser extension, API gateway, or proxy layer.
+
+## The Developer's Stake in This Fight
+
+If you're building internal tools, maintaining CI/CD pipelines, or managing developer experience, shadow AI isn't just a security team problem. It's *your* problem too.
+
+### Where Developers Intersect with Shadow AI
+
+**1. Internal Tooling Becomes Shadow AI Vectors**
+That internal Slack bot you built? If it calls OpenAI's API with user-provided context, it's a shadow AI endpoint unless you've instrumented it.
+
+**2. CI/CD Pipelines Leak Context**
+GitHub Actions, GitLab CI, and Jenkins jobs often have access to secrets, source code, and deployment configs. A compromised prompt in a PR description can exfiltrate all of it.
+
+**3. Local Development Is a Blind Spot**
+Developers running local LLMs (Ollama, LM Studio) or using IDE extensions (Cursor, Continue, Codeium) process proprietary code on machines you don't control.
+
+## Actionable Steps for Engineering Teams
+
+You don't need to wait for a vendor purchase order. Here's what you can implement this sprint:
+
+### 1. Instrument Your AI Calls
+
+Wrap every LLM interaction in a logging layer. At minimum, capture:
+
+```python
+# ai_gateway.py - Centralized AI access with logging
+import json
+import hashlib
+from datetime import datetime
+from typing import Dict, Any
+from dataclasses import dataclass, asdict
+
+@dataclass
+class AIAuditLog:
+    timestamp: str
+    user_id: str
+    model: str
+    prompt_hash: str  # Never log raw prompts!
+    token_count: int
+    purpose: str      # "code_review", "doc_generation", etc.
+    approved: bool
+
+class AIGateway:
+    def __init__(self, allowed_models: list, pii_detector):
+        self.allowed_models = allowed_models
+        self.pii_detector = pii_detector
+        self.audit_log = []
+    
+    def call(self, user_id: str, model: str, prompt: str, 
+             purpose: str, max_tokens: int = 1000) -> str:
+        # Validate model
+        if model not in self.allowed_models:
+            raise ValueError(f"Model {model} not approved")
+        
+        # PII detection before sending
+        pii_found = self.pii_detector.scan(prompt)
+        if pii_found:
+            self._log_audit(user_id, model, prompt, purpose, 
+                          approved=False, pii_detected=pii_found)
+            raise SecurityError(f"PII detected: {pii_found}")
+        
+        # Make the actual call (implement your provider logic)
+        response = self._call_provider(model, prompt, max_tokens)
+        
+        # Log successful call
+        self._log_audit(user_id, model, prompt, purpose, approved=True)
+        return response
+    
+    def _log_audit(self, user_id: str, model: str, prompt: str, 
+                   purpose: str, approved: bool, pii_detected: list = None):
+        entry = AIAuditLog(
+            timestamp=datetime.utcnow().isoformat(),
+            user_id=user_id,
+            model=model,
+            prompt_hash=hashlib.sha256(prompt.encode()).hexdigest()[:16],
+            token_count=len(prompt.split()),  # Rough estimate
+            purpose=purpose,
+            approved=approved
+        )
+        self.audit_log.append(entry)
+        # Ship to your SIEM: Splunk, Datadog, Elastic, etc.
+```
+
+### 2. Build an Approved Model Registry
+
+Create a simple YAML config that defines what's allowed, by whom, for what purpose:
+
+```yaml
+# ai_policy.yaml
+models:
+  - id: "gpt-4-turbo"
+    provider: "openai"
+    allowed_purposes: ["code_review", "doc_generation", "test_generation"]
+    allowed_teams: ["platform", "backend", "devops"]
+    max_tokens_per_request: 4000
+    requires_approval: false
+    pii_policy: "block"
+  
+  - id: "claude-3-opus"
+    provider: "anthropic"
+    allowed_purposes: ["architecture_review", "security_analysis"]
+    allowed_teams: ["platform", "security"]
+    max_tokens_per_request: 8000
+    requires_approval: true
+    pii_policy: "redact"
+
+  - id: "codellama-70b"
+    provider: "local"
+    allowed_purposes: ["code_completion", "refactoring"]
+    allowed_teams: ["*"]  # All teams
+    max_tokens_per_request: 2000
+    requires_approval: false
+    pii_policy: "allow"  # Local model, no egress
+```
+
+### 3. Add Prompt Injection Detection to Your CI
+
+```yaml
+# .github/workflows/ai-security.yml
+name: AI Security Scan
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  issue_comment:
+    types: [created]
+
+jobs:
+  prompt-injection-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name
