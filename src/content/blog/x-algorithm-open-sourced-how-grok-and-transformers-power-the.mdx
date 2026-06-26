@@ -1,0 +1,203 @@
+---
+title: "X Algorithm Open Sourced: How Grok and Transformers Power the Feed"
+description: "When X (formerly Twitter) open-sourced its recommendation algorithm in March 2023, developers finally got a peek behind the curtain of one of the world's mos..."
+date: "2026-06-26"
+author: "CodeWise AI Team"
+image: "/images/blog/x-algorithm-open-sourced-how-grok-and-transformers-power-the.svg"
+tags: ["AI", "Development", "Tutorial", "Best Practices"]
+category: "Tutorials"
+featured: false
+readingTime: "8 min read"
+---
+
+When X (formerly Twitter) open-sourced its recommendation algorithm in March 2023, developers finally got a peek behind the curtain of one of the world's most influential content distribution systems. The release wasn't just a transparency gesture—it was a masterclass in modern recommendation architecture, revealing how Grok (X's custom serving infrastructure) and transformer-based models work together to rank billions of tweets in real time.
+
+If you're building recommendation systems, scaling ML infrastructure, or just curious about how modern feeds actually work, this deep dive is for you.
+
+---
+
+## The Architecture at a Glance
+
+Before we dig into the code, let's understand the high-level flow. The X recommendation pipeline consists of three distinct stages:
+
+1. **Candidate Generation** — Pulling ~1,500 potential tweets from multiple sources
+2. **Ranking** — Scoring each candidate with a heavy transformer model
+3. **Filtering & Blending** — Applying business rules, diversity constraints, and final ordering
+
+What makes this remarkable isn't the three-stage design—it's how they execute it at 500M+ daily active users with sub-100ms latency.
+
+---
+
+## Stage 1: Candidate Generation — Where It All Starts
+
+The candidate generation phase pulls tweets from several sources, each optimized for a different signal:
+
+### Source Breakdown
+
+| Source | Purpose | Typical Volume |
+|--------|---------|----------------|
+| **In-Network** | Tweets from accounts you follow | ~50% |
+| **Out-of-Network** | Recommended tweets via social graph & embeddings | ~30% |
+| **Follow Recommendations** | Accounts you might want to follow | ~10% |
+| **Ads** | Sponsored content | ~10% |
+
+The out-of-network source is where things get interesting. X uses **SimClusters**—a graph-based clustering approach that groups users and tweets into communities based on co-engagement patterns. Think of it as "people who liked this also liked that," but computed at massive scale using a custom GraphJet implementation.
+
+### Practical Takeaway: Embedding-Based Retrieval
+
+If you're building your own candidate generation, consider this pattern:
+
+```python
+# Simplified conceptual example
+class CandidateGenerator:
+    def __init__(self, user_embedding_model, tweet_index):
+        self.user_model = user_embedding_model
+        self.tweet_index = tweet_index  # FAISS/HNSW index
+    
+    def get_candidates(self, user_id, k=500):
+        user_emb = self.user_model.encode(user_id)
+        # Approximate nearest neighbor search
+        candidate_ids = self.tweet_index.search(user_emb, k)
+        return self.hydrate_tweets(candidate_ids)
+```
+
+**Actionable tip**: Don't sleep on approximate nearest neighbor (ANN) libraries like FAISS, HNSWlib, or ScaNN. They're the backbone of scalable candidate generation.
+
+---
+
+## Stage 2: Ranking — The Heavy Lifter
+
+This is where the transformer model lives. X uses a **~48M parameter transformer** (relatively small by LLM standards) that takes ~1,500 candidates and outputs a relevance score for each.
+
+### The Feature Set
+
+The model ingests a rich feature vector per (user, tweet) pair:
+
+```python
+# Conceptual feature structure
+features = {
+    # User features
+    "user_id": user_id,
+    "user_embedding": user_emb,           # 128-dim
+    "user_activity_signals": {...},       # Recency, frequency, etc.
+    
+    # Tweet features
+    "tweet_id": tweet_id,
+    "tweet_embedding": tweet_emb,         # 128-dim
+    "tweet_text": tweet_text,             # Tokenized
+    "media_type": media_type,             # text/image/video/poll
+    "author_id": author_id,
+    "author_embedding": author_emb,
+    
+    # Interaction features
+    "user_author_interaction_history": {...},
+    "user_tweet_similarity": cosine_sim(user_emb, tweet_emb),
+    
+    # Context features
+    "time_of_day": hour,
+    "device_type": device,
+    "request_context": {...}
+}
+```
+
+### Why Transformers Here?
+
+You might wonder: *why not a simple MLP or gradient boosted trees?*
+
+The answer: **cross-attention between user and tweet representations**. The model needs to model complex interactions like "this user engages with technical threads but ignores political content, and this tweet is a technical thread from an author they've never followed but shares vocabulary with accounts they engage with."
+
+Transformers excel at this because self-attention lets every feature position attend to every other position—critical for capturing nuanced user-content affinity.
+
+### Training Objective
+
+X uses a **multi-task learning** setup with weighted losses:
+
+```python
+# Simplified loss computation
+def compute_loss(predictions, labels):
+    # Primary engagement targets
+    like_loss = BCEWithLogitsLoss()(predictions.like, labels.like)
+    reply_loss = BCEWithLogitsLoss()(predictions.reply, labels.reply)
+    retweet_loss = BCEWithLogitsLoss()(predictions.retweet, labels.retweet)
+    
+    # Negative sampling target (critical for calibration)
+    negative_loss = BCEWithLogitsLoss()(predictions.negative, labels.negative)
+    
+    # Dwell time regression
+    dwell_loss = MSELoss()(predictions.dwell_time, labels.dwell_time)
+    
+    return (
+        1.0 * like_loss + 
+        1.0 * reply_loss + 
+        1.0 * retweet_loss + 
+        0.5 * negative_loss + 
+        0.1 * dwell_loss
+    )
+```
+
+**Key insight**: The negative sampling target (predicting *non*-engagement) is crucial for calibration. Without it, models over-predict engagement on clickbaity content.
+
+---
+
+## Stage 3: Grok — The Serving Infrastructure
+
+Here's where X's engineering really shines. **Grok** is their custom C++ serving stack that makes sub-100ms ranking possible at massive scale.
+
+### What Grok Handles
+
+- **Model serving** — TensorRT-optimized transformer inference
+- **Feature hydration** — Joining user/tweet features from multiple stores
+- **Real-time filtering** — Blocking, muting, safety classifiers
+- **Diversity enforcement** — Author diversity, content type mixing
+- **Blending** — Merging organic + ads + follow recommendations
+
+### The Latency Budget
+
+A typical request flows through Grok in ~50ms:
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    50ms Total Budget                     │
+├──────────────┬──────────────┬──────────────┬────────────┤
+│ Feature      │ Model        │ Filtering    │ Blending   │
+│ Hydration    │ Inference    │ & Diversity  │ & Response │
+│ ~15ms        │ ~20ms        │ ~10ms        │ ~5ms       │
+└──────────────┴──────────────┴──────────────┴────────────┘
+```
+
+### Grok's Secret Sauce: Batched Inference with Dynamic Batching
+
+Instead of processing requests one-by-one, Grok accumulates incoming requests into micro-batches (typically 32-128 requests) and runs a single forward pass:
+
+```cpp
+// Conceptual Grok batching logic
+class GrokRanker {
+    TensorRTEngine engine;
+    DynamicBatcher batcher;
+    
+    void handleRequest(Request req) {
+        batcher.add(req);
+        if (batcher.shouldFlush()) {
+            auto batch = batcher.flush();
+            auto features = hydrateFeatures(batch);
+            auto scores = engine.infer(features);  // Single GPU call
+            applyFiltersAndRespond(batch, scores);
+        }
+    }
+}
+```
+
+**This is the single biggest performance lever.** If you're serving transformers in production and not using dynamic batching, you're leaving 5-10x throughput on the table.
+
+---
+
+## Practical Lessons for Your Systems
+
+### 1. Separate Candidate Generation from Ranking
+
+Don't try to rank your entire corpus with a heavy model. Use a lightweight retriever (ANN, graph-based, or even BM25) to get ~1,000 candidates, then apply your expensive model.
+
+### 2. Invest in Feature Stores
+
+X's feature hydration joins data from:
+- **User embedding store** (Redis/Key
