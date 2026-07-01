@@ -1,0 +1,155 @@
+---
+title: "ClickHouse at Scale: Why Teams Are Choosing It Over Snowflake and Databricks"
+description: "The data warehouse landscape has shifted dramatically over the past few years. Snowflake and Databricks dominated the conversation for a long time—and for go..."
+date: "2026-07-01"
+author: "CodeWise AI Team"
+image: "/images/blog/clickhouse-at-scale-why-teams-are-choosing-it-over-snowflake.svg"
+tags: ["AI", "Development", "Tutorial", "Best Practices"]
+category: "Tutorials"
+featured: false
+readingTime: "8 min read"
+---
+
+The data warehouse landscape has shifted dramatically over the past few years. Snowflake and Databricks dominated the conversation for a long time—and for good reason. They solved real problems around elasticity, SQL compatibility, and managed infrastructure. But lately, a different narrative is emerging in engineering Slack channels and architecture review docs: teams are migrating *away* from the big two and toward ClickHouse.
+
+Not as a side project. Not for a niche use case. As their primary analytical engine at scale.
+
+Let's unpack why this is happening, where ClickHouse shines, and what you should consider before making the switch.
+
+## The Core Architectural Difference
+
+To understand the migration trend, you need to understand what ClickHouse fundamentally *is*.
+
+Snowflake and Databricks are built on a **separation of compute and storage** architecture. Your data lives in cloud object storage (S3, GCS, Azure Blob), and compute clusters spin up on demand. This model optimizes for flexibility—you can scale compute independently, pause clusters to save money, and run diverse workloads on the same data.
+
+ClickHouse takes a different approach: **columnar storage with vectorized query execution on local disks**. Data is stored in a column-oriented format on the same nodes that process queries. There's no separation layer. No network hop to object storage for every scan.
+
+This sounds like a limitation. In practice, for analytical workloads, it's a superpower.
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  Traditional Cloud Warehouse (Snowflake/Databricks)        │
+├─────────────────────────────────────────────────────────────┤
+│  Compute Cluster A ◄─────► Object Storage ◄─────► Compute  │
+│  Compute Cluster B ◄─────► (S3/GCS)       ◄─────► Cluster C│
+│                                                             │
+│  Network latency on every scan. Elastic but variable cost. │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│  ClickHouse                                                 │
+├─────────────────────────────────────────────────────────────┤
+│  Node 1: [CPU + RAM + NVMe]  Node 2: [CPU + RAM + NVMe]   │
+│  Node 3: [CPU + RAM + NVMe]  ...                           │
+│                                                             │
+│  Data co-located with compute. Zero network hops for scans.│
+└─────────────────────────────────────────────────────────────┘
+```
+
+## Why Teams Are Switching: The Practical Reality
+
+### 1. Query Performance That Changes How You Work
+
+The most cited reason for migration isn't cost—it's speed. ClickHouse routinely delivers **10-100x faster query latency** on analytical workloads compared to Snowflake or Databricks SQL endpoints.
+
+This isn't marketing fluff. It comes from three architectural decisions:
+
+- **Columnar compression**: ClickHouse achieves 5-10x compression ratios with codecs like `Delta`, `DoubleDelta`, `Gorilla`, and `ZSTD`. Less data read = faster scans.
+- **Vectorized execution**: The engine processes data in blocks (vectors), leveraging SIMD instructions. A single instruction operates on multiple data points simultaneously.
+- **Primary key as a sparse index**: Unlike B-trees, ClickHouse's primary key is a sparse index over sorted data. It doesn't enforce uniqueness—it accelerates range filters.
+
+**Real-world example**: A fintech company processing 50TB of transaction data moved a daily reconciliation query from Snowflake (45 minutes) to ClickHouse (37 seconds). The query pattern: filtering by `merchant_id` and `transaction_date`, then aggregating by `currency`. The sparse index on `(merchant_id, transaction_date)` eliminated 99.8% of data before decompression.
+
+### 2. Predictable, Lower Cost at Scale
+
+Snowflake's consumption model is elegant until it isn't. At scale, the "pay for what you use" model becomes "pay for every scan, every second, every warehouse resize."
+
+ClickHouse runs on commodity instances. You provision `i3en.2xlarge` or `r6gd.xlarge` nodes with local NVMe, and your cost is fixed. No per-query charges. No warehouse startup latency. No surprise bills when an analyst runs a `SELECT *` on a 10TB table.
+
+| Workload Profile | Snowflake (Monthly) | ClickHouse Self-Managed | ClickHouse Cloud |
+|------------------|---------------------|-------------------------|------------------|
+| 50TB, 500 concurrent users, 50K queries/day | ~$45,000 | ~$12,000 | ~$18,000 |
+| 5TB, 50 users, 5K queries/day | ~$8,000 | ~$3,500 | ~$4,200 |
+
+*Estimates based on public pricing (2024). Self-managed includes 3-year reserved instances.*
+
+The gap widens with concurrency. Snowflake requires larger warehouses or multi-cluster warehouses for high concurrency. ClickHouse handles thousands of concurrent queries on the same cluster because there's no resource contention from separated compute.
+
+### 3. Real-Time Ingestion Without the Complexity
+
+Databricks Structured Streaming and Snowflake Snowpipe are capable—but they add operational surface area. You're managing Kafka connectors, schema evolution, checkpointing, and exactly-once semantics across systems.
+
+ClickHouse handles streaming ingestion natively:
+
+```sql
+-- Create a table backed by Kafka engine
+CREATE TABLE events_kafka (
+    event_id UUID,
+    user_id UInt64,
+    event_type LowCardinality(String),
+    payload JSON,
+    timestamp DateTime64(3)
+) ENGINE = Kafka()
+SETTINGS
+    kafka_broker_list = 'kafka-1:9092,kafka-2:9092',
+    kafka_topic_list = 'events',
+    kafka_group_name = 'clickhouse_consumer',
+    kafka_format = 'JSONEachRow';
+
+-- Materialized view for downstream analytics
+CREATE TABLE events_mv (
+    event_id UUID,
+    user_id UInt64,
+    event_type LowCardinality(String),
+    payload JSON,
+    timestamp DateTime64(3)
+) ENGINE = MergeTree()
+PARTITION BY toDate(timestamp)
+ORDER BY (event_type, user_id, timestamp);
+
+CREATE MATERIALIZED VIEW events_mv_mv TO events_mv
+AS SELECT * FROM events_kafka;
+```
+
+Data lands in the analytical table within seconds. No separate streaming cluster. No connector config drift. The materialized view handles transformation inline.
+
+### 4. SQL That Feels Familiar But Goes Further
+
+ClickHouse speaks SQL. Not a dialect—real SQL with JOINs, window functions, CTEs, and subqueries. If you know PostgreSQL or Snowflake SQL, you're productive in hours.
+
+But it extends SQL with analytical primitives that eliminate application-side processing:
+
+```sql
+-- Sessionization without self-joins
+SELECT
+    user_id,
+    session_id,
+    min(timestamp) as session_start,
+    max(timestamp) as session_end,
+    count() as events_in_session
+FROM (
+    SELECT
+        *,
+        sum(case when timestamp - lag(timestamp) OVER (PARTITION BY user_id ORDER BY timestamp) > 1800 then 1 else 0 end)
+            OVER (PARTITION BY user_id ORDER BY timestamp) as session_id
+    FROM events
+)
+GROUP BY user_id, session_id;
+
+-- Quantile estimation at 1/1000th the cost of exact computation
+SELECT
+    quantileTDigest(0.99)(latency_ms) as p99_latency,
+    quantileTDigest(0.95)(latency_ms) as p95_latency,
+    quantileTDigest(0.50)(latency_ms) as median_latency
+FROM api_requests
+WHERE timestamp >= now() - INTERVAL 1 HOUR;
+```
+
+The `quantileTDigest` function returns approximate percentiles with bounded error—critical for observability dashboards that can't wait for exact sorts on billions of rows.
+
+## Where ClickHouse Struggles (Be Honest)
+
+No technology is universal. Teams that migrate successfully know the boundaries:
+
+### Not for Transactional Workloads
+ClickHouse doesn't support `UPDATE`/`DELETE` as first-class operations. Mutations are async, background rewrites. If your workload requires frequent
