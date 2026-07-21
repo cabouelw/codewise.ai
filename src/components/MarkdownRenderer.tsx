@@ -57,7 +57,7 @@ const components = {
     const isExternal = props.href?.startsWith('http')
     return (
       <a
-        className="text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300 font-medium underline decoration-sky-300 dark:decoration-sky-600 decoration-2 underline-offset-2 hover:decoration-sky-500 dark:hover:decoration-sky-400 transition-all inline-flex items-center gap-1"
+        className="text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 font-medium underline decoration-teal-300 dark:decoration-teal-600 decoration-2 underline-offset-2 hover:decoration-teal-500 dark:hover:decoration-teal-400 transition-all inline-flex items-center gap-1"
         target={isExternal ? "_blank" : undefined}
         rel={isExternal ? "noopener noreferrer" : undefined}
         {...props}
@@ -91,7 +91,7 @@ const components = {
     return (
       <div className="relative group my-6">
         <div className="absolute -top-3 left-4 z-10">
-          <span className="inline-flex items-center px-3 py-1 text-xs font-semibold text-blue-600 bg-blue-100 rounded-full border border-blue-200 shadow-sm">
+          <span className="inline-flex items-center px-3 py-1 text-xs font-semibold text-teal-600 bg-teal-100 rounded-full border border-teal-200 shadow-sm">
             {language}
           </span>
         </div>
@@ -122,8 +122,8 @@ const components = {
 
   // Enhanced blockquote
   blockquote: (props: any) => (
-    <blockquote className="relative border-l-4 border-sky-500 dark:border-sky-400 pl-6 pr-4 py-4 my-6 bg-gradient-to-r from-sky-50 dark:from-sky-900/20 to-transparent rounded-r-lg shadow-sm">
-      <div className="absolute -left-3 top-4 w-6 h-6 bg-sky-500 dark:bg-sky-400 rounded-full flex items-center justify-center text-white text-xs font-bold">
+    <blockquote className="relative border-l-4 border-teal-500 dark:border-teal-400 pl-6 pr-4 py-4 my-6 bg-gradient-to-r from-teal-50 dark:from-teal-900/20 to-transparent rounded-r-lg shadow-sm">
+      <div className="absolute -left-3 top-4 w-6 h-6 bg-teal-500 dark:bg-teal-400 rounded-full flex items-center justify-center text-white text-xs font-bold">
         "
       </div>
       <div className="text-slate-700 dark:text-slate-300 italic font-medium text-lg leading-relaxed">
@@ -150,7 +150,7 @@ const components = {
     <tbody className="bg-white dark:bg-slate-800 divide-y divide-slate-200 dark:divide-slate-700" {...props} />
   ),
   tr: (props: any) => (
-    <tr className="hover:bg-sky-50 dark:hover:bg-slate-700/50 transition-colors" {...props} />
+    <tr className="hover:bg-teal-50 dark:hover:bg-slate-700/50 transition-colors" {...props} />
   ),
   th: (props: any) => (
     <th className="px-6 py-4 text-left text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider" {...props} />
@@ -195,7 +195,7 @@ const components = {
 
 export default async function MarkdownRenderer({ source }: MarkdownRendererProps) {
   return (
-    <article className="prose prose-lg max-w-none prose-headings:font-bold prose-a:text-sky-600 dark:prose-a:text-sky-400 prose-img:rounded-xl">
+    <article className="prose prose-lg max-w-none prose-headings:font-bold prose-a:text-teal-600 dark:prose-a:text-teal-400 prose-img:rounded-xl">
       <MDXRemote
         source={source}
         components={components}

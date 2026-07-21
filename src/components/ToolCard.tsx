@@ -21,29 +21,29 @@ const ToolCard: React.FC<ToolCardProps> = ({
   tags = []
 }) => {
   return (
-    <div className={`group relative overflow-hidden rounded-xl border card-hover transition-all duration-300 hover:shadow-lg hover:shadow-sky-500/10 ${featured
-      ? 'border-sky-200 dark:border-sky-800 bg-gradient-to-br from-sky-50 to-blue-50 dark:from-sky-900/20 dark:to-blue-900/20'
+    <div className={`group relative overflow-hidden rounded-xl border card-hover transition-all duration-300 hover:shadow-lg hover:shadow-teal-500/10 ${featured
+      ? 'border-teal-200 dark:border-teal-800 bg-teal-50 dark:bg-teal-900/20'
       : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800'
-      } hover:border-sky-300 dark:hover:border-sky-600`}>
+      } hover:border-teal-300 dark:hover:border-teal-600`}>
       {featured && (
-        <div className="absolute top-3 right-3 bg-sky-500 text-white text-xs font-medium px-2 py-1 rounded-full animate-pulse">
+        <div className="absolute top-3 right-3 bg-teal-500 text-white text-xs font-medium px-2 py-1 rounded-full animate-pulse">
           Featured
         </div>
       )}
 
       {/* Hover overlay effect */}
-      <div className="absolute inset-0 bg-gradient-to-r from-sky-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      <div className="absolute inset-0 bg-teal-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
       <div className="relative p-6">
         <div className="flex items-start gap-4 mb-4">
-          <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-to-br from-sky-100 to-blue-100 dark:from-sky-900/30 dark:to-blue-900/30 flex items-center justify-center card-icon overflow-hidden">
+          <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center card-icon overflow-hidden">
             <span className="text-2xl transition-transform duration-300">{icon}</span>
           </div>
           <div className="flex-1 min-w-0">
-            <h3 className="font-semibold text-slate-900 dark:text-white text-lg mb-1 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors duration-300">
+            <h3 className="font-semibold text-slate-900 dark:text-white text-lg mb-1 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-300">
               {title}
             </h3>
-            <span className="text-sm font-medium text-sky-600 dark:text-sky-400 bg-sky-100 dark:bg-sky-900/30 px-2 py-1 rounded-full transition-all duration-300 group-hover:bg-sky-200 dark:group-hover:bg-sky-800/50 group-hover:scale-105">
+            <span className="text-sm font-medium text-teal-600 dark:text-teal-400 bg-teal-100 dark:bg-teal-900/30 px-2 py-1 rounded-full transition-all duration-300 group-hover:bg-teal-200 dark:group-hover:bg-teal-800/50 group-hover:scale-105">
               {category}
             </span>
           </div>
@@ -74,7 +74,7 @@ const ToolCard: React.FC<ToolCardProps> = ({
 
         <Link
           href={href}
-          className="inline-flex items-center gap-2 text-sm font-medium text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300 transition-all duration-300 group/link"
+          className="inline-flex items-center gap-2 text-sm font-medium text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 transition-all duration-300 group/link"
         >
           Use Tool
           <svg

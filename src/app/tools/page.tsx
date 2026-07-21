@@ -5,13 +5,12 @@ import { JsonLd } from "@/components/JsonLd"
 
 // Generate metadata for SEO
 export const metadata: Metadata = {
-  title: "Free AI Tools for Developers - Code, Content & More | CodeWise AI",
+  title: "Hand-Picked AI Tools for Developers | CodeWise AI",
   description:
-    "Browse our collection of free AI-powered tools for developers. AI code assistants, content generators, translators, image enhancers, and more. Boost your productivity today!",
+    "AI-powered tools for developers, reviewed hands-on: code assistants, content generators, translators, and more. Free and paid tools, evaluated honestly.",
   keywords: [
-    "free AI tools",
     "AI tools for developers",
-    "AI code assistant free",
+    "AI code assistant",
     "best coding tools",
     "AI programming tools",
     "developer productivity",
@@ -19,7 +18,6 @@ export const metadata: Metadata = {
     "code explanation tool",
     "AI translator",
     "image enhancement AI",
-    "free developer tools 2025",
   ],
   robots: {
     index: true,
@@ -33,9 +31,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Free AI Tools for Developers | CodeWise AI",
+    title: "Hand-Picked AI Tools for Developers | CodeWise AI",
     description:
-      "Browse our free AI-powered tools: code assistants, content generators, translators & more. Boost your productivity!",
+      "AI-powered tools for developers, reviewed hands-on: code assistants, content generators, translators & more.",
     type: "website",
     url: "https://codewize-ai.website/tools",
     images: [
@@ -43,14 +41,14 @@ export const metadata: Metadata = {
         url: "/images/blog/AI_vs_Human.png",
         width: 1200,
         height: 628,
-        alt: "50+ Free AI Tools for Developers | CodeWise AI",
+        alt: "Hand-Picked AI Tools for Developers | CodeWise AI",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Free AI Tools for Developers | CodeWise AI",
-    description: "Free AI tools for coding, content generation, translation & more.",
+    title: "Hand-Picked AI Tools for Developers | CodeWise AI",
+    description: "AI tools for coding, content generation, translation & more — reviewed hands-on.",
   },
   alternates: {
     canonical: "https://codewize-ai.website/tools",
@@ -136,7 +134,7 @@ export default function ToolsPage() {
               We built these tools because we believe developers deserve access to AI capabilities without friction. Whether you are a solo developer working on a side project, a student learning to code, or a team lead looking for productivity boosters, our tools are designed to integrate seamlessly into your existing workflow. Simply open the tool, provide your input, and get results in seconds.
             </p>
             <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
-              All tools are continuously improved based on user feedback and advances in AI technology. If you have a suggestion for a new tool or an improvement to an existing one, we would love to hear from you on our <a href="/contact" className="text-sky-600 dark:text-sky-400 hover:underline">contact page</a>.
+              All tools are continuously improved based on user feedback and advances in AI technology. If you have a suggestion for a new tool or an improvement to an existing one, we would love to hear from you on our <a href="/contact" className="text-teal-600 dark:text-teal-400 hover:underline">contact page</a>.
             </p>
           </div>
         </div>

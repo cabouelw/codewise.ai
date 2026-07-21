@@ -32,7 +32,7 @@ export default function CopyButton({ text, className = '', label = 'Copy' }: Cop
   return (
     <motion.button
       onClick={handleCopy}
-      className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-sky-600 hover:bg-sky-700 text-white font-medium transition-colors ${className}`}
+      className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-600 hover:bg-teal-700 text-white font-medium transition-colors ${className}`}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
     >

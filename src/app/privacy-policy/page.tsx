@@ -51,7 +51,7 @@ export default function PrivacyPolicyPage() {
 
           <h2>Introduction</h2>
           <p>
-            At codewize-ai.website, we take your privacy seriously. This Privacy Policy explains how we collect,
+            At CodeWise AI, we take your privacy seriously. This Privacy Policy explains how we collect,
             use, disclose, and safeguard your information when you visit our website or use our services.
           </p>
 

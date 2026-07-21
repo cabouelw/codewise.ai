@@ -1,11 +1,14 @@
 name: Daily Blog Generator
 
 on:
-  # Run every day at 09:00 UTC
-  schedule:
-    - cron: "0 9 * * *"
+  # Daily cron disabled: auto-publishing unreviewed AI posts with no human
+  # review is a Google "scaled content abuse" risk and blocked AdSense
+  # approval. Re-enable only once posts route through a draft + review step
+  # before publishing.
+  # schedule:
+  #   - cron: "0 9 * * *"
 
-  # Allow manual trigger from GitHub Actions tab
+  # Manual trigger only — generates a draft for you to review before it's live.
   workflow_dispatch:
 
 jobs:

@@ -1,3 +1,5 @@
+import type { Metadata } from "next"
+
 export const siteConfig = {
 	name: "CodeWise AI",
 	title: "CodeWise AI - Smart AI Tools for Developers",
@@ -146,7 +148,7 @@ export const toolsMetadata = {
 	},
 }
 
-export function generateToolMetadata(toolSlug: string) {
+export function generateToolMetadata(toolSlug: string): Metadata {
 	const tool = toolsMetadata[toolSlug as keyof typeof toolsMetadata]
 
 	if (!tool) {

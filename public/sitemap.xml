@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.codewize-ai.website/</loc>
-    <lastmod>2025-12-30</lastmod>
+    <lastmod>2026-07-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -12,22 +12,22 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.codewize-ai.website/author/codewise-ai-team</loc>
-    <lastmod>2025-12-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.codewize-ai.website/author/codewize-ai.website-team</loc>
-    <lastmod>2025-10-05</lastmod>
+    <loc>https://www.codewize-ai.website/author/choaib</loc>
+    <lastmod>2026-06-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.codewize-ai.website/blog</loc>
-    <lastmod>2025-12-30</lastmod>
+    <lastmod>2026-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.codewize-ai.website/blog/ai-inference-accelerators-in-plain-english-what-faster-infer</loc>
+    <lastmod>2026-01-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.codewize-ai.website/blog/ai-vs-human-coding</loc>
@@ -54,6 +54,18 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.codewize-ai.website/blog/build-a-local-first-ai-coding-assistant-privacy-preserving-f</loc>
+    <lastmod>2026-01-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.codewize-ai.website/blog/build-a-secure-rag-app-permissions-auditing-and-least-privil</loc>
+    <lastmod>2026-01-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.codewize-ai.website/blog/build-a-web-data-agent-reliable-extraction-rate-limits-and-a</loc>
     <lastmod>2025-12-26</lastmod>
     <changefreq>monthly</changefreq>
@@ -61,7 +73,7 @@
   </url>
   <url>
     <loc>https://www.codewize-ai.website/blog/category/tutorials</loc>
-    <lastmod>2025-12-30</lastmod>
+    <lastmod>2026-06-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -126,6 +138,18 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.codewize-ai.website/blog/knowledge-graphs-for-rag-when-they-help-and-when-they-don-t</loc>
+    <lastmod>2026-01-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.codewize-ai.website/blog/lightrag-vs-traditional-rag-what-changes-when-you-add-a-know</loc>
+    <lastmod>2026-01-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.codewize-ai.website/blog/mastering-machine-learning-model-optimization-techniques</loc>
     <lastmod>2025-12-13</lastmod>
     <changefreq>monthly</changefreq>
@@ -150,8 +174,20 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.codewize-ai.website/blog/multimodal-inference-101-what-omni-models-change-for-real-pr</loc>
+    <lastmod>2025-12-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.codewize-ai.website/blog/navigating-the-future-ai-ethics-and-responsible-ai-developme</loc>
     <lastmod>2025-12-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.codewize-ai.website/blog/next-js-seo-in-2026-metadata-open-graph-indexing-and-the-com</loc>
+    <lastmod>2026-01-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -162,8 +198,32 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.codewize-ai.website/blog/open-source-tts-for-apps-a-developer-s-guide-to-fast-natural</loc>
+    <lastmod>2026-01-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.codewize-ai.website/blog/physical-ai-at-ces-2026-the-robotics-revolution-is-finally-h</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.codewize-ai.website/blog/preventing-xss-and-csrf-attacks-essential-strategies-for-dev</loc>
     <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.codewize-ai.website/blog/private-connectors-for-ai-how-to-safely-let-llms-use-your-in</loc>
+    <lastmod>2026-01-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.codewize-ai.website/blog/production-llm-evaluation-the-metrics-that-actually-predict-</loc>
+    <lastmod>2026-01-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -194,6 +254,12 @@
   <url>
     <loc>https://www.codewize-ai.website/blog/software-engineering-best-practices-elevate-your-development</loc>
     <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.codewize-ai.website/blog/supply-chain-attacks-are-back-a-practical-npm-defense-checkl</loc>
+    <lastmod>2026-01-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -236,6 +302,12 @@
   <url>
     <loc>https://www.codewize-ai.website/blog/url-pattern-api-the-missing-piece-for-safer-cleaner-routing-</loc>
     <lastmod>2025-12-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.codewize-ai.website/blog/vector-search-vs-hybrid-search-a-practical-guide-to-better-r</loc>
+    <lastmod>2026-01-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

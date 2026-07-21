@@ -139,7 +139,7 @@ export default async function BlogPage() {
           <nav className="flex flex-wrap gap-2 justify-center" aria-label="Blog categories">
             <Link
               href="/blog"
-              className="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-sky-500 text-white"
+              className="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-teal-500 text-white"
               aria-current="page"
             >
               All
@@ -148,7 +148,7 @@ export default async function BlogPage() {
               <Link
                 key={category}
                 href={`/blog/category/${category.toLowerCase().replace(/\s+/g, '-')}`}
-                className="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-sky-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-600"
+                className="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-teal-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-600"
               >
                 {category}
               </Link>
@@ -175,7 +175,7 @@ export default async function BlogPage() {
                     <span>•</span>
                     <span>{allPosts[0].readTime}</span>
                     <span>•</span>
-                    <span className="bg-sky-100 dark:bg-sky-900/30 text-sky-600 dark:text-sky-400 px-2 py-1 rounded-full">
+                    <span className="bg-teal-100 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 px-2 py-1 rounded-full">
                       {allPosts[0].category}
                     </span>
                   </div>
@@ -200,7 +200,7 @@ export default async function BlogPage() {
           <nav className="mt-12 flex justify-center" aria-label="Blog pagination">
             <Link
               href="/blog/page/2"
-              className="inline-flex items-center gap-2 bg-sky-500 hover:bg-sky-600 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300"
+              className="inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-600 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300"
               rel="next"
             >
               View More Articles

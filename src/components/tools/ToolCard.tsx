@@ -49,7 +49,7 @@ export default function ToolCard({
           <div className="relative p-6">
             {/* Category Badge */}
             <div className="flex items-center justify-between mb-4">
-              <span className="text-xs font-semibold px-3 py-1 rounded-full bg-sky-100 dark:bg-sky-900 text-sky-700 dark:text-sky-300">
+              <span className="text-xs font-semibold px-3 py-1 rounded-full bg-teal-100 dark:bg-teal-900 text-teal-700 dark:text-teal-300">
                 {category}
               </span>
               {usageCount > 0 && (
@@ -65,7 +65,7 @@ export default function ToolCard({
             </div>
 
             {/* Title */}
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
+            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
               {title}
             </h3>
 
@@ -75,7 +75,7 @@ export default function ToolCard({
             </p>
 
             {/* Arrow Icon */}
-            <div className="mt-4 flex items-center text-sky-600 dark:text-sky-400 font-medium text-sm group-hover:gap-2 transition-all">
+            <div className="mt-4 flex items-center text-teal-600 dark:text-teal-400 font-medium text-sm group-hover:gap-2 transition-all">
               <span>Try it now</span>
               <svg
                 className="w-4 h-4 transform group-hover:translate-x-1 transition-transform"

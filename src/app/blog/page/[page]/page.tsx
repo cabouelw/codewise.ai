@@ -143,7 +143,7 @@ export default async function PaginatedBlogPage({ params }: BlogPageProps) {
             <div className="flex flex-wrap gap-2 justify-center">
               <Link
                 href="/blog"
-                className="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-sky-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-600"
+                className="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-teal-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-600"
               >
                 All
               </Link>
@@ -151,7 +151,7 @@ export default async function PaginatedBlogPage({ params }: BlogPageProps) {
                 <Link
                   key={category}
                   href={`/blog/category/${category.toLowerCase().replace(/\s+/g, '-')}`}
-                  className="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-sky-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-600"
+                  className="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-teal-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-600"
                 >
                   {category}
                 </Link>
@@ -176,7 +176,7 @@ export default async function PaginatedBlogPage({ params }: BlogPageProps) {
               {pageNumber > 1 && (
                 <Link
                   href={pageNumber === 2 ? '/blog' : `/blog/page/${pageNumber - 1}`}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-600 hover:bg-sky-50 dark:hover:bg-slate-700 transition-all duration-300"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-600 hover:bg-teal-50 dark:hover:bg-slate-700 transition-all duration-300"
                   rel="prev"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -212,8 +212,8 @@ export default async function PaginatedBlogPage({ params }: BlogPageProps) {
                       key={num}
                       href={num === 1 ? '/blog' : `/blog/page/${num}`}
                       className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${num === pageNumber
-                        ? 'bg-sky-500 text-white'
-                        : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-600 hover:bg-sky-50 dark:hover:bg-slate-700'
+                        ? 'bg-teal-500 text-white'
+                        : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-600 hover:bg-teal-50 dark:hover:bg-slate-700'
                         }`}
                       aria-current={num === pageNumber ? 'page' : undefined}
                     >
@@ -227,7 +227,7 @@ export default async function PaginatedBlogPage({ params }: BlogPageProps) {
               {pageNumber < totalPages && (
                 <Link
                   href={`/blog/page/${pageNumber + 1}`}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-600 hover:bg-sky-50 dark:hover:bg-slate-700 transition-all duration-300"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-600 hover:bg-teal-50 dark:hover:bg-slate-700 transition-all duration-300"
                   rel="next"
                 >
                   Next

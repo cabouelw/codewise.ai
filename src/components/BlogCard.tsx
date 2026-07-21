@@ -22,7 +22,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
   category,
   image,
   featured = false,
-  author = "CodeWise AI Team",
+  author = "Choaib",
 }) => {
   const formattedDate = new Date(publishedAt).toLocaleDateString("en-US", {
     year: "numeric",
@@ -66,18 +66,18 @@ const BlogCard: React.FC<BlogCardProps> = ({
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingSchema) }} />
       <article
-        className={`group relative overflow-hidden rounded-xl border card-hover transition-all duration-300 hover:shadow-lg hover:shadow-sky-500/10 ${featured
-          ? "border-sky-200 dark:border-sky-800 bg-gradient-to-br from-sky-50 to-blue-50 dark:from-sky-900/20 dark:to-blue-900/20"
+        className={`group relative overflow-hidden rounded-xl border card-hover transition-all duration-300 hover:shadow-lg hover:shadow-teal-500/10 ${featured
+          ? "border-teal-200 dark:border-teal-800 bg-teal-50 dark:bg-teal-900/20"
           : "border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800"
-          } hover:border-sky-300 dark:hover:border-sky-600`}>
+          } hover:border-teal-300 dark:hover:border-teal-600`}>
         {featured && (
-          <div className="absolute top-3 right-3 z-10 bg-sky-500 text-white text-xs font-medium px-2 py-1 rounded-full animate-pulse">
+          <div className="absolute top-3 right-3 z-10 bg-teal-500 text-white text-xs font-medium px-2 py-1 rounded-full animate-pulse">
             Featured
           </div>
         )}
 
         {/* Hover overlay effect */}
-        <div className="absolute inset-0 bg-gradient-to-r from-sky-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div className="absolute inset-0 bg-teal-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
         {image && (
           <div className="relative h-48 w-full overflow-hidden">
@@ -96,7 +96,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
 
         <div className="relative p-6">
           <div className="flex items-center gap-3 mb-3">
-            <span className="text-sm font-medium text-sky-600 dark:text-sky-400 bg-sky-100 dark:bg-sky-900/30 px-2 py-1 rounded-full transition-all duration-300 group-hover:bg-sky-200 dark:group-hover:bg-sky-800/50 group-hover:scale-105">
+            <span className="text-sm font-medium text-teal-600 dark:text-teal-400 bg-teal-100 dark:bg-teal-900/30 px-2 py-1 rounded-full transition-all duration-300 group-hover:bg-teal-200 dark:group-hover:bg-teal-800/50 group-hover:scale-105">
               {category}
             </span>
             <span className="text-sm text-slate-600 dark:text-slate-300 transition-colors duration-300">
@@ -107,7 +107,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
             </span>
           </div>
 
-          <h3 className="font-semibold text-slate-900 dark:text-white text-lg mb-3 line-clamp-2 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors duration-300">
+          <h3 className="font-semibold text-slate-900 dark:text-white text-lg mb-3 line-clamp-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-300">
             {title}
           </h3>
 
@@ -117,7 +117,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
 
           <Link
             href={`/blog/${slug}`}
-            className="inline-flex items-center gap-2 text-sm font-medium text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300 transition-all duration-300 group/link">
+            className="inline-flex items-center gap-2 text-sm font-medium text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 transition-all duration-300 group/link">
             Read More
             <svg
               className="w-4 h-4 transition-transform duration-300 group-hover/link:translate-x-1 group-hover/link:scale-110"

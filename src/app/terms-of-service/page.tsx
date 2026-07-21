@@ -38,7 +38,7 @@ export default function TermsOfServicePage() {
 
           <h2>1. Acceptance of Terms</h2>
           <p>
-            By accessing and using codewize-ai.website (&quot;CodeWise AI&quot;, &quot;we&quot;, &quot;us&quot;, or &quot;our&quot;), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our website or services. These terms apply to all visitors, users, and others who access or use our platform.
+            By accessing and using CodeWise AI (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our website or services. These terms apply to all visitors, users, and others who access or use our platform.
           </p>
 
           <h2>2. Description of Service</h2>
@@ -70,7 +70,7 @@ export default function TermsOfServicePage() {
 
           <h2>4. Intellectual Property</h2>
           <p>
-            All content on codewize-ai.website, including text, graphics, logos, icons, images, and software, is the property of CodeWise AI or its content suppliers and is protected by international copyright laws. You may not reproduce, distribute, or create derivative works from our site content without explicit written permission.
+            All content on CodeWise AI, including text, graphics, logos, icons, images, and software, is the property of CodeWise AI or its content suppliers and is protected by international copyright laws. You may not reproduce, distribute, or create derivative works from our site content without explicit written permission.
           </p>
           <p>
             Content you generate using our AI tools belongs to you. However, we do not guarantee the originality or uniqueness of AI-generated content, and you are responsible for verifying that generated content does not infringe on third-party rights before use.

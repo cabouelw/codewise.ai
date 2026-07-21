@@ -38,7 +38,7 @@ export default function DisclaimerPage() {
 
           <h2>General Information</h2>
           <p>
-            The information provided on codewize-ai.website (&quot;CodeWise AI&quot;) is for general informational and educational purposes only. While we strive to provide accurate and up-to-date information about AI tools, development practices, and technology trends, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability of the information, products, services, or related graphics contained on this website.
+            The information provided on CodeWise AI is for general informational and educational purposes only. While we strive to provide accurate and up-to-date information about AI tools, development practices, and technology trends, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability of the information, products, services, or related graphics contained on this website.
           </p>
 
           <h2>AI-Generated Content</h2>
@@ -68,7 +68,7 @@ export default function DisclaimerPage() {
 
           <h2>Affiliate Disclosure</h2>
           <p>
-            Some links on codewize-ai.website may be affiliate links. This means that if you click on a link and make a purchase or sign up for a service, we may receive a small commission at no additional cost to you. This helps support the maintenance and development of our free tools and content. Our editorial opinions and tool evaluations are not influenced by affiliate relationships — we recommend tools based on their merit and usefulness to developers.
+            Some links on CodeWise AI may be affiliate links. This means that if you click on a link and make a purchase or sign up for a service, we may receive a small commission at no additional cost to you. This helps support the maintenance and development of our free tools and content. Our editorial opinions and tool evaluations are not influenced by affiliate relationships — we recommend tools based on their merit and usefulness to developers.
           </p>
 
           <h2>No Professional Advice</h2>

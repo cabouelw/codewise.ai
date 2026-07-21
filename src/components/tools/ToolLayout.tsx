@@ -39,7 +39,7 @@ export default function ToolLayout({
         >
           <Link
             href="/tools"
-            className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-sky-600 dark:hover:text-sky-400 transition-colors"
+            className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back to Tools</span>
@@ -98,7 +98,7 @@ export default function ToolLayout({
                 <ol className="space-y-3">
                   {howToUse.map((step, index) => (
                     <li key={index} className="flex items-start gap-3 text-slate-600 dark:text-slate-300">
-                      <span className="flex-shrink-0 w-7 h-7 bg-sky-100 dark:bg-sky-900/30 text-sky-600 dark:text-sky-400 rounded-full flex items-center justify-center text-sm font-semibold">
+                      <span className="flex-shrink-0 w-7 h-7 bg-teal-100 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 rounded-full flex items-center justify-center text-sm font-semibold">
                         {index + 1}
                       </span>
                       <span className="leading-relaxed">{step}</span>

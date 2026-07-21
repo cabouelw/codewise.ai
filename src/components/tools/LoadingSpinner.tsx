@@ -17,7 +17,7 @@ export default function LoadingSpinner({ size = 'md', message }: LoadingSpinnerP
   return (
     <div className="flex flex-col items-center justify-center gap-4 py-8">
       <motion.div
-        className={`${sizeClasses[size]} border-4 border-slate-200 dark:border-slate-700 border-t-sky-600 rounded-full`}
+        className={`${sizeClasses[size]} border-4 border-slate-200 dark:border-slate-700 border-t-teal-600 rounded-full`}
         animate={{ rotate: 360 }}
         transition={{
           duration: 1,

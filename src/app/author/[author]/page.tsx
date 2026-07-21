@@ -136,14 +136,14 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
         <nav className="flex mb-8 text-sm" aria-label="Breadcrumb">
           <ol className="inline-flex items-center space-x-1 md:space-x-3">
             <li className="inline-flex items-center">
-              <Link href="/" className="text-slate-600 dark:text-slate-400 hover:text-sky-600 dark:hover:text-sky-400">
+              <Link href="/" className="text-slate-600 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-400">
                 Home
               </Link>
             </li>
             <li>
               <div className="flex items-center">
                 <span className="mx-2 text-slate-400">/</span>
-                <Link href="/blog" className="text-slate-600 dark:text-slate-400 hover:text-sky-600 dark:hover:text-sky-400">
+                <Link href="/blog" className="text-slate-600 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-400">
                   Blog
                 </Link>
               </div>
@@ -160,7 +160,7 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
         {/* Author Header */}
         <div className="text-center mb-16">
           <div className="flex justify-center mb-6">
-            <div className="w-24 h-24 bg-gradient-to-r from-sky-500 to-purple-600 rounded-full flex items-center justify-center shadow-xl">
+            <div className="w-24 h-24 bg-gradient-to-r from-teal-500 to-purple-600 rounded-full flex items-center justify-center shadow-xl">
               <span className="text-white font-bold text-4xl">
                 {authorInitial}
               </span>
@@ -173,7 +173,7 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
             Technical Writer & Developer at CodeWise AI
           </p>
           <div className="flex items-center justify-center gap-4 text-sm text-slate-500 dark:text-slate-400">
-            <span className="bg-sky-100 dark:bg-sky-900/30 text-sky-700 dark:text-sky-400 px-3 py-1 rounded-full font-medium">
+            <span className="bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-400 px-3 py-1 rounded-full font-medium">
               {authorPosts.length} {authorPosts.length === 1 ? 'Article' : 'Articles'}
             </span>
           </div>
@@ -208,7 +208,7 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
         <div className="text-center mt-12">
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300 font-medium transition-colors"
+            className="inline-flex items-center gap-2 text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 font-medium transition-colors"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />

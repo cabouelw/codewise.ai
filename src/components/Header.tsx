@@ -77,10 +77,10 @@ const Header = () => {
 				<div className="flex items-center justify-between h-16">
 					{/* Logo */}
 					<Link href="/" className="flex items-center space-x-2">
-						<div className="w-8 h-8 bg-gradient-to-r from-sky-500 to-blue-600 rounded-lg flex items-center justify-center">
+						<div className="w-8 h-8 bg-gradient-to-r from-teal-500 to-teal-600 rounded-lg flex items-center justify-center">
 							<span className="text-white font-bold text-sm">C</span>
 						</div>
-						<span className="text-xl font-bold text-slate-900 dark:text-white">CodeWise-AI</span>
+						<span className="text-xl font-bold text-slate-900 dark:text-white">CodeWise AI</span>
 					</Link>
 
 					{/* Desktop Navigation */}

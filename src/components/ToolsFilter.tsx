@@ -19,7 +19,7 @@ interface Tool {
 // Define gradients for different categories
 const categoryGradients: Record<string, string> = {
   'AI Assistant': 'from-purple-500 to-pink-500',
-  'Deployment': 'from-blue-500 to-cyan-500',
+  'Deployment': 'from-teal-500 to-cyan-500',
   'Design': 'from-green-500 to-emerald-500',
   'CSS Framework': 'from-orange-500 to-red-500',
   'API Tools': 'from-indigo-500 to-purple-500',
@@ -78,7 +78,7 @@ export default function ToolsFilter({ tools, categories }: ToolsFilterProps) {
             placeholder="Search tools..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-12 pr-4 py-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all"
+            className="w-full pl-12 pr-4 py-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
           />
         </div>
 
@@ -88,7 +88,7 @@ export default function ToolsFilter({ tools, categories }: ToolsFilterProps) {
           <button
             onClick={() => setSelectedCategory('All')}
             className={`px-4 py-2 rounded-lg font-medium transition-all ${selectedCategory === 'All'
-              ? 'bg-sky-600 text-white shadow-lg scale-105'
+              ? 'bg-teal-600 text-white shadow-lg scale-105'
               : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700'
               }`}>
             All
@@ -133,7 +133,7 @@ export default function ToolsFilter({ tools, categories }: ToolsFilterProps) {
             >
               <div className="flex items-center gap-3 mb-6">
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-sky-500"></div>
+                  <div className="w-2 h-2 rounded-full bg-teal-500"></div>
                   <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
                     Our AI Tools
                   </h2>
@@ -166,7 +166,7 @@ export default function ToolsFilter({ tools, categories }: ToolsFilterProps) {
                           <div className="relative p-6">
                             {/* Category Badge & Featured */}
                             <div className="flex items-center justify-between mb-4">
-                              <span className="text-xs font-semibold px-3 py-1 rounded-full bg-sky-100 dark:bg-sky-900 text-sky-700 dark:text-sky-300">
+                              <span className="text-xs font-semibold px-3 py-1 rounded-full bg-teal-100 dark:bg-teal-900 text-teal-700 dark:text-teal-300">
                                 {tool.category}
                               </span>
                               {tool.featured && (
@@ -182,7 +182,7 @@ export default function ToolsFilter({ tools, categories }: ToolsFilterProps) {
                             </div>
 
                             {/* Title */}
-                            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
+                            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
                               {tool.title}
                             </h3>
 
@@ -204,7 +204,7 @@ export default function ToolsFilter({ tools, categories }: ToolsFilterProps) {
                             </div>
 
                             {/* Arrow Icon */}
-                            <div className="flex items-center text-sky-600 dark:text-sky-400 font-medium text-sm group-hover:gap-2 transition-all">
+                            <div className="flex items-center text-teal-600 dark:text-teal-400 font-medium text-sm group-hover:gap-2 transition-all">
                               <span>Try it now</span>
                               <svg
                                 className="w-4 h-4 transform group-hover:translate-x-1 transition-transform"
@@ -269,7 +269,7 @@ export default function ToolsFilter({ tools, categories }: ToolsFilterProps) {
                           <div className="relative p-6">
                             {/* Category Badge & External Badge */}
                             <div className="flex items-center justify-between mb-4">
-                              <span className="text-xs font-semibold px-3 py-1 rounded-full bg-sky-100 dark:bg-sky-900 text-sky-700 dark:text-sky-300">
+                              <span className="text-xs font-semibold px-3 py-1 rounded-full bg-teal-100 dark:bg-teal-900 text-teal-700 dark:text-teal-300">
                                 {tool.category}
                               </span>
                               <div className="flex items-center gap-1">
@@ -290,7 +290,7 @@ export default function ToolsFilter({ tools, categories }: ToolsFilterProps) {
                             </div>
 
                             {/* Title */}
-                            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
+                            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
                               {tool.title}
                             </h3>
 
@@ -312,7 +312,7 @@ export default function ToolsFilter({ tools, categories }: ToolsFilterProps) {
                             </div>
 
                             {/* Arrow Icon */}
-                            <div className="flex items-center text-sky-600 dark:text-sky-400 font-medium text-sm group-hover:gap-2 transition-all">
+                            <div className="flex items-center text-teal-600 dark:text-teal-400 font-medium text-sm group-hover:gap-2 transition-all">
                               <span>Visit site</span>
                               <svg
                                 className="w-4 h-4 transform group-hover:translate-x-1 transition-transform"

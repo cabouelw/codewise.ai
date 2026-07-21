@@ -94,14 +94,14 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         <nav className="flex mb-8 text-sm" aria-label="Breadcrumb">
           <ol className="inline-flex items-center space-x-1 md:space-x-3">
             <li className="inline-flex items-center">
-              <Link href="/" className="text-slate-600 dark:text-slate-400 hover:text-sky-600 dark:hover:text-sky-400">
+              <Link href="/" className="text-slate-600 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-400">
                 Home
               </Link>
             </li>
             <li>
               <div className="flex items-center">
                 <span className="mx-2 text-slate-400">/</span>
-                <Link href="/blog" className="text-slate-600 dark:text-slate-400 hover:text-sky-600 dark:hover:text-sky-400">
+                <Link href="/blog" className="text-slate-600 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-400">
                   Blog
                 </Link>
               </div>
@@ -117,7 +117,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-block bg-sky-100 dark:bg-sky-900/30 text-sky-700 dark:text-sky-400 px-4 py-2 rounded-full text-sm font-medium mb-4">
+          <div className="inline-block bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-400 px-4 py-2 rounded-full text-sm font-medium mb-4">
             Category
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4">
@@ -133,7 +133,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           <div className="flex flex-wrap gap-2 justify-center">
             <Link
               href="/blog"
-              className="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-sky-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-600"
+              className="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-teal-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-600"
             >
               All
             </Link>
@@ -146,8 +146,8 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                   key={cat}
                   href={`/blog/category/${catSlug}`}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${isActive
-                    ? 'bg-sky-500 text-white'
-                    : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-sky-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-600'
+                    ? 'bg-teal-500 text-white'
+                    : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-teal-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-600'
                     }`}
                   aria-current={isActive ? 'page' : undefined}
                 >
@@ -171,7 +171,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         <div className="text-center mt-12">
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300 font-medium transition-colors"
+            className="inline-flex items-center gap-2 text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 font-medium transition-colors"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />

@@ -21,7 +21,7 @@ export default function ToolContentSection({ title, description, howToUse, featu
         <ol className="space-y-3">
           {howToUse.map((step, index) => (
             <li key={index} className="flex items-start gap-3 text-slate-300">
-              <span className="flex-shrink-0 w-7 h-7 bg-sky-500/20 text-sky-400 rounded-full flex items-center justify-center text-sm font-semibold">
+              <span className="flex-shrink-0 w-7 h-7 bg-teal-500/20 text-teal-400 rounded-full flex items-center justify-center text-sm font-semibold">
                 {index + 1}
               </span>
               <span className="leading-relaxed">{step}</span>

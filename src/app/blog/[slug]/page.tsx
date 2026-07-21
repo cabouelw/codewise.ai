@@ -189,7 +189,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           {/* Header */}
           <header className="mb-12">
             <div className="mb-6">
-              <span className="inline-block bg-sky-100 dark:bg-sky-900/30 text-sky-700 dark:text-sky-400 px-3 py-1 rounded-full text-sm font-medium">
+              <span className="inline-block bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-400 px-3 py-1 rounded-full text-sm font-medium">
                 {post.category}
               </span>
             </div>
@@ -203,13 +203,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 href={`/author/${post.author.toLowerCase().replace(/\s+/g, '-')}`}
                 className="flex items-center gap-2 hover:opacity-80 transition-opacity"
               >
-                <div className="w-10 h-10 bg-gradient-to-r from-sky-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg">
+                <div className="w-10 h-10 bg-gradient-to-r from-teal-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg">
                   <span className="text-white font-semibold text-sm">
                     {post.author.charAt(0).toUpperCase()}
                   </span>
                 </div>
                 <div>
-                  <div className="font-medium text-slate-900 dark:text-white hover:text-sky-600 dark:hover:text-sky-400 transition-colors">
+                  <div className="font-medium text-slate-900 dark:text-white hover:text-teal-600 dark:hover:text-teal-400 transition-colors">
                     {post.author}
                   </div>
                   <div className="text-sm">{formattedDate}</div>
@@ -223,7 +223,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </div>
               <Link
                 href="/editorial-policy"
-                className="text-sm text-sky-600 dark:text-sky-400 hover:underline"
+                className="text-sm text-teal-600 dark:text-teal-400 hover:underline"
               >
                 Editorial policy
               </Link>
